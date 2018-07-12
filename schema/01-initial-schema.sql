@@ -15,19 +15,16 @@ CREATE TABLE client_companies(
 );
 
 CREATE TABLE contracts(
-    contract_id INT PRIMARY KEY,
+    contract_id INT PRIMARY KEY AUTO_INCREMENT,
     contract_type VARCHAR(255),
     type_of_service VARCHAR(255),
     acv FLOAT,
     initial_amount FLOAT,
-    service_start_date TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
-);
-
-CREATE TABLE contract_managers(
-    # one-to-many
+    service_start_date TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
     manager_id INT,
-    contract_id INT,
-    PRIMARY KEY (manager_id, contract_id)
+    FOREIGN KEY (manager_id) REFERENCES employees(employee_id),
+    company_name INT,
+    FOREIGN KEY (company_name) REFERENCES client_companies(company_name)
 );
 
 CREATE TABLE departments(
@@ -38,26 +35,9 @@ CREATE TABLE departments(
 CREATE TABLE employees(
     employee_id INT PRIMARY KEY,
     first_name VARCHAR(255),
-    last_name VARCHAR(255)
-);
-
-CREATE TABLE employee_managers(
-    # one-to-many
+    last_name VARCHAR(255),
+    department VARCHAR(255),
+    FOREIGN KEY (department) REFERENCES departments(department_id)
     manager_id INT,
-    employee_id INT,
-    PRIMARY KEY (manager_id, employee_id)
-);
-
-CREATE TABLE department_employees(
-    # one-to-many
-    department_id INT,
-    employee_id INT,
-    PRIMARY KEY (department_id, employee_id)
-);
-
-CREATE TABLE client_contracts(
-    # one-to-many
-    company_name INT,
-    contract_id INT,
-    PRIMARY KEY (company_name, contract_id)
+    FOREIGN KEY (manager_id) REFERENCES employees(employee_id)
 );
