@@ -69,6 +69,29 @@
                     </div>
                 </div>
                 <div class="form-group">
+                    <label for="exampleFormControlSelect1">Select a Province</label>
+                    <select class="form-control" id="province" name="province">
+                        <option value="" disabled selected>Select a Province</option>
+                        <option>Ontario</option>
+                        <option>British Columbia</option>
+                        <option>Quebec</option>
+                        <option>Alberta</option>
+                        <option>Nova Scotia</option>
+                        <option>Saskatchewan</option>
+                        <option>Manitoba</option>
+                        <option>New Brunswick</option>
+                        <option>Newfoundland and Labrador</option>
+                        <option>Prince Edward Island</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="exampleFormControlSelect1">Select a City</label>
+                    <select class="form-control" id="city" name="city">
+                        <option value="" disabled selected>Select a City</option>
+                        <!--add logic to populate cities based on province selection-->
+                    </select>
+                </div>
+                <div class="form-group">
                     <label for="password" class="cols-sm-2 control-label">Enter Password</label>
                     <div class="cols-sm-10">
                         <div class="input-group">
