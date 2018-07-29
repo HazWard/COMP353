@@ -6,24 +6,24 @@ USE company_cms;
 # Initialize tables
 CREATE TABLE provinces(
     prov_abbrev CHAR(2) PRIMARY KEY,
-    prov_name VARCHAR(255),
+    prov_name VARCHAR(255) NOT NULL,
 );
 
 CREATE TABLE cities(
     city_id INT PRIMARY KEY,
-    city_name VARCHAR(255),
-    province CHAR(2),
+    city_name VARCHAR(255) NOT NULL,
+    province CHAR(2) NOT NULL,
     FOREIGN KEY (province) REFERENCES provinces(prov_abbrev)
 );
 
 CREATE TABLE clients(
     company_name VARCHAR(255) PRIMARY KEY,
-    contact_number NUMERIC(10,0),
-    company_email VARCHAR(255),
-    rep_first_name VARCHAR(255),
-    rep_last_name VARCHAR(255),
-    rep_middle_initial VARCHAR(255),
-    city INT,
+    contact_number NUMERIC(10,0) NOT NULL,
+    company_email VARCHAR(255) NOT NULL,
+    rep_first_name VARCHAR(255) NOT NULL,
+    rep_last_name VARCHAR(255) NOT NULL,
+    rep_middle_initial VARCHAR(255) NOT NULL,
+    city INT NOT NULL,
     FOREIGN KEY (city) REFERENCES cities(city_id)
 );
 
@@ -55,7 +55,7 @@ CREATE TABLE contracts(
     
     manager_id INT NOT NULL,
     FOREIGN KEY (manager_id) REFERENCES employees(employee_id),
-    company_name VARCHAR(255),
+    company_name VARCHAR(255) NOT NULL,
     FOREIGN KEY (company_name) REFERENCES clients(company_name)
 );
 
