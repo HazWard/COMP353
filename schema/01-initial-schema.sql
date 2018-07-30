@@ -50,7 +50,11 @@ CREATE TABLE contracts(
     acv FLOAT NOT NULL,
     initial_amount FLOAT NOT NULL,
     
-    service_start_date TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    service_start_date TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    1_delivered TIMESTAMP DEFAULT NULL, #updated when first deliverable is finished
+    2_delivered TIMESTAMP DEFAULT NULL,
+    3_delivered TIMESTAMP DEFAULT NULL,
+    4_delivered TIMESTAMP DEFAULT NULL,
     score INT DEFAULT NULL, #score assigned post performance by client; to be updated
     
     manager_id INT NOT NULL,
