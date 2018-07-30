@@ -86,3 +86,10 @@ CREATE TABLE deliverable(
     deliv3 int not null,
     deliv4 int default null
 )
+
+CREATE TABLE user_credentials(
+    username VARCHAR(50),
+    user_type VARCHAR(10),
+    password VARCHAR(50),
+    constraint credentials primary key (username, password)
+)
