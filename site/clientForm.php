@@ -20,13 +20,22 @@
     <div class="row main">
         <div class="main-login main-center">
             <h5 style="text-align: center; font-weight: bold; font-size: large">Enter client information</h5>
-            <form class="" method="post" action="#">
+            <form class="" method="post" action="scripts/createClient.php">
                 <div class="form-group">
                     <label for="name" class="cols-sm-2 control-label">Company Name</label>
                     <div class="cols-sm-10">
                         <div class="input-group">
                             <span class="input-group-addon"><i class="fa fa-user fa" aria-hidden="true"></i></span>
-                            <input type="text" class="form-control" name="companyMame" id="name"  placeholder="Enter Company Name"/>
+                            <input type="text" class="form-control" name="companyName" id="name"  placeholder="Enter Company Name"/>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="number" class="cols-sm-2 control-label">Company Number</label>
+                    <div class="cols-sm-10">
+                        <div class="input-group">
+                            <span class="input-group-addon"><i class="fa fa-user fa" aria-hidden="true"></i></span>
+                            <input type="text" class="form-control" name="companyNumber" id="name"  placeholder="Enter Company Number"/>
                         </div>
                     </div>
                 </div>
@@ -40,7 +49,7 @@
                     </div>
                 </div>
                 <div class="form-group">
-                    <label for="username" class="cols-sm-2 control-label">Enter Representative First Name</label>
+                    <label for="FN" class="cols-sm-2 control-label">Enter Representative First Name</label>
                     <div class="cols-sm-10">
                         <div class="input-group">
                             <span class="input-group-addon"><i class="fa fa-users fa" aria-hidden="true"></i></span>
@@ -49,7 +58,7 @@
                     </div>
                 </div>
                 <div class="form-group">
-                    <label for="username" class="cols-sm-2 control-label">Enter Representative Last Name</label>
+                    <label for="LN" class="cols-sm-2 control-label">Enter Representative Last Name</label>
                     <div class="cols-sm-10">
                         <div class="input-group">
                             <span class="input-group-addon"><i class="fa fa-users fa" aria-hidden="true"></i></span>
@@ -58,7 +67,7 @@
                     </div>
                 </div>
                 <div class="form-group">
-                    <label for="username" class="cols-sm-2 control-label">Enter Representative Middle Initial</label>
+                    <label for="MI" class="cols-sm-2 control-label">Enter Representative Middle Initial</label>
                     <div class="cols-sm-10">
                         <div class="input-group">
                             <span class="input-group-addon"><i class="fa fa-users fa" aria-hidden="true"></i></span>
@@ -83,7 +92,7 @@
                     </select>
                 </div>
                 <div class="form-group">
-                    <label for="exampleFormControlSelect1">Select a City</label>
+                    <label>Select a City</label>
                     <select class="form-control" id="city" name="city">
                         <option value="" disabled selected>Select a City</option>
                         <!--add logic to populate cities based on province selection-->
@@ -99,7 +108,7 @@
                     </div>
                 </div>
                 <div class="form-group ">
-                    <a href="https://ccp.cloudaccess.net/aff.php?aff=5188" target="_blank" type="button" id="button" class="btn btn-primary btn-lg btn-block login-button">Register New Client</a>
+                    <input type="submit" class="btn btn-primary btn-lg btn-block login-button" value="Register New Client">
                 </div>
 
             </form>
