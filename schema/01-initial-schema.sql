@@ -27,8 +27,7 @@ CREATE TABLE clients(
     rep_middle_initial VARCHAR(255) NOT NULL,
     city VARCHAR(255),
     province CHAR(2),
-    FOREIGN KEY (city) REFERENCES cities(city_name),
-    FOREIGN KEY (province) REFERENCES provinces(prov_abbrev)
+    FOREIGN KEY (city, province) REFERENCES cities(city_name, province)
 );
 
 CREATE TABLE insurances(
@@ -78,8 +77,8 @@ CREATE TABLE desired_contracts(
 
 CREATE TABLE assigned_contracts(
     # entity is populated when manager assigns a contract wrt employees preferences
-    employee_id int,
-    contract_id int,
+    employee_id int not null,
+    contract_id int not null,
     hours_worked int default 0,
     foreign key (employee_id) references employees(employee_id),
     foreign key (contract_id) references contracts(contract_id),
