@@ -3,28 +3,32 @@ DROP DATABASE company_cms;
 CREATE DATABASE company_cms;
 USE company_cms;
 
+SET FOREIGN_KEY_CHECKS=0;
+
 # Initialize tables
 CREATE TABLE provinces(
     prov_abbrev CHAR(2) PRIMARY KEY,
-    prov_name VARCHAR(255) NOT NULL,
+    prov_name VARCHAR(255) NOT NULL
 );
 
 CREATE TABLE cities(
-    city_id INT PRIMARY KEY,
     city_name VARCHAR(255) NOT NULL,
     province CHAR(2) NOT NULL,
-    FOREIGN KEY (province) REFERENCES provinces(prov_abbrev)
+    FOREIGN KEY (province) REFERENCES provinces(prov_abbrev),
+    CONSTRAINT city primary key (city_name, province)
 );
 
 CREATE TABLE clients(
     company_name VARCHAR(255) PRIMARY KEY,
-    contact_number NUMERIC(10,0) NOT NULL,
+    contact_number NUMERIC(10,0) NOT NULL DEFAULT 0,
     company_email VARCHAR(255) NOT NULL,
     rep_first_name VARCHAR(255) NOT NULL,
     rep_last_name VARCHAR(255) NOT NULL,
     rep_middle_initial VARCHAR(255) NOT NULL,
-    city INT NOT NULL,
-    FOREIGN KEY (city) REFERENCES cities(city_id)
+    city VARCHAR(255),
+    province CHAR(2),
+    FOREIGN KEY (city) REFERENCES cities(city_name),
+    FOREIGN KEY (province) REFERENCES provinces(prov_abbrev)
 );
 
 CREATE TABLE insurances(
@@ -51,10 +55,10 @@ CREATE TABLE contracts(
     initial_amount FLOAT NOT NULL,
     
     service_start_date TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
-    1_delivered TIMESTAMP DEFAULT NULL, #updated when first deliverable is finished
-    2_delivered TIMESTAMP DEFAULT NULL,
-    3_delivered TIMESTAMP DEFAULT NULL,
-    4_delivered TIMESTAMP DEFAULT NULL,
+    1_delivered TIMESTAMP NULL, #updated when first deliverable is finished
+    2_delivered TIMESTAMP NULL,
+    3_delivered TIMESTAMP NULL,
+    4_delivered TIMESTAMP NULL,
     score INT DEFAULT NULL, #score assigned post performance by client; to be updated
     
     manager_id INT NOT NULL,
@@ -74,8 +78,8 @@ CREATE TABLE desired_contracts(
 
 CREATE TABLE assigned_contracts(
     # entity is populated when manager assigns a contract wrt employees preferences
-    employee_id int not null,
-    contract_id int default null,
+    employee_id int,
+    contract_id int,
     hours_worked int default 0,
     foreign key (employee_id) references employees(employee_id),
     foreign key (contract_id) references contracts(contract_id),
@@ -89,11 +93,13 @@ CREATE TABLE deliverable(
     deliv2 int not null,
     deliv3 int not null,
     deliv4 int default null
-)
+);
 
 CREATE TABLE user_credentials(
     username VARCHAR(50),
     user_type VARCHAR(10),
     password VARCHAR(50),
     constraint credentials primary key (username, password)
-)
+);
+
+SET FOREIGN_KEY_CHECKS=1;
