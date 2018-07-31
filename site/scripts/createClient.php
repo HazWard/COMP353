@@ -8,6 +8,8 @@ $cityID = findCityID($clientArray['province'],$clientArray['city']);
 insertClient($clientArray['companyName'],$clientArray['companyNumber'],$clientArray['email'],$clientArray['firstName'],
             $clientArray['lastName'],$clientArray['middleInitial'],$cityID);
 
+insertClientCredential($clientArray['email'],$clientArray['password']);
+
 function findCityID($province, $city){
     global $conn;
 
@@ -35,6 +37,16 @@ function insertClient($companyName,$companyNumber,$companyEmail,$repFN,$repLN,$r
             "."'$companyName'".","."'$companyNumber'".","."'$companyEmail'".","."'$repFN'".","."'$repLN'".","."'$repMI'".","."'$city'".");";
 
 
+}
+
+function insertClientCredential($username,$password){
+    global $conn;
+
+    $sql = "INSERT INTO user_credentials (username, user_type, password) VALUES (
+            "."'$username'".","."'client'".","."'$password'".");";
+
+   
+
     if ($conn->query($sql) === TRUE) {
         echo "New record created successfully";
     } else {
@@ -42,5 +54,4 @@ function insertClient($companyName,$companyNumber,$companyEmail,$repFN,$repLN,$r
     }
 
     $conn->close();
-
 }
