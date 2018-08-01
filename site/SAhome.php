@@ -14,8 +14,9 @@
 <body>
 <?php include('head.php'); ?>
 <div class="container-fluid bg-2 text-center">
-    <h3 class="margin">Welcome to the CMS website</h3>
-    <a href="#" class="btn btn-default btn-lg"> login </a>
+    <h3 class="margin">Welcome, please select an option below</h3>
+    <a href="clientForm.php" class="btn btn-default btn-lg"> Create a client account </a>
+    <a href="#" class="btn btn-default btn-lg"> Update Contracts</a>
 </div>
 </body>
 </html>

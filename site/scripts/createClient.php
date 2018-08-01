@@ -2,13 +2,13 @@
 include ("connectDB.php");
 $clientArray = $_POST;
 
-
 $cityID = findCityID($clientArray['province'],$clientArray['city']);
 
 insertClient($clientArray['companyName'],$clientArray['companyNumber'],$clientArray['email'],$clientArray['firstName'],
             $clientArray['lastName'],$clientArray['middleInitial'],$cityID);
-
 insertClientCredential($clientArray['email'],$clientArray['password']);
+
+header("Location: ../SAhome.php");
 
 function findCityID($province, $city){
     global $conn;
@@ -36,7 +36,10 @@ function insertClient($companyName,$companyNumber,$companyEmail,$repFN,$repLN,$r
     $sql = "INSERT INTO clients (company_name,contact_number,company_email,rep_first_name,rep_last_name,rep_middle_initial,city) VALUES (
             "."'$companyName'".","."'$companyNumber'".","."'$companyEmail'".","."'$repFN'".","."'$repLN'".","."'$repMI'".","."'$city'".");";
 
-
+    if ($conn->query($sql) === TRUE) {
+    } else {
+        echo "Error: " . $sql . "<br>" . $conn->error;
+    }
 }
 
 function insertClientCredential($username,$password){
@@ -44,14 +47,6 @@ function insertClientCredential($username,$password){
 
     $sql = "INSERT INTO user_credentials (username, user_type, password) VALUES (
             "."'$username'".","."'client'".","."'$password'".");";
-
-   
-
-    if ($conn->query($sql) === TRUE) {
-        echo "New record created successfully";
-    } else {
-        echo "Error: " . $sql . "<br>" . $conn->error;
-    }
 
     $conn->close();
 }

@@ -6,15 +6,15 @@
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-    <script src="js/temp.js"></script>
+    <script src="js/client.js"></script>
     <!-- Website Font style -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.1/css/font-awesome.min.css">
     <!-- Google Fonts -->
     <link href='https://fonts.googleapis.com/css?family=Passion+One' rel='stylesheet' type='text/css'>
     <link href='https://fonts.googleapis.com/css?family=Oxygen' rel='stylesheet' type='text/css'>
-
-
 </head>
+
+<?php include('head.php'); ?>
 <body>
 <div class="container">
     <div class="row main">
@@ -26,7 +26,7 @@
                     <div class="cols-sm-10">
                         <div class="input-group">
                             <span class="input-group-addon"><i class="fa fa-user fa" aria-hidden="true"></i></span>
-                            <input type="text" class="form-control" name="companyName" id="name"  placeholder="Enter Company Name"/>
+                            <input type="text" class="form-control" name="companyName" id="name"  placeholder="Enter Company Name" required/>
                         </div>
                     </div>
                 </div>
@@ -35,7 +35,7 @@
                     <div class="cols-sm-10">
                         <div class="input-group">
                             <span class="input-group-addon"><i class="fa fa-user fa" aria-hidden="true"></i></span>
-                            <input type="text" class="form-control" name="companyNumber" id="name"  placeholder="Enter Company Number"/>
+                            <input type="text" class="form-control" name="companyNumber" id="name"  placeholder="Enter Company Number" minlength="10" maxlength="10" required/>
                         </div>
                     </div>
                 </div>
@@ -44,7 +44,7 @@
                     <div class="cols-sm-10">
                         <div class="input-group">
                             <span class="input-group-addon"><i class="fa fa-envelope fa" aria-hidden="true"></i></span>
-                            <input type="text" class="form-control" name="email" id="email"  placeholder="Enter Company Email"/>
+                            <input type="text" class="form-control" name="email" id="email"  placeholder="Enter Company Email" required/>
                         </div>
                     </div>
                 </div>
@@ -53,7 +53,7 @@
                     <div class="cols-sm-10">
                         <div class="input-group">
                             <span class="input-group-addon"><i class="fa fa-users fa" aria-hidden="true"></i></span>
-                            <input type="text" class="form-control" name="firstName" id="firstName"  placeholder="Enter First Name"/>
+                            <input type="text" class="form-control" name="firstName" id="firstName"  placeholder="Enter First Name" required/>
                         </div>
                     </div>
                 </div>
@@ -62,7 +62,7 @@
                     <div class="cols-sm-10">
                         <div class="input-group">
                             <span class="input-group-addon"><i class="fa fa-users fa" aria-hidden="true"></i></span>
-                            <input type="text" class="form-control" name="lastName" id="lastName"  placeholder="Enter Last Name"/>
+                            <input type="text" class="form-control" name="lastName" id="lastName"  placeholder="Enter Last Name" required/>
                         </div>
                     </div>
                 </div>
@@ -71,7 +71,7 @@
                     <div class="cols-sm-10">
                         <div class="input-group">
                             <span class="input-group-addon"><i class="fa fa-users fa" aria-hidden="true"></i></span>
-                            <input type="text" class="form-control" name="middleInitial" id="middleInitial"  placeholder="Enter Middle Initial"/>
+                            <input type="text" class="form-control" name="middleInitial" id="middleInitial"  placeholder="Enter Middle Initial" maxlength="1" required/>
                         </div>
                     </div>
                 </div>
