@@ -21,6 +21,10 @@ class Location
 
     public function getCities() {
         $province = $_REQUEST["province"];
+        if (!isset($province)) {
+          return NULL;
+        }
+
         $stmt = $this->connection->prepare("SELECT city_name FROM " . $this->city_table_name . " WHERE province=:name");
         $stmt->bindValue(':name', $province, PDO::PARAM_STR);
         $stmt->execute();

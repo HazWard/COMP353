@@ -5,7 +5,7 @@ header("Content-Type: application/json");
 
 // include database and object files
 include_once '../core.php';
-include_once '../location/location.php';
+include_once 'location.php';
 
 $database = new Database();
 $db = $database->getConnection();
