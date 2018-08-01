@@ -11,13 +11,13 @@ $database = new Database();
 $db = $database->getConnection();
 $location = new Location($db);
 
-$stmt = $location->getProvinces();
+$stmt = $location->getCities();
+
 
 $results = array();
 while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
     extract($row);
-    $province_item = $prov_name." (".$prov_abbrev.")";
-    array_push($results, $province_item);
+    array_push($results, $city_name);
 }
 
 print_r(json_encode($results));
