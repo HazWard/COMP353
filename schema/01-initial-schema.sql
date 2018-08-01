@@ -10,7 +10,7 @@ CREATE TABLE provinces(
 );
 
 CREATE TABLE cities(
-    city_id INT PRIMARY KEY,
+    city_id INT PRIMARY KEY AUTO_INCREMENT,
     city_name VARCHAR(255) NOT NULL,
     province CHAR(2) NOT NULL,
     FOREIGN KEY (province) REFERENCES provinces(prov_abbrev)
@@ -97,3 +97,4 @@ CREATE TABLE user_credentials(
     password VARCHAR(50),
     constraint credentials primary key (username, password)
 )
+
