@@ -1,4 +1,4 @@
-?php
+<?php
 session_start();
 
 // initialize variables to your needs
