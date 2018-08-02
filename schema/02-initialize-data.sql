@@ -307,3 +307,22 @@ insert into contracts(contract_id, contract_category, type_of_service, acv, init
     values (49, 'Silver', 'Cloud', 2000, 400, '2017-01-19 03:14:07', 10000008, 'Essence');
 insert into contracts(contract_id, contract_category, type_of_service, acv, initial_amount, service_start_date, manager_id, company_name)
     values (50, 'Silver', 'On-premise', 5000, 1000, '2017-01-19 03:14:07', 10000009, 'Walmart');
+
+/*
+# TO INCLUDE IF INCLUDING SALES ASSOCIATES AND ADMIN
+2 Sales Associates (id: 3 at the front, 8 digits)
+1 Admins (id: 4 at the front, 8 digits)
+*/
+
+# Sales Associates
+INSERT INTO employees(employee_id, first_name, last_name, department, manager_id, insurance_plan)
+VALUES(30000000, 'Wayne', 'Cornfield', 'Sales', NULL, 'Normal Employee Plan');
+INSERT INTO employees(employee_id, first_name, last_name, department, manager_id, insurance_plan)
+VALUES(30000001, 'Winnie', 'Bluebird', 'Sales', NULL, 'Normal Employee Plan');
+
+# Admin
+INSERT INTO employees(employee_id, first_name, last_name, department, manager_id, insurance_plan)
+VALUES(40000000, 'Oulianna', 'Rachmaninoff', 'Administration', NULL, 'Premium Employee Plan');
+INSERT INTO employees(employee_id, first_name, last_name, department, manager_id, insurance_plan)
+VALUES(40000001, 'Marie', 'Antouine', 'Administration', NULL, 'Premium Employee Plan');
+
