@@ -22,7 +22,7 @@ CREATE TABLE clients(
     company_email VARCHAR(255) NOT NULL,
     rep_first_name VARCHAR(255) NOT NULL,
     rep_last_name VARCHAR(255) NOT NULL,
-    rep_middle_initial VARCHAR(255) NOT NULL,
+    rep_middle_initial VARCHAR(255) DEFAULT NULL,
     city VARCHAR(255),
     province CHAR(2),
     line_of_business VARCHAR(255) NOT NULL,
