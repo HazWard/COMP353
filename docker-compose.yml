@@ -6,7 +6,7 @@ services:
       context: .
       dockerfile: webserver.Dockerfile
     volumes:
-      - ./site:/var/www/html
+      - .:/var/www/html
     links:
       - "db:database"
     ports:
