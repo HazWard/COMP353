@@ -1,5 +1,10 @@
 # COMP 353 - Team Project
 
+## Installation
+1. Install Composer from [here](https://getcomposer.org/)
+2. Run ``composer install`` inside the source folder
+
+
 ## API documentation
 
 ### Locations
