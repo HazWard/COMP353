@@ -1,40 +1,47 @@
-?php
+<?php
 session_start();
 
 // initialize variables to your needs
 $username = "";
-$errors = array(); 
-$host = 'localhost';
-$user = 'root';
-$password = 'root';
-$dbname = 'register';
+$password = "";
+$errors = array();
 
-$db = mysqli_connect($host, $user, $password, $dbname);
 
 if (isset($_POST['login_button'])) {
-  $username = mysqli_real_escape_string($db, $_POST['username']);
-  $password = mysqli_real_escape_string($db, $_POST['password']);
+    $username = $_POST['username'];
+    $password = $_POST['password'];
 
-  if (empty($username)) {
-    array_push($errors, "You must enter a username");
-  }
-  if (empty($password)) {
-    array_push($errors, "You must enter a password");
-  }
-
-  if (count($errors) == 0) {
-    //encrypt password
-    $password = md5($password);
-
-    $query = "SELECT * FROM user_credentials WHERE username='$username' AND password='$password'";
-    $results = mysqli_query($db, $query);
-    if (mysqli_num_rows($results) != 0) {
-      $_SESSION['username'] = $username;
-      header('location: index.php');
-    }else {
-      array_push($errors, "Wrong username/password combination");
+    if (empty($username)) {
+        array_push($errors, "You must enter a username");
     }
-  }
+    if (empty($password)) {
+        array_push($errors, "You must enter a password");
+    }
+
+    if (count($errors) == 0) {
+        //encrypt password
+        $password = md5($password);
+
+
+        //next example will insert new conversation
+        $service_url = 'http://localhost/api/index.php/auth/login';
+        $curl = curl_init($service_url);
+        $curl_post_data = array(
+            'username' => $username,
+            'password' => $password,
+        );
+        curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
+        curl_setopt($curl, CURLOPT_POST, true);
+        curl_setopt($curl, CURLOPT_POSTFIELDS, $curl_post_data);
+        curl_exec($curl);
+        $httpcode = curl_getinfo($curl, CURLINFO_HTTP_CODE);
+        if ($httpcode == 200) {
+            $_SESSION['username'] = $username;
+            header('location: index.php');
+        } else {
+            array_push($errors, "Wrong username/password combination");
+        }
+    }
 }
 
 ?>
