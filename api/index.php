@@ -1,6 +1,8 @@
 <?php
+use \Psr\Http\Message\ServerRequestInterface as Request;
+use \Psr\Http\Message\ResponseInterface as Response;
 
-require '../../vendor/autoload.php';
+require '../vendor/autoload.php';
 include 'controllers/locations/location.php';
 include 'controllers/authentication/auth.php';
 
@@ -17,14 +19,16 @@ $container['db'] = function ($c) {
     return $pdo;
 };
 
-$app->group('/api', function () {
-
-    // Location Endpoints
-    $this->get('/locations/provinces', \LocationController::class . ':provinces');
-    $this->get('/locations/cities', \LocationController::class . ':cities');
-
-    // Authentication Endpoints
-    $this->post('/auth/login', \AuthController::class .  ':login');
-    $this->post('/auth/register', \AuthController::class .  ':register');
+$app->get('/',function (Request $request, Response $response, array $args) {
+    echo "Welcome the backend API";
 });
+
+// Location Endpoints
+$app->get('/locations/provinces', \LocationController::class . ':provinces');
+$app->get('/locations/cities', \LocationController::class . ':cities');
+
+// Authentication Endpoints
+$app->post('/auth/login', \AuthController::class .  ':login');
+$app->post('/auth/register', \AuthController::class .  ':register');
+
 $app->run();
