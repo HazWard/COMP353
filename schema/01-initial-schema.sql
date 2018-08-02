@@ -3,8 +3,6 @@ DROP DATABASE IF EXISTS company_cms;
 CREATE DATABASE company_cms;
 USE company_cms;
 
-SET FOREIGN_KEY_CHECKS=0;
-
 # Initialize tables
 CREATE TABLE provinces(
     prov_abbrev CHAR(2) PRIMARY KEY,
