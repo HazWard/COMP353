@@ -310,7 +310,7 @@ insert into contracts(contract_id, contract_category, type_of_service, acv, init
 
 /*
 # TO INCLUDE IF INCLUDING SALES ASSOCIATES AND ADMIN
-2 Sales Associates (id: 3 at the front, 8 digits)
+10 Sales Associates (id: 3 at the front, 8 digits)
 1 Admins (id: 4 at the front, 8 digits)
 */
 
@@ -319,10 +319,23 @@ INSERT INTO employees(employee_id, first_name, last_name, department, manager_id
 VALUES(30000000, 'Wayne', 'Cornfield', 'Sales', NULL, 'Normal Employee Plan');
 INSERT INTO employees(employee_id, first_name, last_name, department, manager_id, insurance_plan)
 VALUES(30000001, 'Winnie', 'Bluebird', 'Sales', NULL, 'Normal Employee Plan');
+INSERT INTO employees(employee_id, first_name, last_name, department, manager_id, insurance_plan)
+VALUES(30000002, 'James', 'Cornell', 'Sales', NULL, 'Normal Employee Plan');
+INSERT INTO employees(employee_id, first_name, last_name, department, manager_id, insurance_plan)
+VALUES(30000003, 'Homer', 'Bayes', 'Sales', NULL, 'Normal Employee Plan');
+INSERT INTO employees(employee_id, first_name, last_name, department, manager_id, insurance_plan)
+VALUES(30000004, 'Sherlock', 'Hansen', 'Sales', NULL, 'Normal Employee Plan');
+INSERT INTO employees(employee_id, first_name, last_name, department, manager_id, insurance_plan)
+VALUES(30000005, 'Allie', 'Wong', 'Sales', NULL, 'Normal Employee Plan');
+INSERT INTO employees(employee_id, first_name, last_name, department, manager_id, insurance_plan)
+VALUES(30000006, 'Jessica', 'Hudson', 'Sales', NULL, 'Normal Employee Plan');
+INSERT INTO employees(employee_id, first_name, last_name, department, manager_id, insurance_plan)
+VALUES(30000007, 'Yossi', 'Haman', 'Sales', NULL, 'Normal Employee Plan');
+INSERT INTO employees(employee_id, first_name, last_name, department, manager_id, insurance_plan)
+VALUES(30000008, 'Ben', 'Gordon', 'Sales', NULL, 'Normal Employee Plan');
+INSERT INTO employees(employee_id, first_name, last_name, department, manager_id, insurance_plan)
+VALUES(30000009, 'Louis', 'Salamander', 'Sales', NULL, 'Normal Employee Plan');
 
 # Admin
 INSERT INTO employees(employee_id, first_name, last_name, department, manager_id, insurance_plan)
 VALUES(40000000, 'Oulianna', 'Rachmaninoff', 'Administration', NULL, 'Premium Employee Plan');
-INSERT INTO employees(employee_id, first_name, last_name, department, manager_id, insurance_plan)
-VALUES(40000001, 'Marie', 'Antouine', 'Administration', NULL, 'Premium Employee Plan');
-
