@@ -1,16 +1,15 @@
 <?php
-class Database{
+class Database {
 
     // specify your own database credentials
-    private $host = "localhost";
-    private $db_name = "company-cms";
+    private $host = "database";
+    private $db_name = "company_cms";
     private $username = "root";
-    private $password = "";
+    private $password = "mydatabase";
     public $conn;
 
     // get the database connection
     public function getConnection(){
-        $this->password = $_ENV['DBPASS'];
         $this->conn = null;
 
         try{
