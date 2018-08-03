@@ -3,8 +3,6 @@ DROP DATABASE IF EXISTS company_cms;
 CREATE DATABASE company_cms;
 USE company_cms;
 
-SET FOREIGN_KEY_CHECKS=0;
-
 # Initialize tables
 CREATE TABLE provinces(
     prov_abbrev CHAR(2) PRIMARY KEY,
@@ -20,7 +18,7 @@ CREATE TABLE cities(
 
 CREATE TABLE clients(
     company_name VARCHAR(255) PRIMARY KEY,
-    contact_number NUMERIC(10,0) NOT NULL DEFAULT 0,
+    contact_number NUMERIC(10,0) NOT NULL,
     company_email VARCHAR(255) NOT NULL,
     rep_first_name VARCHAR(255) NOT NULL,
     rep_last_name VARCHAR(255) NOT NULL,
@@ -59,6 +57,7 @@ CREATE TABLE categories(
 CREATE TABLE contracts(
     contract_id INT PRIMARY KEY,
     contract_category VARCHAR(255) NOT NULL,
+    FOREIGN KEY (contract_category) REFERENCES categories(contract_category),
     type_of_service VARCHAR(255) NOT NULL,
     acv FLOAT NOT NULL,
     initial_amount FLOAT NOT NULL,
