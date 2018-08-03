@@ -2,7 +2,7 @@
 session_start();
 
 // initialize variables to your needs
-$username = "";
+$username = "root";
 $password = "";
 $errors = array();
 

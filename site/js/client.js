@@ -1,64 +1,68 @@
 
 $( document ).ready(function() {
     $('#province').change(function() {
-        populateCities();
+        getCities();
+
     });
+
+
 });
 
-
-
-function populateCities (){
-    let cityDrop = document.getElementById("city");
-    removeOptions(cityDrop);
+function getCities(){
+    let xmlhttp = new XMLHttpRequest();
+    let cityArray = [];
     let provinceDrop = document.getElementById("province");
     let selectedProvince = provinceDrop.options[provinceDrop.selectedIndex].value;
+    let province = getProvinceAbbrev(selectedProvince);
+    xmlhttp.onreadystatechange = function() {
+        if (this.readyState == 4 && this.status == 200) {
+            cityArray = JSON.parse(this.responseText);
+            populateCities(cityArray,selectedProvince);
+        }
 
-    let ontarioCities = ['Toronto','Ottawa','Hamilton','Waterloo',];
-    let quebecCities = ['Montreal','Quebec','Gatineau','laval'];
-    let bcCities = ['Vancouver','Victoria','Surrey','Burnaby'];
-    let albertaCities = ['Calgary','Edmonton','Red Deer','Lethbridge'];
-    let nvCities = ['Halifax','Sydney','Truro','New Glasgow'];
-    let saskCities = ['Saskatoon','Regina','Prince Albert','Moose Jaw'];
-    let manitobaCities = ['Winnipeg','Brandon','Steinbach','Thompson'];
-    let nbCities = ['Moncton','Bathurst','Fredericton','Dieppe'];
-    let nflCities = ['St John\'s','Mount Pearl','Paradise','Labrador City'];
-    let peiCities = ['Charlottetown','Summerside','Stratford','Cornwall'];
+    };
+    xmlhttp.open("GET", "/COMP353/api/locations/cities.php?province=" + province, true);
+    xmlhttp.send();
 
-    let displayCities;
+}
+
+function getProvinceAbbrev(selectedProvince){
+    console.log(selectedProvince);
     switch(selectedProvince) {
-        case 'Ontario':
-            displayCities =  ontarioCities;
-            break;
-        case 'Quebec':
-            displayCities =  quebecCities;
-            break;
-        case 'British Columbia':
-            displayCities =  bcCities;
-            break;
-        case 'Alberta':
-            displayCities =  albertaCities;
-            break;
-        case 'Nova Scotia':
-            displayCities =  nvCities;
-            break;
-        case 'Saskatchewan':
-            displayCities =  saskCities;
-            break;
-        case 'Manitoba':
-            displayCities =  manitobaCities;
-            break;
-        case 'New Brunswick':
-            displayCities =  nbCities;
-            break;
-        case 'Newfoundland and Labrador':
-            displayCities =  nflCities;
-            break;
-        case 'Prince Edward Island':
-            displayCities =  peiCities;
-            break;
-        default:
-           displayCities = [];
-    }
+            case 'Ontario':
+                return 'ON';
+            case 'Quebec':
+                return 'QC';
+            case 'British Columbia':
+                return 'BC';
+            case 'Alberta':
+                return 'AB';
+            case 'Nova Scotia':
+                return 'NS';
+            case 'Saskatchewan':
+                return 'SK';
+            case 'Manitoba':
+                return 'MB';
+            case 'New Brunswick':
+                return 'NB';
+            case 'Newfoundland and Labrador':
+                return 'NL';
+            case 'Prince Edward Island':
+                return 'PE';
+            case 'Nunavut':
+                return 'NU';
+            case 'Yukon':
+                return 'YT';
+            case 'Northwest Territories':
+                return 'NT';
+        }
+}
+
+function populateCities (cityArray,province){
+    let cityDrop = document.getElementById("city");
+    removeOptions(cityDrop);
+    let displayCities = cityArray;
+
     let select = document.getElementById("city");
     let options = displayCities;
 

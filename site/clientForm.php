@@ -20,7 +20,7 @@
     <div class="row main">
         <div class="main-login main-center">
             <h5 style="text-align: center; font-weight: bold; font-size: large">Enter client information</h5>
-            <form class="" method="post" action="scripts/createClient.php">
+            <form class="" method="post" action="../api/clients/createClient.php">
                 <div class="form-group">
                     <label for="name" class="cols-sm-2 control-label">Company Name</label>
                     <div class="cols-sm-10">
@@ -35,7 +35,7 @@
                     <div class="cols-sm-10">
                         <div class="input-group">
                             <span class="input-group-addon"><i class="fa fa-user fa" aria-hidden="true"></i></span>
-                            <input type="text" class="form-control" name="companyNumber" id="name"  placeholder="Enter Company Number" minlength="10" maxlength="10" required/>
+                            <input type="text" class="form-control" name="companyNumber" id="number"  placeholder="Enter Company Number" minlength="10" maxlength="10" required/>
                         </div>
                     </div>
                 </div>
@@ -76,6 +76,15 @@
                     </div>
                 </div>
                 <div class="form-group">
+                    <label for="LOB" class="cols-sm-2 control-label">Enter Line of Business</label>
+                    <div class="cols-sm-10">
+                        <div class="input-group">
+                            <span class="input-group-addon"><i class="fa fa-briefcase fa" aria-hidden="true"></i></span>
+                            <input type="text" class="form-control" name="LOB" id="LOB"  placeholder="Line of Business"  required/>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
                     <label for="exampleFormControlSelect1">Select a Province</label>
                     <select class="form-control" id="province" name="province">
                         <option value="" disabled selected>Select a Province</option>
@@ -89,6 +98,9 @@
                         <option>New Brunswick</option>
                         <option>Newfoundland and Labrador</option>
                         <option>Prince Edward Island</option>
+                        <option>Nunavut</option>
+                        <option>Northwest Territories</option>
+                        <option>Yukon</option>
                     </select>
                 </div>
                 <div class="form-group">
