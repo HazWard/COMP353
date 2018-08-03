@@ -19,14 +19,14 @@ class AuthController
         $results = array();
         $connection = $this->container->get("db");
         $request_body = $request->getParsedBody();
-        $stmt = $connection->prepare("SELECT * FROM ".AuthController::$table_name." WHERE username=:username AND password=:password");
+        $stmt = $connection->prepare("SELECT * FROM ".AuthController::$table_name." WHERE username=:username AND password=:password LIMIT 1");
         $stmt->bindValue(':username', $request_body['username'], PDO::PARAM_STR);
         $stmt->bindValue(':password', $request_body['password'], PDO::PARAM_STR);
         $stmt->execute();
 
         while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
             extract($row);
-            array_push($results, $username);
+            array_push($results, $user_type);
         }
         if (count($results) < 1) {
             $response = $response->withStatus(403);
@@ -37,6 +37,10 @@ class AuthController
         }
         $response = $response->withStatus(200);
         $response = $response->withHeader("Content-Type", "application/json");
+        $body = array(
+          'type' => $results[0]
+        );
+        $response->getBody()->write(json_encode($body));
         return $response;
     }
 

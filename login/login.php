@@ -6,20 +6,25 @@
     <link rel="stylesheet" type="text/css" href="style.css">
 </head>
 <body>
+<div id="loginbox">
 <div class="header">
     <h2>Login</h2>
 </div>
 
 <form method="post" action="login.php">
     <?php include('errors.php'); ?>
+
     <label>Username</label>
-    <input type="text" name="username" placeholder="EmployeeID/Comapny Email">
+    <input type="text" name="username" placeholder="EmployeeID/Comapny Email"><br/>
     <label>Password</label>
     <input type="password" name="password" placeholder="Password">
+    <br/>
     <button type="submit" class="button" name="login_button">Login</button>
+
     <p>
-        Not yet registered? <a href="#">Register</a>
+        Not yet registered? <a href="/site/createClient.php">Register</a>
     </p>
 </form>
+</div>
 </body>
 </html>

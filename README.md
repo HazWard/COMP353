@@ -7,6 +7,24 @@
 
 ## API documentation
 
+### Authentication
+
+#### ``/api/index.php/auth/login``
+* Request body has to have both a ``username`` and ``password`` field
+
+Returns:
+```json
+# On Successful login (Status Code 200)
+{
+  "type": "<user type>"
+}
+
+# On Unsuccessful login (Status Code 403)
+{
+  "error": "<error message>"
+}
+```
+
 ### Locations
 
 #### ``/api/index.php/locations/provinces``

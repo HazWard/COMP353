@@ -5,6 +5,7 @@ use \Psr\Http\Message\ResponseInterface as Response;
 require '../vendor/autoload.php';
 include 'controllers/locations/location.php';
 include 'controllers/authentication/auth.php';
+include 'controllers/employees/employee.php';
 
 $config = require 'config.php'; // The path will change for deployement
 $app = new \Slim\App($config);
@@ -30,5 +31,9 @@ $app->get('/locations/cities', \LocationController::class . ':cities');
 // Authentication Endpoints
 $app->post('/auth/login', \AuthController::class .  ':login');
 $app->post('/auth/register', \AuthController::class .  ':register');
+
+// Employee Endpoints
+$app->get('/employees', \EmployeeController::class .  ':employees');
+$app->get('/employees/{id}', \EmployeeController::class .  ':employee');
 
 $app->run();
