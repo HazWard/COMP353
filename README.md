@@ -16,6 +16,7 @@ Returns:
 ```json
 # On Successful login (Status Code 200)
 {
+  "username" : "<username>"
   "type": "<user type>"
 }
 
