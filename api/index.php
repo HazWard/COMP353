@@ -6,6 +6,7 @@ require '../vendor/autoload.php';
 include 'controllers/locations/location.php';
 include 'controllers/authentication/auth.php';
 include 'controllers/employees/employee.php';
+include 'controllers/clients/client.php;
 
 $config = require 'config.php'; // The path will change for deployement
 $app = new \Slim\App($config);
@@ -36,5 +37,11 @@ $app->post('/auth/register', \AuthController::class .  ':register');
 $app->get('/employees', \EmployeeController::class .  ':employees');
 $app->map(['GET', 'POST'],'/employees/{id}', \EmployeeController::class .  ':employee');
 $app->map(['GET', 'POST'],'/employees/{id}/preferences', \EmployeeController::class .  ':preferences');
+
+// Client Endpoints
+$app->post('/clients/new', \ClientController::class . ':createNewClient');
+$app->get('/clients/{cName}', \ClientController::class . ':loadClient');
+$app->get('/clientNames', \ClientController::class . ':getClientNames');
+$app->post('/clients/update', \ClientController::class. ':updateClient');
 
 $app->run();
