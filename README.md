@@ -130,4 +130,16 @@ Returns:
 ]
 ```
 
+#### ``/api/index.php/employees/{id}/preferences``
+* ``GET`` will return a JSON object with a field for ``category`` and ``type`` for the given employee ID
+* ``POST`` updates the given employee (using its ID), both ``category`` and ``type`` need to be sent
+
+Returns (in both cases):
+```json
+{
+	"category": "<a category>",
+	"type": "<a type>"
+}
+```
+
 
