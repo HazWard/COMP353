@@ -22,7 +22,7 @@ class EmployeeController
 
         switch ($method) {
             case 'GET':
-                $queryText = "SELECT * FROM " . $this->table_name . " WHERE employee_id=:id";
+                $queryText = "SELECT * FROM " . $this->table_name . " WHERE employee_id=:id LIMIT 1";
                 $get_stmt = $connection->prepare($queryText);
                 $get_stmt->bindValue(':id', $employee_id_param, PDO::PARAM_INT);
                 $get_stmt->execute();
@@ -43,6 +43,17 @@ class EmployeeController
                 // Processing for POST
                 break;
         }
+        if (count($results) != 1) {
+            $response = $response->withStatus(404);
+            $response = $response->withHeader("Content-Type", "application/json");
+            $results = array(
+              "error" => "Employee with ID '".$employee_id_param."' was not found"
+            );
+            $response->getBody()->write(json_encode($results));
+            return $response;
+        }
+        $response = $response->withHeader("Content-Type", "application/json");
+        $response->getBody()->write(json_encode($results[0]));
         return $response;
     }
 
@@ -80,6 +91,7 @@ class EmployeeController
             $stmt->bindValue(':manager', $manager, PDO::PARAM_INT);
             $stmt->execute();
             while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
+                extract($row);
                 $employee  = array(
                     "id" => $employee_id,
                     "firstName" => $first_name,
@@ -90,14 +102,25 @@ class EmployeeController
                 );
                 array_push($results, $employee);
             }
-            $response = $response->withHeader("Content-Type", "application/json");
-            $response->getBody()->write(json_encode($results));
+            if (count($results) == 0) {
+                $response = $response->withStatus(404);
+                $response = $response->withHeader("Content-Type", "application/json");
+                $results = array(
+                    "error" => "No employees with manager with ID '".$manager."'"
+                );
+                $response->getBody()->write(json_encode($results));
+            } else {
+                $response = $response->withHeader("Content-Type", "application/json");
+                $response->getBody()->write(json_encode($results));
+            }
         } else {
-            $placeholders = str_repeat ('?, ',  count ($list) - 1) . '?';
+            $employee_ids = explode(",", $list);
+            $placeholders = str_repeat ('?, ',  count ($employee_ids) - 1) . '?';
             $stmt = $connection->prepare("SELECT * FROM " . $this->table_name. " WHERE employee_id IN ($placeholders)");
             $stmt->bindValue(':manager', $manager, PDO::PARAM_INT);
-            $stmt->execute($list);
+            $stmt->execute($employee_ids);
             while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
+                extract($row);
                 $employee  = array(
                     "id" => $employee_id,
                     "firstName" => $first_name,
@@ -108,8 +131,17 @@ class EmployeeController
                 );
                 array_push($results, $employee);
             }
-            $response = $response->withHeader("Content-Type", "application/json");
-            $response->getBody()->write(json_encode($results));
+            if (count($results) == 0) {
+                $response = $response->withStatus(404);
+                $response = $response->withHeader("Content-Type", "application/json");
+                $results = array(
+                    "error" => "No employees with the following IDs: ".$list
+                );
+                $response->getBody()->write(json_encode($results));
+            } else {
+                $response = $response->withHeader("Content-Type", "application/json");
+                $response->getBody()->write(json_encode($results));
+            }
         }
         return $response;
     }
