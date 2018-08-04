@@ -3,8 +3,6 @@ DROP DATABASE IF EXISTS company_cms;
 CREATE DATABASE company_cms;
 USE company_cms;
 
-SET FOREIGN_KEY_CHECKS=0;
-
 # Initialize tables
 CREATE TABLE provinces(
     prov_abbrev CHAR(2) PRIMARY KEY,
@@ -20,13 +18,14 @@ CREATE TABLE cities(
 
 CREATE TABLE clients(
     company_name VARCHAR(255) PRIMARY KEY,
-    contact_number NUMERIC(10,0) NOT NULL DEFAULT 0,
+    contact_number NUMERIC(10,0) NOT NULL,
     company_email VARCHAR(255) NOT NULL,
     rep_first_name VARCHAR(255) NOT NULL,
     rep_last_name VARCHAR(255) NOT NULL,
-    rep_middle_initial VARCHAR(255) NOT NULL,
+    rep_middle_initial VARCHAR(255) DEFAULT NULL,
     city VARCHAR(255),
     province CHAR(2),
+    line_of_business VARCHAR(255) NOT NULL,
     FOREIGN KEY (city, province) REFERENCES cities(city_name, province)
 );
 
@@ -46,18 +45,28 @@ CREATE TABLE employees(
     FOREIGN KEY (insurance_plan) REFERENCES insurances(plan_name)
 );
 
+CREATE TABLE categories(
+    # entity describes the number of days for each deliverable based on category of contract
+    contract_category varchar(255) primary key,
+    deliv1 int not null,
+    deliv2 int not null,
+    deliv3 int not null,
+    deliv4 int default null
+);
+
 CREATE TABLE contracts(
     contract_id INT PRIMARY KEY,
     contract_category VARCHAR(255) NOT NULL,
+    FOREIGN KEY (contract_category) REFERENCES categories(contract_category),
     type_of_service VARCHAR(255) NOT NULL,
     acv FLOAT NOT NULL,
     initial_amount FLOAT NOT NULL,
     
     service_start_date TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
-    1_delivered TIMESTAMP NULL, #updated when first deliverable is finished
-    2_delivered TIMESTAMP NULL,
-    3_delivered TIMESTAMP NULL,
-    4_delivered TIMESTAMP NULL,
+    1_delivered INT NULL, #updated when first deliverable is finished
+    2_delivered INT NULL, #just records the number of days it took to finish 1,2,3,4 delivs
+    3_delivered INT NULL,
+    4_delivered INT NULL,
     score INT DEFAULT NULL, #score assigned post performance by client; to be updated
     
     manager_id INT NOT NULL,
@@ -85,20 +94,9 @@ CREATE TABLE assigned_contracts(
     constraint pkg_ec primary key (employee_id, contract_id)
 );
 
-CREATE TABLE deliverable(
-    # entity describes the number of days for each deliverable based on category of contract
-    contract_category varchar(255) primary key,
-    deliv1 int not null,
-    deliv2 int not null,
-    deliv3 int not null,
-    deliv4 int default null
-);
-
 CREATE TABLE user_credentials(
     username VARCHAR(50),
     user_type VARCHAR(10),
     password VARCHAR(50),
     constraint credentials primary key (username, password)
 );
-
-SET FOREIGN_KEY_CHECKS=1;
