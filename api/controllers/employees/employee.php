@@ -5,7 +5,8 @@ use Slim\Container;
 
 class EmployeeController
 {
-    private $table_name = "employees";
+    private $employee_table_name = "employees";
+    private $prefs_table_name = "desired_contracts";
 
     protected $container;
 
@@ -22,7 +23,7 @@ class EmployeeController
 
         switch ($method) {
             case 'GET':
-                $queryText = "SELECT * FROM " . $this->table_name . " WHERE employee_id=:id LIMIT 1";
+                $queryText = "SELECT * FROM " . $this->employee_table_name . " WHERE employee_id=:id LIMIT 1";
                 $get_stmt = $connection->prepare($queryText);
                 $get_stmt->bindValue(':id', $employee_id_param, PDO::PARAM_INT);
                 $get_stmt->execute();
@@ -87,7 +88,7 @@ class EmployeeController
         }
         $connection = $this->container->get("db");
         if (!is_null($manager)) {
-            $stmt = $connection->prepare("SELECT * FROM " . $this->table_name. " WHERE manager_id=:manager");
+            $stmt = $connection->prepare("SELECT * FROM " . $this->employee_table_name. " WHERE manager_id=:manager");
             $stmt->bindValue(':manager', $manager, PDO::PARAM_INT);
             $stmt->execute();
             while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
@@ -116,7 +117,7 @@ class EmployeeController
         } else {
             $employee_ids = explode(",", $list);
             $placeholders = str_repeat ('?, ',  count ($employee_ids) - 1) . '?';
-            $stmt = $connection->prepare("SELECT * FROM " . $this->table_name. " WHERE employee_id IN ($placeholders)");
+            $stmt = $connection->prepare("SELECT * FROM " . $this->employee_table_name. " WHERE employee_id IN ($placeholders)");
             $stmt->bindValue(':manager', $manager, PDO::PARAM_INT);
             $stmt->execute($employee_ids);
             while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
@@ -143,6 +144,64 @@ class EmployeeController
                 $response->getBody()->write(json_encode($results));
             }
         }
+        return $response;
+    }
+
+    public function preferences(Request $request, Response $response, array $args) {
+        $results = array();
+        $connection = $this->container->get("db");
+        $method = $request->getMethod();
+        $employee_id_param = $args['id'];
+
+        switch ($method) {
+            case 'GET':
+                $queryText = "SELECT * FROM " . $this->prefs_table_name . " WHERE employee_id=:id LIMIT 1";
+                $get_stmt = $connection->prepare($queryText);
+                $get_stmt->bindValue(':id', $employee_id_param, PDO::PARAM_INT);
+                $get_stmt->execute();
+                while ($row = $get_stmt->fetch(PDO::FETCH_ASSOC)) {
+                    extract($row);
+                    $prefs  = array(
+                        "category" => $desired_category,
+                        "type" => $desired_type,
+                    );
+                    array_push($results, $prefs);
+                }
+                break;
+            case 'POST':
+                $request_body = $request->getParsedBody();
+                $queryText = "INSERT INTO ".$this->prefs_table_name." (employee_id, desired_category, desired_type) VALUES(:id, :category, :type) ON DUPLICATE KEY UPDATE    
+desired_category=:category, desired_type=:type";
+                $post_stmt = $connection->prepare($queryText);
+                $post_stmt->bindValue(':id', $employee_id_param, PDO::PARAM_INT);
+                $post_stmt->bindValue(':category', $request_body['category'], PDO::PARAM_STR);
+                $post_stmt->bindValue(':type', $request_body['type'], PDO::PARAM_STR);
+                $post_stmt->execute();
+                $queryText = "SELECT * FROM " . $this->prefs_table_name . " WHERE employee_id=:id LIMIT 1";
+                $post_stmt = $connection->prepare($queryText);
+                $post_stmt->bindValue(':id', $employee_id_param, PDO::PARAM_INT);
+                $post_stmt->execute();
+                while ($row = $post_stmt->fetch(PDO::FETCH_ASSOC)) {
+                    extract($row);
+                    $prefs  = array(
+                        "category" => $desired_category,
+                        "type" => $desired_type,
+                    );
+                    array_push($results, $prefs);
+                }
+                break;
+        }
+        if (count($results) != 1) {
+            $response = $response->withStatus(404);
+            $response = $response->withHeader("Content-Type", "application/json");
+            $results = array(
+                "error" => "No preferences set for employee with ID '".$employee_id_param."'"
+            );
+            $response->getBody()->write(json_encode($results));
+            return $response;
+        }
+        $response = $response->withHeader("Content-Type", "application/json");
+        $response->getBody()->write(json_encode($results[0]));
         return $response;
     }
 }
