@@ -1,52 +1,148 @@
 <?php
+use \Psr\Http\Message\ServerRequestInterface as Request;
+use \Psr\Http\Message\ResponseInterface as Response;
+use Slim\Container;
 
-class Employee
+class EmployeeController
 {
-    private $connection;
     private $table_name = "employees";
 
-    public $id;
-    public $firstName;
-    public $lastName;
-    public $department;
-    public $managerID;
-    public $insurance;
+    protected $container;
 
-    // constructor with $db as database connection
-    public function __construct($db) {
-        $this->conn = $db;
+    // constructor receives container instance
+    public function __construct(Container $container) {
+        $this->container = $container;
     }
 
-    public function getEmployee() {
-        $employeeID = $_REQUEST["id"];
-        if (!isset($province)) {
-          return NULL;
+    public function employee(Request $request, Response $response, array $args) {
+        $results = array();
+        $connection = $this->container->get("db");
+        $method = $request->getMethod();
+        $employee_id_param = $args['id'];
+
+        switch ($method) {
+            case 'GET':
+                $queryText = "SELECT * FROM " . $this->table_name . " WHERE employee_id=:id LIMIT 1";
+                $get_stmt = $connection->prepare($queryText);
+                $get_stmt->bindValue(':id', $employee_id_param, PDO::PARAM_INT);
+                $get_stmt->execute();
+                while ($row = $get_stmt->fetch(PDO::FETCH_ASSOC)) {
+                    extract($row);
+                    $employee  = array(
+                        "id" => $employee_id,
+                        "firstName" => $first_name,
+                        "lastName" => $last_name,
+                        "department" => $department,
+                        "managerId" => $manager_id,
+                        "insurancePlan" => $insurance_plan
+                    );
+                    array_push($results, $employee);
+                }
+                break;
+            case 'POST':
+                // Processing for POST
+                break;
         }
-
-        $stmt = $this->connection->prepare("SELECT * FROM " . $this->table_name . " WHERE employee_id=:id");
-        $stmt->bindValue(':id', $employeeID, PDO::PARAM_INT);
-        $stmt->execute();
-        return $stmt;
-    }
-
-    public function getEmployees() {
-        $managerID = $_REQUEST["manager"];
-        $idList = $_REQUEST["list"];
-        if (isset($managerID) && !isset($idList) ) {
-            // Handle search using manager ID
-            return NULL;
+        if (count($results) != 1) {
+            $response = $response->withStatus(404);
+            $response = $response->withHeader("Content-Type", "application/json");
+            $results = array(
+              "error" => "Employee with ID '".$employee_id_param."' was not found"
+            );
+            $response->getBody()->write(json_encode($results));
+            return $response;
         }
+        $response = $response->withHeader("Content-Type", "application/json");
+        $response->getBody()->write(json_encode($results[0]));
+        return $response;
+    }
 
-        if (!isset($managerID) && isset($idList) ) {
-            // Handle search using list of IDs
-            return NULL;
+    public function employees(Request $request, Response $response, array $args) {
+        $results = array();
+        $list = $request->getQueryParam("list", $default = null);
+        $manager = $request->getQueryParam("manager", $default = null);
+
+        if (count($request->getQueryParams()) < 1) {
+            $response = $response->withStatus(500);
+            $response = $response->withHeader("Content-Type", "application/json");
+            $results["error"] = "Missing value for 'list' or 'manager' query parameters";
+            $response->getBody()->write(json_encode($results));
+            return $response;
+        } else {
+            if (is_null($list) && is_null($manager)) {
+                $response = $response->withStatus(500);
+                $response = $response->withHeader("Content-Type", "application/json");
+                $invalid_list = implode (", ", $request->getQueryParams());
+                $results["error"] = "Missing value for 'list' or 'manager' query parameters. ".$invalid_list." are not value query parameters.";
+                $response->getBody()->write(json_encode($results));
+                return $response;
+            }
+            if (!is_null($list) && !is_null($manager)) {
+                $response = $response->withStatus(500);
+                $response = $response->withHeader("Content-Type", "application/json");
+                $results["error"] = "Both 'list' and 'manager' cannot be set at the same time.";
+                $response->getBody()->write(json_encode($results));
+                return $response;
+            }
         }
-
-        return false;
+        $connection = $this->container->get("db");
+        if (!is_null($manager)) {
+            $stmt = $connection->prepare("SELECT * FROM " . $this->table_name. " WHERE manager_id=:manager");
+            $stmt->bindValue(':manager', $manager, PDO::PARAM_INT);
+            $stmt->execute();
+            while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
+                extract($row);
+                $employee  = array(
+                    "id" => $employee_id,
+                    "firstName" => $first_name,
+                    "lastName" => $last_name,
+                    "department" => $department,
+                    "managerId" => $manager_id,
+                    "insurancePlan" => $insurance_plan
+                );
+                array_push($results, $employee);
+            }
+            if (count($results) == 0) {
+                $response = $response->withStatus(404);
+                $response = $response->withHeader("Content-Type", "application/json");
+                $results = array(
+                    "error" => "No employees with manager with ID '".$manager."'"
+                );
+                $response->getBody()->write(json_encode($results));
+            } else {
+                $response = $response->withHeader("Content-Type", "application/json");
+                $response->getBody()->write(json_encode($results));
+            }
+        } else {
+            $employee_ids = explode(",", $list);
+            $placeholders = str_repeat ('?, ',  count ($employee_ids) - 1) . '?';
+            $stmt = $connection->prepare("SELECT * FROM " . $this->table_name. " WHERE employee_id IN ($placeholders)");
+            $stmt->bindValue(':manager', $manager, PDO::PARAM_INT);
+            $stmt->execute($employee_ids);
+            while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
+                extract($row);
+                $employee  = array(
+                    "id" => $employee_id,
+                    "firstName" => $first_name,
+                    "lastName" => $last_name,
+                    "department" => $department,
+                    "managerId" => $manager_id,
+                    "insurancePlan" => $insurance_plan
+                );
+                array_push($results, $employee);
+            }
+            if (count($results) == 0) {
+                $response = $response->withStatus(404);
+                $response = $response->withHeader("Content-Type", "application/json");
+                $results = array(
+                    "error" => "No employees with the following IDs: ".$list
+                );
+                $response->getBody()->write(json_encode($results));
+            } else {
+                $response = $response->withHeader("Content-Type", "application/json");
+                $response->getBody()->write(json_encode($results));
+            }
+        }
+        return $response;
     }
-
-    public function setPreferences() {
-        // Set the desired_contracts values
-    }
-
 }
