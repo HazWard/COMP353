@@ -143,4 +143,73 @@ Returns (in both cases):
 }
 ```
 
+### Clients
 
+#### ``/api/index.php/clients/new``
+* ``POST`` creates new client data into the client table & credentials data (using email & password) into the user_credentials table. Used fields in the clientForm.php
+* NOTE: UNTESTED
+
+Returns:
+```json
+{
+	true,
+	true,
+	{
+		"company_name": "<name>",
+		"contact_number": "<#>",
+		"company_email": "<@>",
+		"rep_first_name": "<fn>",
+		"rep_last_name": "<ln>",
+		"rep_middle_initial": "<mi>",
+		"city": "<a city>",
+		"province": "<a province>",
+		"line_of_business": "<lob>"
+	}
+	{
+		"username": "<@>",
+		"user_type": "<type>",
+		"password": "<pass>"
+	}
+}
+```
+
+#### ``/api/index.php/clients/{cName}``
+* ``GET`` loads client information
+* insert company Name @ ``{cName}``
+
+Example:
+``/api/index.php/clients/Apple%20Inc.``
+
+Result:
+```json
+{
+	"company_name":"Apple Inc.",
+	"contact_number":"4632343154",
+	"company_email":"apple@email.com",
+	"rep_first_name":"Steve",
+	"rep_last_name":"Jobs",
+	"rep_middle_initial":"A",
+	"city":"Waterloo",
+	"province":"ON",
+	"line_of_business":"Tech"
+}
+```
+
+#### ``/api/index.php/clientNames``
+* ``GET`` returns list of Client Names (company_name)
+
+Result:
+```json
+[
+	"Digital Extremes",
+	"Manulife",
+	"Koryo",
+	"Walmart",
+	"Air Canada",
+	"Wallgreens",
+	"IKEA",
+	"Nike",
+	"Apple Inc.",
+	"Essence"
+]
+```
