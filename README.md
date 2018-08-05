@@ -17,7 +17,7 @@ Returns:
 # On Successful login (Status Code 200)
 {
   "username" : "<username>"
-  "type": "<user type>"
+  "type" : "<user type>"
 }
 
 # On Unsuccessful login (Status Code 403)
@@ -202,155 +202,164 @@ Result:
 ```
 
 ### Contracts
-#### ``/api/index.php/contracts/new``
+#### ``/api/index.php/contracts``
 * ``POST`` : implemented but untested. Should capture all non default information about a contract in the front end
 
-#### ``/api/index.php/contracts/{cid}/deliverables/first/{numDays}``
-* ``GET`` : ``{cid}`` is contract_id, ``{numDays}`` is number of days taken to complete first deliverable
-#### ``/api/index.php/contracts/{cid}/deliverables/second/{numDays}``
-#### ``/api/index.php/contracts/{cid}/deliverables/third/{numDays}``
-#### ``/api/index.php/contracts/{cid}/deliverables/fourth/{numDays}``
-* ``GET`` : ``{cid}`` is contract_id, ``{numDays}`` is number of days taken to complete second/third/fourth deliverable
-* NOTE: fourth deliverable api doesn't check to make sure it is a silver category (the only category that has 4 deliverables
-* Returns post-change contract info
 
-Example:
-``http://localhost:8888/api/index.php/contracts/1/deliverables/fourth/3``
-Result:
+#### ``/api/index.php/contracts/{cid}/deliverables/{deliv}``
+
+* ``cid`` corresponds to the contract ID
+* ``deliv`` corresponds to the target deliverable with the following possible values:
+    * ``first`` for first deliverables
+    * ``second``  for second deliverables
+    * ``third`` for third deliverables
+    * ``fourth``  for fourth deliverables
+* Only used to update the deliverables
+* Use POST with simple payload
+
+Payload:
 ```json
 {
-	"id":"1",
-	"category":"Premium",
-	"serviceType":"Cloud",
-	"acv":"50000",
-	"initialAmount":"10000",
-	"startDate":"2017-01-19 03:14:07",
-	"firstDeliverable":"4",
-	"secondDeliverable":"4",
-	"thirdDeliverable":"4",
-	"fourthDeliverable":"3",
-	"satisfactionScore":null,
-	"manager_id":"10000000"
+  "numDays" : "<number of days to complete deliverable>"
 }
+
 ```
-
-#### ``/api/index.php/contracts/update``
-* ``POST`` : takes as input all aspects of the contracts and updates the contract tuple accordingly
-* Weakly implemented but untested
-
-
-#### ``/api/index.php/contracts/{cid}/score/{score}``
-* ``GET`` : ``{cid}`` is contract_id, ``{score}`` is the input satisfaction score. Updates satisfaction score for the contract
 
 Returns:
 ```json
-[
-	{
-		"contractID":"1",
-		"satisfactionScore":"4"
-	}
-]
+{
+	"id": "1",
+	"company": "Apple Inc.",
+	"category": "Premium",
+	"serviceType": "Cloud",
+	"acv": "50000",
+	"initialAmount": "10000",
+	"startDate": "2017-01-19 03:14:07",
+	"firstDeliverable": 4,
+	"secondDeliverable": 4,
+	"thirdDeliverable": 4,
+	"fourthDeliverable": 3,
+	"score": null,
+	"manager": "10000000"
+}
 ```
 
-#### ``/api/index.php/scores/{mid}``
+#### ``/api/index.php/contracts/{cid}/score``
+* Updates satisfaction score for the contract (only supports post)
+
+Example payload:
+```json
+{
+	"score":"4"
+}
+```
+
+Returns:
+```json
+{
+	"id": "1",
+	"company": "Apple Inc.",
+	"category": "Premium",
+	"serviceType": "Cloud",
+	"acv": "50000",
+	"initialAmount": "10000",
+	"startDate": "2017-01-19 03:14:07",
+	"firstDeliverable": "4",
+	"secondDeliverable": "4",
+	"thirdDeliverable": "5",
+	"fourthDeliverable": "5",
+	"score": "4",
+	"manager": "10000000"
+}
+```
+
+#### ``/api/index.php/managers/{mid}/scores``
 * ``GET`` : shows a list of all the scores and contracts of a manager identified by their employee id ``{mid}`` as well as the average score for the manager.
 
 Returns:
 ```json
-[
-	{
-		"contractID":"1",
-		"satisfactionScore":"4"
-	},
-	{
-		"contractID":"3",
-		"satisfactionScore":null
-	},
-	{
-		"contractID":"5",
-		"satisfactionScore":null
-	},
-	{
-		"contractID":"7",
-		"satisfactionScore":null
-	},
-	{
-		"contractID":"9",
-		"satisfactionScore":null
-	},
-	{
-		"AVG(score)":"4.0000"
-	}
-]
+{
+	"contracts": [
+		{
+			"id": "1",
+			"score": "5"
+		},
+		{
+			"id": "3",
+			"score": "5"
+		},
+		{
+			"id": "5",
+			"score": "5"
+		},
+		{
+			"id": "7",
+			"score": "5"
+		},
+		{
+			"id": "9",
+			"score": "5"
+		}
+	],
+	"average": "5.0000"
+}
 ```
 
 #### ``/api/index.php/contracts/{cid}``
 * ``GET`` : views contract information identified by contract id ``{cid}``
+* ``POST`` : updates contract information identified by contract id ``{cid}``
+
+Returns:
 ```json
 {
-	"contract_id":"5",
-	"contract_category":"Silver",
-	"type_of_service":"On-premises",
-	"acv":"15000",
-	"initial_amount":"3000",
-	"service_start_date":"2017-09-19 03:14:07",
-	"first_deliv":null,
-	"second_deliv":null,
-	"third_deliv":null,
-	"fourth_deliv":null,
-	"score":null,
-	"manager_id":"10000000",
-	"company_name":"Digital Extremes"
+	"id" : "42",
+	"company" : "IKEA",
+	"category" : "Diamond",
+	"serviceType" : "Cloud",
+	"acv" : "40000",
+	"initialAmount" : "10000",
+	"startDate" : "2017-01-19 03:14:07",
+	"firstDeliverable" : null,
+	"secondDeliverable" : null,
+	"thirdDeliverable" : null,
+	"fourthDeliverable" : null,
+	"score" : null,
+	"manager" : "10000009"
 }
 ```
 
-#### ``/api/index.php/myContracts/{cName}``
+#### ``/api/index.php/clients/{cName}/contracts``
 * ``GET`` : returns a list of all the contracts signed by a company with the company name, ``{cName}``
 * NOTE : ``...`` signifies data points ommitted for the sake of conciseness
 ```json
 [
 	{
-		"id":"1",
-		"category":"Premium",
-		"serviceType":"Cloud",
-		"acv":"50000",
-		"initialAmount":"10000",
-		"startDate":"2017-01-19 03:14:07",
-		"firstDeliverable":"4",
-		"secondDeliverable":"4",
-		"thirdDeliverable":"4",
-		"fourthDeliverable":"3",
-		"satisfactionScore":"4",
-		"manager_id":"10000000"
+		"id": "1",
+		"category": "Premium",
+		"serviceType": "Cloud",
+		"acv": "50000",
+		"initialAmount": "10000",
+		"startDate": "2017-01-19 03:14:07",
+		"firstDeliverable": "4",
+		"secondDeliverable": "4",
+		"thirdDeliverable": "5",
+		"fourthDeliverable": "5",
+		"score": "5",
+		"manager": "10000000"
 	},
 	{
-		"id":"2",
-		"category":"Premium",
-		"serviceType":"On-premises",
-		"acv":"55000",
-		"initialAmount":"15000",
-		"startDate":"2017-02-21 03:14:07",
-		"firstDeliverable":null,
-		"secondDeliverable":null,
-		"thirdDeliverable":null,
-		"fourthDeliverable":null,
-		"satisfactionScore":null,
-		"manager_id":"10000001"
-	},
-	{
-		"id":"4",
-		"category":"Silver",
-		"serviceType":"Cloud",
-		"acv":"10000",
-		"initialAmount":"2000",
-		"startDate":"2017-08-09 03:14:07",
-		"firstDeliverable":null,
-		"secondDeliverable":null,
-		"thirdDeliverable":null,
-		"fourthDeliverable":null,
-		"satisfactionScore":null
-		,"manager_id":"10000001"
+		"id": "2",
+		"category": "Premium",
+		"serviceType": "On-premises",
+		"acv": "55000",
+		"initialAmount": "15000",
+		"startDate": "2017-02-21 03:14:07",
+		"firstDeliverable": null,
+		"secondDeliverable": null,
+		"thirdDeliverable": null,
+		"fourthDeliverable": null,
+		"score": null,
+		"manager": "10000001"
 	}
-	...
 ]
 ```

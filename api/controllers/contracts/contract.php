@@ -13,6 +13,13 @@ class ContractController
     private static $assigned_table_name = "assigned_contracts";
     private static $desired_table_name = "desired_contracts";
 
+    private static $deliverables = array(
+        "first" => "first_deliv",
+        "second" => "second_deliv",
+        "third" => "third_deliv",
+        "fourth" => "fourth_deliv",
+    );
+
     protected $container;
 
     // constructor receives container instance
@@ -36,22 +43,21 @@ class ContractController
 
         // query: INSERT INTO client table
         $stmt = $connection->prepare(
-            "INSERT INTO ".ContractController::$contract_table_name."(contract_id, contract_category, type_of_service, acv, initial_amount, manager_id, company_name) VALUES (:id, :cat, :contractType, :acv, :initAmt, :mid, :companyName)"
+            "INSERT INTO ".ContractController::$contract_table_name."(contract_category, type_of_service, acv, initial_amount, manager_id, company_name) VALUES (:cat, :contractType, :acv, :initAmt, :mid, :companyName)"
         );
-        $stmt->bindValue(':id', $request_body['cid'], PDO::PARAM_INT);
-        $stmt->bindValue(':cat', $request_body['cat'], PDO::PARAM_STR);
-        $stmt->bindValue(':contractType', $request_body['type'], PDO::PARAM_STR);
+        $stmt->bindValue(':cat', $request_body['category'], PDO::PARAM_STR);
+        $stmt->bindValue(':contractType', $request_body['serviceType'], PDO::PARAM_STR);
         $stmt->bindValue(':acv', $request_body['acv'], PDO::PARAM_STR);
-        $stmt->bindValue(':initAmt', $request_body['initAmt'], PDO::PARAM_STR);
-        $stmt->bindValue(':mid', $request_body['mid'], PDO::PARAM_INT);
-        $stmt->bindValue(':companyName', $request_body['name'], PDO::PARAM_STR);
-        $result1 = $stmt->execute(); // $result = success/fail of execution
-        array_push($results, $result1);
+        $stmt->bindValue(':initAmt', $request_body['initialAmount'], PDO::PARAM_STR);
+        $stmt->bindValue(':mid', $request_body['manager'], PDO::PARAM_INT);
+        $stmt->bindValue(':companyName', $request_body['company'], PDO::PARAM_STR);
+        $stmt->execute(); // $result = success/fail of execution
+        $contract_id_param = $connection->lastInsertId();
 
         // query database to to present successful input
         $queryTxt2 = "SELECT * FROM ".ContractController::$contract_table_name." WHERE contract_id =:contract_id";
         $stmt2 = $connection->prepare($queryTxt2);
-        $stmt2->bindValue(':contract_id', $request_body['cid'], PDO::PARAM_STR);
+        $stmt2->bindValue(':contract_id', $contract_id_param, PDO::PARAM_STR);
         $stmt2->execute();
         $result2 = array();
         // put result of query in array
@@ -82,194 +88,37 @@ class ContractController
     }
 
     /*
-     * GET
-     * update[Xth]Deliv()
+     * updateDeliv()
      * reserved for managers & admin
      * updates the number of days it took to complete the xth deliverable for the contract
      * should receive as param cid and numDays
      */
-    public function updateFirstDeliv(Request $request, Response $response, array $args)
+    public function updateDeliv(Request $request, Response $response, array $args)
     {
         // connect to db and parse
         $connection = $this->container->get("db");
         $contract_id_param = $args['cid'];
-        $numDays_param = $args['numDays'];
+        $deliv_name_param = trim($args['deliv']);
+        $body = $request->getParsedBody();
+        $numDays_param = $body['numDays'];
+
+        if(!isset(ContractController::$deliverables[$deliv_name_param])){
+            $response = $response->withStatus(500);
+            $response = $response->withHeader("Content-Type", "application/json");
+            $results = array(
+                "error" => "'".$deliv_name_param."' is not a valid deliverable."
+            );
+            $response->getBody()->write(json_encode($results));
+            return $response;
+        }
+
+        $deliv_name_param = ContractController::$deliverables[$deliv_name_param];
+
         $results = array();
 
         // query: UPDATE contract table name SET first_deliv = args
         $stmt = $connection->prepare(
-            "UPDATE ".ContractController::$contract_table_name." SET first_deliv = :numDays WHERE contract_id = :cid"
-        );
-        $stmt->bindValue(':numDays', $numDays_param, PDO::PARAM_INT);
-        $stmt->bindValue(':cid', $contract_id_param, PDO::PARAM_INT);
-        $stmt->execute(); // result = success/fail of execution
-
-        $stmt2 = $connection->prepare(
-            "SELECT * FROM ".ContractController::$contract_table_name." WHERE contract_id = :cid"
-        );
-        $stmt2->bindValue(':cid', $contract_id_param, PDO::PARAM_INT);
-        $stmt2->execute();
-
-        while ($row = $stmt2->fetch(PDO::FETCH_ASSOC)) {
-            extract($row);
-            $contract_tuple = array(
-                "id" => $contract_id,
-                "category" => $contract_category,
-                "serviceType" => $type_of_service,
-                "acv" => $acv,
-                "initialAmount" => $initial_amount,
-                "startDate" => $service_start_date,
-                "firstDeliverable" => $first_deliv,
-                "secondDeliverable" => $second_deliv,
-                "thirdDeliverable" => $third_deliv,
-                "fourthDeliverable" => $fourth_deliv,
-                "satisfactionScore" => $score,
-                "manager_id" => $manager_id
-            );
-            array_push($results, $contract_tuple);
-        }
-
-        // Check existence
-        if (count($results) != 1) {
-            $response = $response->withStatus(404);
-            $response = $response->withHeader("Content-Type", "application/json");
-            $results = array(
-                "error" => "Contract with ID '".$contract_id_param."' was not found"
-            );
-            $response->getBody()->write(json_encode($results));
-            return $response;
-        }
-
-        // If exist, return contract info
-        $response = $response->withHeader("Content-Type", "application/json");
-        $response->getBody()->write(json_encode($results[0]));
-        return $response;
-    }
-    public function updateSecondDeliv(Request $request, Response $response, array $args)
-    {
-        // connect to db and parse
-        $connection = $this->container->get("db");
-        $contract_id_param = $args['cid'];
-        $numDays_param = $args['numDays'];
-        $results = array();
-
-        // query: UPDATE contract table name SET second_deliv = args
-        $stmt = $connection->prepare(
-            "UPDATE ".ContractController::$contract_table_name." SET second_deliv = :numDays WHERE contract_id = :cid"
-        );
-        $stmt->bindValue(':numDays', $numDays_param, PDO::PARAM_INT);
-        $stmt->bindValue(':cid', $contract_id_param, PDO::PARAM_INT);
-        $stmt->execute(); // result = success/fail of execution
-
-        $stmt2 = $connection->prepare(
-            "SELECT * FROM ".ContractController::$contract_table_name." WHERE contract_id = :cid"
-        );
-        $stmt2->bindValue(':cid', $contract_id_param, PDO::PARAM_INT);
-        $stmt2->execute();
-
-        while ($row = $stmt2->fetch(PDO::FETCH_ASSOC)) {
-            extract($row);
-            $contract_tuple = array(
-                "id" => $contract_id,
-                "category" => $contract_category,
-                "serviceType" => $type_of_service,
-                "acv" => $acv,
-                "initialAmount" => $initial_amount,
-                "startDate" => $service_start_date,
-                "firstDeliverable" => $first_deliv,
-                "secondDeliverable" => $second_deliv,
-                "thirdDeliverable" => $third_deliv,
-                "fourthDeliverable" => $fourth_deliv,
-                "satisfactionScore" => $score,
-                "manager_id" => $manager_id
-            );
-            array_push($results, $contract_tuple);
-        }
-
-        // Check existence
-        if (count($results) != 1) {
-            $response = $response->withStatus(404);
-            $response = $response->withHeader("Content-Type", "application/json");
-            $results = array(
-                "error" => "Contract with ID '".$contract_id_param."' was not found"
-            );
-            $response->getBody()->write(json_encode($results));
-            return $response;
-        }
-
-        // If exist, return contract info
-        $response = $response->withHeader("Content-Type", "application/json");
-        $response->getBody()->write(json_encode($results[0]));
-        return $response;
-    }
-    public function updateThirdDeliv(Request $request, Response $response, array $args)
-    {
-        // connect to db and parse
-        $connection = $this->container->get("db");
-        $contract_id_param = $args['cid'];
-        $numDays_param = $args['numDays'];
-        $results = array();
-
-        // query: UPDATE contract table name SET third_deliv = args
-        $stmt = $connection->prepare(
-            "UPDATE ".ContractController::$contract_table_name." SET third_deliv = :numDays WHERE contract_id = :cid"
-        );
-        $stmt->bindValue(':numDays', $numDays_param, PDO::PARAM_INT);
-        $stmt->bindValue(':cid', $contract_id_param, PDO::PARAM_INT);
-        $stmt->execute(); // result = success/fail of execution
-
-        $stmt2 = $connection->prepare(
-            "SELECT * FROM ".ContractController::$contract_table_name." WHERE contract_id = :cid"
-        );
-        $stmt2->bindValue(':cid', $contract_id_param, PDO::PARAM_INT);
-        $stmt2->execute();
-
-        while ($row = $stmt2->fetch(PDO::FETCH_ASSOC)) {
-            extract($row);
-            $contract_tuple = array(
-                "id" => $contract_id,
-                "category" => $contract_category,
-                "serviceType" => $type_of_service,
-                "acv" => $acv,
-                "initialAmount" => $initial_amount,
-                "startDate" => $service_start_date,
-                "firstDeliverable" => $first_deliv,
-                "secondDeliverable" => $second_deliv,
-                "thirdDeliverable" => $third_deliv,
-                "fourthDeliverable" => $fourth_deliv,
-                "satisfactionScore" => $score,
-                "manager_id" => $manager_id
-            );
-            array_push($results, $contract_tuple);
-        }
-
-        // Check existence
-        if (count($results) != 1) {
-            $response = $response->withStatus(404);
-            $response = $response->withHeader("Content-Type", "application/json");
-            $results = array(
-                "error" => "Contract with ID '".$contract_id_param."' was not found"
-            );
-            $response->getBody()->write(json_encode($results));
-            return $response;
-        }
-
-        // If exist, return contract info
-        $response = $response->withHeader("Content-Type", "application/json");
-        $response->getBody()->write(json_encode($results[0]));
-        return $response;
-    }
-    public function updateFourthDeliv(Request $request, Response $response, array $args)
-    {
-        // connect to db and parse
-        $connection = $this->container->get("db");
-        $contract_id_param = $args['cid'];
-        $numDays_param = $args['numDays'];
-        $results = array();
-
-        // query: UPDATE contract table name SET fourth_deliv = args
-        $stmt = $connection->prepare(
-            "UPDATE ".ContractController::$contract_table_name." SET fourth_deliv = :numDays WHERE contract_id = :cid"
+            "UPDATE ".ContractController::$contract_table_name." SET ".$deliv_name_param." = :numDays WHERE contract_id = :cid"
         );
         $stmt->bindValue(':numDays', $numDays_param, PDO::PARAM_INT);
         $stmt->bindValue(':cid', $contract_id_param, PDO::PARAM_INT);
@@ -321,31 +170,72 @@ class ContractController
      * updateContract()
      * reserved for Sales
      * used to create a new contract based on information given in a form (not made)
-     * WILL NEED REVISION (only returns true or false for now)
      */
     public function updateContract(Request $request, Response $response, array $args)
     {
         // connect to db and parse
         $connection = $this->container->get("db");
         $request_body = $request->getParsedBody();
+        $results = array();
 
         // query: INSERT INTO client table
         $stmt = $connection->prepare(
             //uncomment to allow changing contract_id
             //"UPDATE ".ContractController::$contract_table_name." SET contract_id=:newID, contract_category=:cat, type_of_service=:contractType, acv=:acv, initial_amount=:initAmt, manager_id=:mid, company_name=:name WHERE contract_id=:cid"
-            "UPDATE ".ContractController::$contract_table_name." SET contract_category=:cat, type_of_service=:contractType, acv=:acv, initial_amount=:initAmt, manager_id=:mid, company_name=:name WHERE contract_id=:cid"
+            "UPDATE ".ContractController::$contract_table_name." SET contract_category=:category, type_of_service=:serviceType, acv=:acv, initial_amount=:initialAmount, manager_id=:mid, company_name=:name WHERE contract_id=:cid"
         );
         //$stmt->bindValue(':newID', $request_body['newID'], PDO::PARAM_INT); //uncomment to allow changing contract_id
-        $stmt->bindValue(':cat', $request_body['cat'], PDO::PARAM_STR);
-        $stmt->bindValue(':contractType', $request_body['type'], PDO::PARAM_STR);
+        $stmt->bindValue(':category', $request_body['category'], PDO::PARAM_STR);
+        $stmt->bindValue(':serviceType', $request_body['serviceType'], PDO::PARAM_STR);
         $stmt->bindValue(':acv', $request_body['acv'], PDO::PARAM_STR);
-        $stmt->bindValue(':initAmt', $request_body['initAmt'], PDO::PARAM_STR);
-        $stmt->bindValue(':mid', $request_body['mid'], PDO::PARAM_INT);
-        $stmt->bindValue(':companyName', $request_body['name'], PDO::PARAM_STR);
-        $stmt->bindValue(':cid', $request_body['cid'], PDO::PARAM_INT);
-        $result = $stmt->execute(); // $result = success/fail of execution
+        $stmt->bindValue(':initialAmount', $request_body['initialAmount'], PDO::PARAM_INT);
+        $stmt->bindValue(':mid', $request_body['manager'], PDO::PARAM_INT);
+        $stmt->bindValue(':name', $request_body['company'], PDO::PARAM_STR);
+        $stmt->bindValue(':cid', $request_body['id'], PDO::PARAM_INT);
+        $stmt->execute(); // $result = success/fail of execution
 
-        return $result; // returns boolean t = if success, f = if fail.
+        $stmt = $connection->prepare(
+            "SELECT * FROM ".ContractController::$contract_table_name." WHERE contract_id = :cid"
+        );
+        $stmt->bindValue(':cid', $request_body['id'], PDO::PARAM_INT);
+        $stmt->execute();
+        // push query results into array
+        while ($row = $stmt->fetch(PDO::FETCH_ASSOC))
+        {
+            extract($row);
+            $contract_tuple = array(
+                "id" => $contract_id,
+                "company" => $company_name,
+                "category" => $contract_category,
+                "serviceType" => $type_of_service,
+                "acv" => $acv,
+                "initialAmount" => $initial_amount,
+                "startDate" => $service_start_date,
+                "firstDeliverable" => $first_deliv,
+                "secondDeliverable" => $second_deliv,
+                "thirdDeliverable" => $third_deliv,
+                "fourthDeliverable" => $fourth_deliv,
+                "score" => $score,
+                "manager" => $manager_id
+            );
+            array_push($results, $contract_tuple);
+        }
+
+        // Check existence
+        if (count($results) != 1) {
+            $response = $response->withStatus(404);
+            $response = $response->withHeader("Content-Type", "application/json");
+            $results = array(
+                "error" => "Contract with ID '".$contract_id_param."' was not found"
+            );
+            $response->getBody()->write(json_encode($results));
+            return $response;
+        }
+
+        // If exist, return contract info
+        $response = $response->withHeader("Content-Type", "application/json");
+        $response->getBody()->write(json_encode($results[0]));
+        return $response;
     }
 
     /*
@@ -358,7 +248,8 @@ class ContractController
         // connect to db and parse
         $connection = $this->container->get("db");
         $contract_id_param = $args['cid'];
-        $score_param = $args['score'];
+        $body = $request->getParsedBody();
+        $score_param = $body['score'];
         $results = array();
 
         // query: Update score
@@ -370,7 +261,7 @@ class ContractController
         $stmt->execute(); // $result = success/fail of execution
 
         // query2: select score wrt cid
-        $queryText = "SELECT contract_id, score FROM " . ContractController::$contract_table_name . " WHERE contract_id =:cid ";
+        $queryText = "SELECT * FROM " . ContractController::$contract_table_name . " WHERE contract_id =:cid ";
         $stmt2 = $connection->prepare($queryText);
         $stmt2->bindValue(':cid', $contract_id_param, PDO::PARAM_INT);
         $stmt2->execute();
@@ -378,16 +269,27 @@ class ContractController
         // push result of query2
         while ($row = $stmt2->fetch(PDO::FETCH_ASSOC)) {
             extract($row);
-            $score_tuple = array(
-                "contractID" => $contract_id,
-                "satisfactionScore" => $score,
+            $contract_tuple = array(
+                "id" => $contract_id,
+                "company" => $company_name,
+                "category" => $contract_category,
+                "serviceType" => $type_of_service,
+                "acv" => $acv,
+                "initialAmount" => $initial_amount,
+                "startDate" => $service_start_date,
+                "firstDeliverable" => $first_deliv,
+                "secondDeliverable" => $second_deliv,
+                "thirdDeliverable" => $third_deliv,
+                "fourthDeliverable" => $fourth_deliv,
+                "score" => $score,
+                "manager" => $manager_id
             );
-            array_push($results, $score_tuple);
+            array_push($results, $contract_tuple);
         }
 
         // format and return response
         $response = $response->withHeader("Content-Type", "application/json");
-        $response->getBody()->write(json_encode($results));
+        $response->getBody()->write(json_encode($results[0]));
         return $response;
     }
 
@@ -408,26 +310,31 @@ class ContractController
         $stmt->bindValue(':mid', $manager_id_param, PDO::PARAM_INT);
         $stmt->execute();
 
-
+        $results['contracts'] = array();
         while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
             extract($row);
             $score_tuple = array(
-                "contractID" => $contract_id,
-                "satisfactionScore" => $score,
+                "id" => $contract_id,
+                "score" => $score,
             );
-            array_push($results, $score_tuple);
+            array_push($results['contracts'], $score_tuple);
         }
 
-
-        $queryText2 = "SELECT AVG(score) FROM " . ContractController::$contract_table_name . " WHERE manager_id =:mid";
+        $queryText2 = "SELECT AVG(score) as average_value FROM " . ContractController::$contract_table_name . " WHERE manager_id =:mid";
         $stmt2 = $connection->prepare($queryText2);
         $stmt2->bindValue(':mid', $manager_id_param, PDO::PARAM_INT);
         $stmt2->execute();
-
         while ($row = $stmt2->fetch(PDO::FETCH_ASSOC)) {
-            array_push($results, $row);
+            extract($row);
+            $results["average"] = $average_value;
         }
 
+        if (count($results['contracts']) == 0) {
+            $response = $results->withStatus(404);
+            $results = array(
+                "error" => "The manager with ID '".$manager_id_param."' has not been given a score yet."
+            );
+        }
         $response = $response->withHeader("Content-Type", "application/json");
         $response->getBody()->write(json_encode($results));
         return $response;
@@ -452,7 +359,23 @@ class ContractController
         // push query results into array
         while ($row = $stmt->fetch(PDO::FETCH_ASSOC))
         {
-            array_push($results, $row);
+            extract($row);
+            $contract_tuple = array(
+                "id" => $contract_id,
+                "company" => $company_name,
+                "category" => $contract_category,
+                "serviceType" => $type_of_service,
+                "acv" => $acv,
+                "initialAmount" => $initial_amount,
+                "startDate" => $service_start_date,
+                "firstDeliverable" => $first_deliv,
+                "secondDeliverable" => $second_deliv,
+                "thirdDeliverable" => $third_deliv,
+                "fourthDeliverable" => $fourth_deliv,
+                "score" => $score,
+                "manager" => $manager_id
+            );
+            array_push($results, $contract_tuple);
         }
 
         // Check existence
@@ -503,10 +426,17 @@ class ContractController
                 "secondDeliverable" => $second_deliv,
                 "thirdDeliverable" => $third_deliv,
                 "fourthDeliverable" => $fourth_deliv,
-                "satisfactionScore" => $score,
-                "manager_id" => $manager_id
+                "score" => $score,
+                "manager" => $manager_id
             );
             array_push($results, $contract_tuple);
+        }
+
+        if (count($results) == 0) {
+            $response = $results->withStatus(404);
+            $results = array(
+                "error" => $company_name_param."does not have any contracts yet."
+            );
         }
         $response = $response->withHeader("Content-Type", "application/json");
         $response->getBody()->write(json_encode($results));
