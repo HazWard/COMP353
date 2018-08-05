@@ -61,14 +61,14 @@ CREATE TABLE contracts(
     type_of_service VARCHAR(255) NOT NULL,
     acv FLOAT NOT NULL,
     initial_amount FLOAT NOT NULL,
-    
+
     service_start_date TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
     first_deliv INT NULL, #updated when first deliverable is finished
     second_deliv INT NULL, #just records the number of days it took to finish 1,2,3,4 delivs
     third_deliv INT NULL,
     fourth_deliv INT NULL,
     score INT DEFAULT NULL, #score assigned post performance by client; to be updated
-    
+
     manager_id INT NOT NULL,
     FOREIGN KEY (manager_id) REFERENCES employees(employee_id),
     company_name VARCHAR(255) NOT NULL,
