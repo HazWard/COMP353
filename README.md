@@ -47,6 +47,10 @@ Return an array of city names
 
 ### Employees
 
+#### ``/api/index.php/managers``
+
+Returns a list of employees who are managers
+
 #### ``/api/index.php/employees/{id}``
 
 Returns:

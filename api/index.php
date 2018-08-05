@@ -36,6 +36,7 @@ $app->post('/auth/register', \AuthController::class .  ':register');
 
 // Employee Endpoints
 $app->get('/employees', \EmployeeController::class .  ':employees');
+$app->get('/managers', \EmployeeController::class .  ':managers');
 $app->map(['GET', 'POST'],'/employees/{id}', \EmployeeController::class .  ':employee');
 $app->map(['GET', 'POST'],'/employees/{id}/preferences', \EmployeeController::class .  ':preferences');
 
