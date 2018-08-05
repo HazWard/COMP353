@@ -1,40 +1,36 @@
 <?php
-include("connectDB.php");
+
 $clientArray = $_POST;
 
+//next example will insert new conversation
+$service_url = 'http://localhost/COMP353/api/index.php/clients';
+$curl = curl_init($service_url);
+$curl_post_data = array(
+    'name' => $clientArray['companyName'],
+    'number' => $clientArray['companyNumber'],
+    'email' => $clientArray['email'],
+    'firstName' => $clientArray['firstName'],
+    'lastName' => $clientArray['lastName'],
+    'middleInitial' => $clientArray['middleInitial'],
+    'city' => $clientArray['city'],
+    'province' => getProvinceAbbrev($clientArray['province']),
+    'lob' => $clientArray['LOB'],
+    'password' => $clientArray['password'],
+);
 
-insertClient($clientArray['companyName'],$clientArray['companyNumber'],$clientArray['email'],$clientArray['firstName'],
-            $clientArray['lastName'],$clientArray['middleInitial'],$clientArray['LOB'],getProvinceAbbrev($clientArray['province']),$clientArray['city']);
-insertClientCredential($clientArray['email'],$clientArray['password']);
 
-header("Location: /COMP353/site/SAhome.php");
-
-
-function insertClient($companyName,$companyNumber,$companyEmail,$repFN,$repLN,$repMI,$lob,$province,$city){
-    global $conn;
-
-    $sql = "INSERT INTO clients (company_name,contact_number,company_email,rep_first_name,rep_last_name,rep_middle_initial,city,province,line_of_business) VALUES (
-            "."'$companyName'".","."'$companyNumber'".","."'$companyEmail'".","."'$repFN'".","."'$repLN'".","."'$repMI'".","."'$city'".","."'$province'".","."'$lob'".");";
+curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
+curl_setopt($curl, CURLOPT_POST, true);
+curl_setopt($curl, CURLOPT_POSTFIELDS, $curl_post_data);
+curl_exec($curl);
+$httpcode = curl_getinfo($curl, CURLINFO_HTTP_CODE);
 
 
-    if ($conn->query($sql) === TRUE) {
-    } else {
-        echo "Error: " . $sql . "<br>" . $conn->error;
-    }
+if ($httpcode == 200) {
+    header("Location: /COMP353/site/SAhome.php");
 }
-
-function insertClientCredential($username,$password){
-    global $conn;
-
-    $sql = "INSERT INTO user_credentials (username, user_type, password) VALUES (
-            "."'$username'".","."'client'".","."'$password'".");";
-
-    if ($conn->query($sql) === TRUE) {
-    } else {
-        echo "Error: " . $sql . "<br>" . $conn->error;
-    }
-    
-    $conn->close();
+else{
+    echo 'Error';
 }
 
 function getProvinceAbbrev($province){

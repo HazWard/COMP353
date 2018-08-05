@@ -2,10 +2,7 @@
 $( document ).ready(function() {
     $('#province').change(function() {
         getCities();
-
     });
-
-
 });
 
 function getCities(){
@@ -19,15 +16,13 @@ function getCities(){
             cityArray = JSON.parse(this.responseText);
             populateCities(cityArray,selectedProvince);
         }
-
     };
-    xmlhttp.open("GET", "/COMP353/api/locations/cities.php?province=" + province, true);
+    xmlhttp.open("GET", "/COMP353/api/index.php/locations/cities?province=" + province, true);
     xmlhttp.send();
 
 }
 
 function getProvinceAbbrev(selectedProvince){
-    console.log(selectedProvince);
     switch(selectedProvince) {
             case 'Ontario':
                 return 'ON';
