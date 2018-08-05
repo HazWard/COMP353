@@ -7,6 +7,7 @@ include 'controllers/locations/location.php';
 include 'controllers/authentication/auth.php';
 include 'controllers/employees/employee.php';
 include 'controllers/clients/client.php';
+include 'controllers/contracts/contract.php';
 
 $config = require('config.php'); // The path will change for deployement
 $app = new \Slim\App($config);
@@ -43,5 +44,14 @@ $app->post('/clients', \ClientController::class . ':createNewClient');
 $app->get('/clients/{cName}', \ClientController::class . ':loadClient');
 $app->get('/clients', \ClientController::class . ':getClientNames');
 $app->post('/clients/{cName}', \ClientController::class. ':updateClient');
+
+// Contract Endpoints
+$app->post('/contracts', \ContractController::class . ':createNewContract');
+$app->post('/contracts/{cid}/deliverables/{deliv}', \ContractController::class . ':updateDeliv');
+$app->post('/contracts/{cid}', \ContractController::class . ':updateContract');
+$app->post('/contracts/{cid}/score', \ContractController::class . ':updateScore');
+$app->get('/managers/{mid}/scores', \ContractController::class . ':getScore');
+$app->get('/contracts/{cid}', \ContractController::class . ':viewContract');
+$app->get('/clients/{cName}/contracts', \ContractController::class . ':getMyContracts');
 
 $app->run();

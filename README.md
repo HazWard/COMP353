@@ -16,8 +16,8 @@ Returns:
 ```json
 # On Successful login (Status Code 200)
 {
-  "username" : "<username>"
-  "type": "<user type>"
+  "username" : "<username>",
+  "type" : "<user type>"
 }
 
 # On Unsuccessful login (Status Code 403)
@@ -198,5 +198,168 @@ Result:
 	"Nike",
 	"Wallgreens",
 	"Walmart"
+]
+```
+
+### Contracts
+#### ``/api/index.php/contracts``
+* ``POST`` : implemented but untested. Should capture all non default information about a contract in the front end
+
+
+#### ``/api/index.php/contracts/{cid}/deliverables/{deliv}``
+
+* ``cid`` corresponds to the contract ID
+* ``deliv`` corresponds to the target deliverable with the following possible values:
+    * ``first`` for first deliverables
+    * ``second``  for second deliverables
+    * ``third`` for third deliverables
+    * ``fourth``  for fourth deliverables
+* Only used to update the deliverables
+* Use POST with simple payload
+
+Payload:
+```json
+{
+  "numDays" : "<number of days to complete deliverable>"
+}
+
+```
+
+Returns:
+```json
+{
+	"id": "1",
+	"company": "Apple Inc.",
+	"category": "Premium",
+	"serviceType": "Cloud",
+	"acv": "50000",
+	"initialAmount": "10000",
+	"startDate": "2017-01-19 03:14:07",
+	"firstDeliverable": 4,
+	"secondDeliverable": 4,
+	"thirdDeliverable": 4,
+	"fourthDeliverable": 3,
+	"score": null,
+	"manager": "10000000"
+}
+```
+
+#### ``/api/index.php/contracts/{cid}/score``
+* Updates satisfaction score for the contract (only supports post)
+
+Example payload:
+```json
+{
+	"score":"4"
+}
+```
+
+Returns:
+```json
+{
+	"id": "1",
+	"company": "Apple Inc.",
+	"category": "Premium",
+	"serviceType": "Cloud",
+	"acv": "50000",
+	"initialAmount": "10000",
+	"startDate": "2017-01-19 03:14:07",
+	"firstDeliverable": "4",
+	"secondDeliverable": "4",
+	"thirdDeliverable": "5",
+	"fourthDeliverable": "5",
+	"score": "4",
+	"manager": "10000000"
+}
+```
+
+#### ``/api/index.php/managers/{mid}/scores``
+* ``GET`` : shows a list of all the scores and contracts of a manager identified by their employee id ``{mid}`` as well as the average score for the manager.
+
+Returns:
+```json
+{
+	"contracts": [
+		{
+			"id": "1",
+			"score": "5"
+		},
+		{
+			"id": "3",
+			"score": "5"
+		},
+		{
+			"id": "5",
+			"score": "5"
+		},
+		{
+			"id": "7",
+			"score": "5"
+		},
+		{
+			"id": "9",
+			"score": "5"
+		}
+	],
+	"average": "5.0000"
+}
+```
+
+#### ``/api/index.php/contracts/{cid}``
+* ``GET`` : views contract information identified by contract id ``{cid}``
+* ``POST`` : updates contract information identified by contract id ``{cid}``
+
+Returns:
+```json
+{
+	"id" : "42",
+	"company" : "IKEA",
+	"category" : "Diamond",
+	"serviceType" : "Cloud",
+	"acv" : "40000",
+	"initialAmount" : "10000",
+	"startDate" : "2017-01-19 03:14:07",
+	"firstDeliverable" : null,
+	"secondDeliverable" : null,
+	"thirdDeliverable" : null,
+	"fourthDeliverable" : null,
+	"score" : null,
+	"manager" : "10000009"
+}
+```
+
+#### ``/api/index.php/clients/{cName}/contracts``
+* ``GET`` : returns a list of all the contracts signed by a company with the company name, ``{cName}``
+* NOTE : ``...`` signifies data points ommitted for the sake of conciseness
+```json
+[
+	{
+		"id": "1",
+		"category": "Premium",
+		"serviceType": "Cloud",
+		"acv": "50000",
+		"initialAmount": "10000",
+		"startDate": "2017-01-19 03:14:07",
+		"firstDeliverable": "4",
+		"secondDeliverable": "4",
+		"thirdDeliverable": "5",
+		"fourthDeliverable": "5",
+		"score": "5",
+		"manager": "10000000"
+	},
+	{
+		"id": "2",
+		"category": "Premium",
+		"serviceType": "On-premises",
+		"acv": "55000",
+		"initialAmount": "15000",
+		"startDate": "2017-02-21 03:14:07",
+		"firstDeliverable": null,
+		"secondDeliverable": null,
+		"thirdDeliverable": null,
+		"fourthDeliverable": null,
+		"score": null,
+		"manager": "10000001"
+	}
 ]
 ```
