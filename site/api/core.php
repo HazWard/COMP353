@@ -3,7 +3,7 @@ class Database{
 
     // specify your own database credentials
     private $host = "localhost";
-    private $db_name = "company-cms";
+    private $db_name = "company_cms";
     private $username = "root";
     private $password = "";
     public $conn;
