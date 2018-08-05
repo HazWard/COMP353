@@ -55,7 +55,7 @@ CREATE TABLE categories(
 );
 
 CREATE TABLE contracts(
-    contract_id INT PRIMARY KEY,
+    contract_id INT PRIMARY KEY AUTO_INCREMENT,
     contract_category VARCHAR(255) NOT NULL,
     FOREIGN KEY (contract_category) REFERENCES categories(contract_category),
     type_of_service VARCHAR(255) NOT NULL,

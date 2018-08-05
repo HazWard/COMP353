@@ -195,118 +195,118 @@ INSERT INTO categories(contract_category, deliv1, deliv2, deliv3, deliv4) values
 # Contracts
 # Contracts in 'Tech' (with Apple Inc. and Digital Extremes)
 # Manager in charge of Tech Line of business: 10000000, 10000001
-insert into contracts(contract_id, contract_category, type_of_service, acv, initial_amount, service_start_date, manager_id, company_name)
-    values (1, 'Premium', 'Cloud', 50000, 10000, '2017-01-19 03:14:07', 10000000, 'Apple Inc.');
-insert into contracts(contract_id, contract_category, type_of_service, acv, initial_amount, service_start_date, manager_id, company_name)
-    values (2, 'Premium', 'On-premises', 55000, 15000, '2017-02-21 03:14:07', 10000001, 'Apple Inc.');
-insert into contracts(contract_id, contract_category, type_of_service, acv, initial_amount, service_start_date, manager_id, company_name)
-    values (3, 'Premium', 'On-premises', 60000, 20000, '2017-07-19 03:14:07', 10000000, 'Digital Extremes');
-insert into contracts(contract_id, contract_category, type_of_service, acv, initial_amount, service_start_date, manager_id, company_name)
-    values (4, 'Silver', 'Cloud', 10000, 2000, '2017-08-09 03:14:07', 10000001, 'Apple Inc.');
-insert into contracts(contract_id, contract_category, type_of_service, acv, initial_amount, service_start_date, manager_id, company_name)
-    values (5, 'Silver', 'On-premises', 15000, 3000, '2017-09-19 03:14:07', 10000000, 'Digital Extremes');
-insert into contracts(contract_id, contract_category, type_of_service, acv, initial_amount, service_start_date, manager_id, company_name)
-    values (6, 'Gold', 'On-premises', 20000, 4000, '2017-10-19 03:14:07', 10000001, 'Apple Inc.');
-insert into contracts(contract_id, contract_category, type_of_service, acv, initial_amount, service_start_date, manager_id, company_name)
-    values (7, 'Gold', 'Cloud', 25000, 5000, '2017-11-19 03:14:07', 10000000, 'Apple Inc.');
-insert into contracts(contract_id, contract_category, type_of_service, acv, initial_amount, service_start_date, manager_id, company_name)
-    values (8, 'Diamond', 'On-premises', 30000, 6000, '2018-02-19 03:14:07', 10000001, 'Apple Inc.');
-insert into contracts(contract_id, contract_category, type_of_service, acv, initial_amount, service_start_date, manager_id, company_name)
-    values (9, 'Diamond', 'Cloud', 35000, 7000, '2018-07-19 03:14:07', 10000000, 'Digital Extremes');
-insert into contracts(contract_id, contract_category, type_of_service, acv, initial_amount, service_start_date, manager_id, company_name)
-    values (10, 'Diamond', 'Cloud', 40000, 8000, '2018-05-19 03:14:07', 10000001, 'Apple Inc.');
+insert into contracts( contract_category, type_of_service, acv, initial_amount, service_start_date, manager_id, company_name)
+    values ('Premium', 'Cloud', 50000, 10000, '2017-01-19 03:14:07', 10000000, 'Apple Inc.');
+insert into contracts( contract_category, type_of_service, acv, initial_amount, service_start_date, manager_id, company_name)
+    values ('Premium', 'On-premises', 55000, 15000, '2017-02-21 03:14:07', 10000001, 'Apple Inc.');
+insert into contracts( contract_category, type_of_service, acv, initial_amount, service_start_date, manager_id, company_name)
+    values ('Premium', 'On-premises', 60000, 20000, '2017-07-19 03:14:07', 10000000, 'Digital Extremes');
+insert into contracts( contract_category, type_of_service, acv, initial_amount, service_start_date, manager_id, company_name)
+    values ('Silver', 'Cloud', 10000, 2000, '2017-08-09 03:14:07', 10000001, 'Apple Inc.');
+insert into contracts( contract_category, type_of_service, acv, initial_amount, service_start_date, manager_id, company_name)
+    values ('Silver', 'On-premises', 15000, 3000, '2017-09-19 03:14:07', 10000000, 'Digital Extremes');
+insert into contracts( contract_category, type_of_service, acv, initial_amount, service_start_date, manager_id, company_name)
+    values ('Gold', 'On-premises', 20000, 4000, '2017-10-19 03:14:07', 10000001, 'Apple Inc.');
+insert into contracts( contract_category, type_of_service, acv, initial_amount, service_start_date, manager_id, company_name)
+    values ('Gold', 'Cloud', 25000, 5000, '2017-11-19 03:14:07', 10000000, 'Apple Inc.');
+insert into contracts( contract_category, type_of_service, acv, initial_amount, service_start_date, manager_id, company_name)
+    values ('Diamond', 'On-premises', 30000, 6000, '2018-02-19 03:14:07', 10000001, 'Apple Inc.');
+insert into contracts( contract_category, type_of_service, acv, initial_amount, service_start_date, manager_id, company_name)
+    values ('Diamond', 'Cloud', 35000, 7000, '2018-07-19 03:14:07', 10000000, 'Digital Extremes');
+insert into contracts( contract_category, type_of_service, acv, initial_amount, service_start_date, manager_id, company_name)
+    values ('Diamond', 'Cloud', 40000, 8000, '2018-05-19 03:14:07', 10000001, 'Apple Inc.');
 
 # Contracts in 'Travel' (with Air Canada)
 # Manager in charge of this line of business: 10000002, 10000003
-insert into contracts(contract_id, contract_category, type_of_service, acv, initial_amount, service_start_date, manager_id, company_name)
-    values (11, 'Premium', 'Cloud', 60000, 20000, '2017-08-19 03:14:07', 10000002, 'Air Canada');
-insert into contracts(contract_id, contract_category, type_of_service, acv, initial_amount, service_start_date, manager_id, company_name)
-    values (12, 'Premium', 'On-premises', 50000, 10000, '2017-09-19 03:14:07', 10000003, 'Air Canada');
-insert into contracts(contract_id, contract_category, type_of_service, acv, initial_amount, service_start_date, manager_id, company_name)
-    values (13, 'Diamond', 'Cloud', 40000, 8000, '2017-010-19 03:14:07', 10000002, 'Air Canada');
-insert into contracts(contract_id, contract_category, type_of_service, acv, initial_amount, service_start_date, manager_id, company_name)
-    values (14, 'Diamond', 'Cloud', 30000, 6000, '2017-11-19 03:14:07', 10000003, 'Air Canada');
-insert into contracts(contract_id, contract_category, type_of_service, acv, initial_amount, service_start_date, manager_id, company_name)
-    values (15, 'Gold', 'Cloud', 20000, 4000, '2017-12-19 03:14:07', 10000002, 'Air Canada');
-insert into contracts(contract_id, contract_category, type_of_service, acv, initial_amount, service_start_date, manager_id, company_name)
-    values (16, 'Gold', 'Cloud', 20000, 4500, '2018-01-19 03:14:07', 10000003, 'Air Canada');
-insert into contracts(contract_id, contract_category, type_of_service, acv, initial_amount, service_start_date, manager_id, company_name)
-    values (17, 'Silver', 'On-premises', 5000, 1000, '2018-02-19 03:14:07', 10000002, 'Air Canada');
-insert into contracts(contract_id, contract_category, type_of_service, acv, initial_amount, service_start_date, manager_id, company_name)
-    values (18, 'Silver', 'Cloud', 4500, 1000, '2018-03-19 03:14:07', 10000003, 'Air Canada');
-insert into contracts(contract_id, contract_category, type_of_service, acv, initial_amount, service_start_date, manager_id, company_name)
-    values (19, 'Silver', 'Cloud', 5000, 1000, '2018-04-19 03:14:07', 10000002, 'Air Canada');
-insert into contracts(contract_id, contract_category, type_of_service, acv, initial_amount, service_start_date, manager_id, company_name)
-    values (20, 'Silver', 'Cloud', 10000, 1000, '2018-05-19 03:14:07', 10000003, 'Air Canada');
+insert into contracts( contract_category, type_of_service, acv, initial_amount, service_start_date, manager_id, company_name)
+    values ('Premium', 'Cloud', 60000, 20000, '2017-08-19 03:14:07', 10000002, 'Air Canada');
+insert into contracts( contract_category, type_of_service, acv, initial_amount, service_start_date, manager_id, company_name)
+    values ('Premium', 'On-premises', 50000, 10000, '2017-09-19 03:14:07', 10000003, 'Air Canada');
+insert into contracts( contract_category, type_of_service, acv, initial_amount, service_start_date, manager_id, company_name)
+    values ('Diamond', 'Cloud', 40000, 8000, '2017-010-19 03:14:07', 10000002, 'Air Canada');
+insert into contracts( contract_category, type_of_service, acv, initial_amount, service_start_date, manager_id, company_name)
+    values ('Diamond', 'Cloud', 30000, 6000, '2017-11-19 03:14:07', 10000003, 'Air Canada');
+insert into contracts( contract_category, type_of_service, acv, initial_amount, service_start_date, manager_id, company_name)
+    values ('Gold', 'Cloud', 20000, 4000, '2017-12-19 03:14:07', 10000002, 'Air Canada');
+insert into contracts( contract_category, type_of_service, acv, initial_amount, service_start_date, manager_id, company_name)
+    values ('Gold', 'Cloud', 20000, 4500, '2018-01-19 03:14:07', 10000003, 'Air Canada');
+insert into contracts( contract_category, type_of_service, acv, initial_amount, service_start_date, manager_id, company_name)
+    values ('Silver', 'On-premises', 5000, 1000, '2018-02-19 03:14:07', 10000002, 'Air Canada');
+insert into contracts( contract_category, type_of_service, acv, initial_amount, service_start_date, manager_id, company_name)
+    values ('Silver', 'Cloud', 4500, 1000, '2018-03-19 03:14:07', 10000003, 'Air Canada');
+insert into contracts( contract_category, type_of_service, acv, initial_amount, service_start_date, manager_id, company_name)
+    values ('Silver', 'Cloud', 5000, 1000, '2018-04-19 03:14:07', 10000002, 'Air Canada');
+insert into contracts( contract_category, type_of_service, acv, initial_amount, service_start_date, manager_id, company_name)
+    values ('Silver', 'Cloud', 10000, 1000, '2018-05-19 03:14:07', 10000003, 'Air Canada');
 
 # Contracts in 'Food' (with Koryo)
 # Manager in charge of the line of business: 10000004, 10000005
-insert into contracts(contract_id, contract_category, type_of_service, acv, initial_amount, service_start_date, manager_id, company_name)
-    values (21, 'Premium', 'Cloud', 50000, 10000, '2017-01-19 03:14:07', 10000004, 'Koryo');
-insert into contracts(contract_id, contract_category, type_of_service, acv, initial_amount, service_start_date, manager_id, company_name)
-    values (22, 'Premium', 'Cloud', 50000, 10000, '2017-02-04 03:14:07', 10000005, 'Koryo');
-insert into contracts(contract_id, contract_category, type_of_service, acv, initial_amount, service_start_date, manager_id, company_name)
-    values (23, 'Premium', 'Cloud', 50000, 15000, '2017-02-16 03:14:07', 10000004, 'Koryo');
-insert into contracts(contract_id, contract_category, type_of_service, acv, initial_amount, service_start_date, manager_id, company_name)
-    values (24, 'Premium', 'Cloud', 80000, 15000, '2017-04-18 03:14:07', 10000005, 'Koryo');
-insert into contracts(contract_id, contract_category, type_of_service, acv, initial_amount, service_start_date, manager_id, company_name)
-    values (25, 'Premium', 'On-premises', 60000, 12000, '2018-01-22 03:14:07', 10000004, 'Koryo');
-insert into contracts(contract_id, contract_category, type_of_service, acv, initial_amount, service_start_date, manager_id, company_name)
-    values (26, 'Diamond', 'Cloud', 40000, 7000, '2018-03-19 03:14:07', 10000005, 'Koryo');
-insert into contracts(contract_id, contract_category, type_of_service, acv, initial_amount, service_start_date, manager_id, company_name)
-    values (27, 'Gold', 'On-premises', 20000, 5000, '2018-05-20 03:14:07', 10000004, 'Koryo');
-insert into contracts(contract_id, contract_category, type_of_service, acv, initial_amount, service_start_date, manager_id, company_name)
-    values (28, 'Gold', 'On-premises', 25000, 60000, '2017-11-04 03:14:07', 10000005, 'Koryo');
-insert into contracts(contract_id, contract_category, type_of_service, acv, initial_amount, service_start_date, manager_id, company_name)
-    values (29, 'Silver', 'On-premises', 5000, 1000, '2017-12-01 03:14:07', 10000004, 'Koryo');
-insert into contracts(contract_id, contract_category, type_of_service, acv, initial_amount, service_start_date, manager_id, company_name)
-    values (30, 'Silver', 'On-premises', 5500, 1000, '2018-04-24 03:14:07', 10000005, 'Koryo');
+insert into contracts( contract_category, type_of_service, acv, initial_amount, service_start_date, manager_id, company_name)
+    values ('Premium', 'Cloud', 50000, 10000, '2017-01-19 03:14:07', 10000004, 'Koryo');
+insert into contracts( contract_category, type_of_service, acv, initial_amount, service_start_date, manager_id, company_name)
+    values ('Premium', 'Cloud', 50000, 10000, '2017-02-04 03:14:07', 10000005, 'Koryo');
+insert into contracts( contract_category, type_of_service, acv, initial_amount, service_start_date, manager_id, company_name)
+    values ('Premium', 'Cloud', 50000, 15000, '2017-02-16 03:14:07', 10000004, 'Koryo');
+insert into contracts( contract_category, type_of_service, acv, initial_amount, service_start_date, manager_id, company_name)
+    values ('Premium', 'Cloud', 80000, 15000, '2017-04-18 03:14:07', 10000005, 'Koryo');
+insert into contracts( contract_category, type_of_service, acv, initial_amount, service_start_date, manager_id, company_name)
+    values ('Premium', 'On-premises', 60000, 12000, '2018-01-22 03:14:07', 10000004, 'Koryo');
+insert into contracts( contract_category, type_of_service, acv, initial_amount, service_start_date, manager_id, company_name)
+    values ('Diamond', 'Cloud', 40000, 7000, '2018-03-19 03:14:07', 10000005, 'Koryo');
+insert into contracts( contract_category, type_of_service, acv, initial_amount, service_start_date, manager_id, company_name)
+    values ('Gold', 'On-premises', 20000, 5000, '2018-05-20 03:14:07', 10000004, 'Koryo');
+insert into contracts( contract_category, type_of_service, acv, initial_amount, service_start_date, manager_id, company_name)
+    values ('Gold', 'On-premises', 25000, 60000, '2017-11-04 03:14:07', 10000005, 'Koryo');
+insert into contracts( contract_category, type_of_service, acv, initial_amount, service_start_date, manager_id, company_name)
+    values ('Silver', 'On-premises', 5000, 1000, '2017-12-01 03:14:07', 10000004, 'Koryo');
+insert into contracts( contract_category, type_of_service, acv, initial_amount, service_start_date, manager_id, company_name)
+    values ('Silver', 'On-premises', 5500, 1000, '2018-04-24 03:14:07', 10000005, 'Koryo');
 
 # Contracts in 'Financial' (with Manulife)
 # Managers in charge of this line of business: 10000006, 10000007
-insert into contracts(contract_id, contract_category, type_of_service, acv, initial_amount, service_start_date, manager_id, company_name)
-    values (31, 'Premium', 'Cloud', 50000, 15000, '2017-01-04 03:14:07', 10000006, 'Manulife');
-insert into contracts(contract_id, contract_category, type_of_service, acv, initial_amount, service_start_date, manager_id, company_name)
-    values (32, 'Premium', 'On-premise', 50000, 10000, '2017-02-04 03:14:07', 10000007, 'Manulife');
-insert into contracts(contract_id, contract_category, type_of_service, acv, initial_amount, service_start_date, manager_id, company_name)
-    values (33, 'Diamond', 'Cloud', 45000, 9000, '2017-02-02 03:14:07', 10000006, 'Manulife');
-insert into contracts(contract_id, contract_category, type_of_service, acv, initial_amount, service_start_date, manager_id, company_name)
-    values (34, 'Diamond', 'Cloud', 30000, 7000, '2017-03-02 03:14:07', 10000007, 'Manulife');
-insert into contracts(contract_id, contract_category, type_of_service, acv, initial_amount, service_start_date, manager_id, company_name)
-    values (35, 'Diamond', 'On-premise', 35000, 7000, '2017-04-05 03:14:07', 10000006, 'Manulife');
-insert into contracts(contract_id, contract_category, type_of_service, acv, initial_amount, service_start_date, manager_id, company_name)
-    values (36, 'Diamond', 'Cloud', 40000, 6000, '2018-01-05 03:14:07', 10000007, 'Manulife');
-insert into contracts(contract_id, contract_category, type_of_service, acv, initial_amount, service_start_date, manager_id, company_name)
-    values (37, 'Gold', 'Cloud', 25000, 5000, '2018-03-07 03:14:07', 10000006, 'Manulife');
-insert into contracts(contract_id, contract_category, type_of_service, acv, initial_amount, service_start_date, manager_id, company_name)
-    values (38, 'Gold', 'Cloud', 25000, 5000, '2017-11-19 03:14:07', 10000007, 'Manulife');
-insert into contracts(contract_id, contract_category, type_of_service, acv, initial_amount, service_start_date, manager_id, company_name)
-    values (39, 'Gold', 'Cloud', 20000, 4000, '2017-12-19 03:14:07', 10000006, 'Manulife');
-insert into contracts(contract_id, contract_category, type_of_service, acv, initial_amount, service_start_date, manager_id, company_name)
-    values (40, 'Silver', 'Cloud', 5000, 1000, '2017-09-19 03:14:07', 10000007, 'Manulife');
+insert into contracts( contract_category, type_of_service, acv, initial_amount, service_start_date, manager_id, company_name)
+    values ('Premium', 'Cloud', 50000, 15000, '2017-01-04 03:14:07', 10000006, 'Manulife');
+insert into contracts( contract_category, type_of_service, acv, initial_amount, service_start_date, manager_id, company_name)
+    values ('Premium', 'On-premise', 50000, 10000, '2017-02-04 03:14:07', 10000007, 'Manulife');
+insert into contracts( contract_category, type_of_service, acv, initial_amount, service_start_date, manager_id, company_name)
+    values ('Diamond', 'Cloud', 45000, 9000, '2017-02-02 03:14:07', 10000006, 'Manulife');
+insert into contracts( contract_category, type_of_service, acv, initial_amount, service_start_date, manager_id, company_name)
+    values ('Diamond', 'Cloud', 30000, 7000, '2017-03-02 03:14:07', 10000007, 'Manulife');
+insert into contracts( contract_category, type_of_service, acv, initial_amount, service_start_date, manager_id, company_name)
+    values ('Diamond', 'On-premise', 35000, 7000, '2017-04-05 03:14:07', 10000006, 'Manulife');
+insert into contracts( contract_category, type_of_service, acv, initial_amount, service_start_date, manager_id, company_name)
+    values ('Diamond', 'Cloud', 40000, 6000, '2018-01-05 03:14:07', 10000007, 'Manulife');
+insert into contracts( contract_category, type_of_service, acv, initial_amount, service_start_date, manager_id, company_name)
+    values ('Gold', 'Cloud', 25000, 5000, '2018-03-07 03:14:07', 10000006, 'Manulife');
+insert into contracts( contract_category, type_of_service, acv, initial_amount, service_start_date, manager_id, company_name)
+    values ('Gold', 'Cloud', 25000, 5000, '2017-11-19 03:14:07', 10000007, 'Manulife');
+insert into contracts( contract_category, type_of_service, acv, initial_amount, service_start_date, manager_id, company_name)
+    values ('Gold', 'Cloud', 20000, 4000, '2017-12-19 03:14:07', 10000006, 'Manulife');
+insert into contracts( contract_category, type_of_service, acv, initial_amount, service_start_date, manager_id, company_name)
+    values ('Silver', 'Cloud', 5000, 1000, '2017-09-19 03:14:07', 10000007, 'Manulife');
 
 # Contracts in Retail (with Essence, IKEA, Nike, Wallgreens, Walmart)
 # Managers in charge of the line of business : 10000008, 10000009, 10000010, 10000011
-insert into contracts(contract_id, contract_category, type_of_service, acv, initial_amount, service_start_date, manager_id, company_name)
-    values (41, 'Premium', 'Cloud', 100000, 20000, '2017-01-19 03:14:07', 10000008, 'Essence');
-insert into contracts(contract_id, contract_category, type_of_service, acv, initial_amount, service_start_date, manager_id, company_name)
-    values (42, 'Diamond', 'Cloud', 40000, 10000, '2017-01-19 03:14:07', 10000009, 'IKEA');
-insert into contracts(contract_id, contract_category, type_of_service, acv, initial_amount, service_start_date, manager_id, company_name)
-    values (43, 'Diamond', 'On-premises', 40000, 10000, '2017-01-19 03:14:07', 10000010, 'Nike');
-insert into contracts(contract_id, contract_category, type_of_service, acv, initial_amount, service_start_date, manager_id, company_name)
-    values (44, 'Gold', 'Cloud', 30000, 4000, '2017-01-19 03:14:07', 10000011, 'Wallgreens');
-insert into contracts(contract_id, contract_category, type_of_service, acv, initial_amount, service_start_date, manager_id, company_name)
-    values (45, 'Gold', 'On-premises', 20000, 4500, '2017-01-19 03:14:07', 10000008, 'Walmart');
-insert into contracts(contract_id, contract_category, type_of_service, acv, initial_amount, service_start_date, manager_id, company_name)
-    values (46, 'Gold', 'Cloud', 25000, 4000, '2017-01-19 03:14:07', 10000009, 'Nike');
-insert into contracts(contract_id, contract_category, type_of_service, acv, initial_amount, service_start_date, manager_id, company_name)
-    values (47, 'Gold', 'On-premises', 25000, 4500, '2017-01-19 03:14:07', 10000010, 'Wallgreens');
-insert into contracts(contract_id, contract_category, type_of_service, acv, initial_amount, service_start_date, manager_id, company_name)
-    values (48, 'Gold', 'Cloud', 20000, 4000, '2017-01-19 03:14:07', 10000011, 'IKEA');
-insert into contracts(contract_id, contract_category, type_of_service, acv, initial_amount, service_start_date, manager_id, company_name)
-    values (49, 'Silver', 'Cloud', 2000, 400, '2017-01-19 03:14:07', 10000008, 'Essence');
-insert into contracts(contract_id, contract_category, type_of_service, acv, initial_amount, service_start_date, manager_id, company_name)
-    values (50, 'Silver', 'On-premise', 5000, 1000, '2017-01-19 03:14:07', 10000009, 'Walmart');
+insert into contracts( contract_category, type_of_service, acv, initial_amount, service_start_date, manager_id, company_name)
+    values ('Premium', 'Cloud', 100000, 20000, '2017-01-19 03:14:07', 10000008, 'Essence');
+insert into contracts( contract_category, type_of_service, acv, initial_amount, service_start_date, manager_id, company_name)
+    values ('Diamond', 'Cloud', 40000, 10000, '2017-01-19 03:14:07', 10000009, 'IKEA');
+insert into contracts( contract_category, type_of_service, acv, initial_amount, service_start_date, manager_id, company_name)
+    values ('Diamond', 'On-premises', 40000, 10000, '2017-01-19 03:14:07', 10000010, 'Nike');
+insert into contracts( contract_category, type_of_service, acv, initial_amount, service_start_date, manager_id, company_name)
+    values ('Gold', 'Cloud', 30000, 4000, '2017-01-19 03:14:07', 10000011, 'Wallgreens');
+insert into contracts( contract_category, type_of_service, acv, initial_amount, service_start_date, manager_id, company_name)
+    values ('Gold', 'On-premises', 20000, 4500, '2017-01-19 03:14:07', 10000008, 'Walmart');
+insert into contracts( contract_category, type_of_service, acv, initial_amount, service_start_date, manager_id, company_name)
+    values ('Gold', 'Cloud', 25000, 4000, '2017-01-19 03:14:07', 10000009, 'Nike');
+insert into contracts( contract_category, type_of_service, acv, initial_amount, service_start_date, manager_id, company_name)
+    values ('Gold', 'On-premises', 25000, 4500, '2017-01-19 03:14:07', 10000010, 'Wallgreens');
+insert into contracts( contract_category, type_of_service, acv, initial_amount, service_start_date, manager_id, company_name)
+    values ('Gold', 'Cloud', 20000, 4000, '2017-01-19 03:14:07', 10000011, 'IKEA');
+insert into contracts( contract_category, type_of_service, acv, initial_amount, service_start_date, manager_id, company_name)
+    values ('Silver', 'Cloud', 2000, 400, '2017-01-19 03:14:07', 10000008, 'Essence');
+insert into contracts( contract_category, type_of_service, acv, initial_amount, service_start_date, manager_id, company_name)
+    values ('Silver', 'On-premise', 5000, 1000, '2017-01-19 03:14:07', 10000009, 'Walmart');
 
 /*
 # TO INCLUDE IF INCLUDING SALES ASSOCIATES AND ADMIN
