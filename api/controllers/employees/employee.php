@@ -147,6 +147,38 @@ class EmployeeController
         return $response;
     }
 
+    public function managers(Request $request, Response $response, array $args) {
+        $results = array();
+        $connection = $this->container->get("db");
+        $stmt = $connection->prepare("SELECT * FROM " . $this->employee_table_name. " WHERE manager_id IS NULL");
+        $stmt->execute();
+        while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
+            extract($row);
+            $employee  = array(
+                "id" => $employee_id,
+                "firstName" => $first_name,
+                "lastName" => $last_name,
+                "department" => $department,
+                "managerId" => $manager_id,
+                "insurancePlan" => $insurance_plan
+            );
+            array_push($results, $employee);
+        }
+        if (count($results) == 0) {
+            $response = $response->withStatus(404);
+            $response = $response->withHeader("Content-Type", "application/json");
+            $results = array(
+                "error" => "No managers found"
+            );
+            $response->getBody()->write(json_encode($results));
+        } else {
+            $response = $response->withHeader("Content-Type", "application/json");
+            $response->getBody()->write(json_encode($results));
+        }
+        return $response;
+    }
+
+
     public function preferences(Request $request, Response $response, array $args) {
         $results = array();
         $connection = $this->container->get("db");
