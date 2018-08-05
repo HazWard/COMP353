@@ -1,5 +1,5 @@
 <?php
-class Database {
+class Database{
 
     // specify your own database credentials
     private $host = "localhost";
@@ -10,6 +10,7 @@ class Database {
 
     // get the database connection
     public function getConnection(){
+        $this->password = $_ENV['DBPASS'];
         $this->conn = null;
 
         try{
@@ -22,3 +23,4 @@ class Database {
         return $this->conn;
     }
 }
+?>
