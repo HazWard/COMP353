@@ -354,3 +354,51 @@ Returns:
 	...
 ]
 ```
+
+### Assignment
+#### ``/api/index.php/manager/{eid}``
+* ``GET`` : loads list of contracts that match the preference of employee ``{eid}``
+* NOTE : ``...`` signifies data points ommitted for the sake of conciseness
+
+Returns:
+```json
+[
+	{
+		"contract_id":"1",
+		"contract_category":"Premium",
+		"type_of_service":"Cloud",
+		"acv":"50000","initial_amount":"10000",
+		"service_start_date":"2017-01-19 03:14:07",
+		"first_deliv":"4",
+		"second_deliv":"4",
+		"third_deliv":"4",
+		"fourth_deliv":"3",
+		"score":"4",
+		"manager_id":"10000000",
+		"company_name":"Apple Inc."
+	},
+	{
+		"contract_id":"11",
+		"contract_category":"Premium",
+		"type_of_service":"Cloud",
+		"acv":"60000",
+		"initial_amount":"20000",
+		"service_start_date":"2017-08-19 03:14:07",
+		"first_deliv":null,
+		"second_deliv":null,
+		"third_deliv":null,
+		"fourth_deliv":null,
+		"score":null,
+		"manager_id":"10000002",
+		"company_name":"Air Canada"
+	},
+	...
+]
+```
+
+* ``POST`` : Assigns a contract to employee ``{eid}``; returns list of contracts assigned to employee
+* IMPLEMENTED BUT UNTESTED
+
+#### ``/api/index.php/employees/{eid}/hours/{cid}``
+* ``POST`` : Updates number of hours employee `{eid}` worked on contract `{cid}`
+* IMPLEMENTED BUT UNTESTED
