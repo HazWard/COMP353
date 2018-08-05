@@ -6,9 +6,9 @@ require '../vendor/autoload.php';
 include 'controllers/locations/location.php';
 include 'controllers/authentication/auth.php';
 include 'controllers/employees/employee.php';
-include 'controllers/clients/client.php;
+include 'controllers/clients/client.php';
 
-$config = require 'config.php'; // The path will change for deployement
+$config = require('config.php'); // The path will change for deployement
 $app = new \Slim\App($config);
 
 $container = $app->getContainer();
@@ -39,9 +39,9 @@ $app->map(['GET', 'POST'],'/employees/{id}', \EmployeeController::class .  ':emp
 $app->map(['GET', 'POST'],'/employees/{id}/preferences', \EmployeeController::class .  ':preferences');
 
 // Client Endpoints
-$app->post('/clients/new', \ClientController::class . ':createNewClient');
+$app->post('/clients', \ClientController::class . ':createNewClient');
 $app->get('/clients/{cName}', \ClientController::class . ':loadClient');
-$app->get('/clientNames', \ClientController::class . ':getClientNames');
-$app->post('/clients/update', \ClientController::class. ':updateClient');
+$app->get('/clients', \ClientController::class . ':getClientNames');
+$app->post('/clients/{cName}', \ClientController::class. ':updateClient');
 
 $app->run();

@@ -145,71 +145,58 @@ Returns (in both cases):
 
 ### Clients
 
-#### ``/api/index.php/clients/new``
+#### ``/api/index.php/clients``
 * ``POST`` creates new client data into the client table & credentials data (using email & password) into the user_credentials table. Used fields in the clientForm.php
-* NOTE: UNTESTED
 
 Returns:
 ```json
 {
-	true,
-	true,
-	{
-		"company_name": "<name>",
-		"contact_number": "<#>",
-		"company_email": "<@>",
-		"rep_first_name": "<fn>",
-		"rep_last_name": "<ln>",
-		"rep_middle_initial": "<mi>",
-		"city": "<a city>",
-		"province": "<a province>",
-		"line_of_business": "<lob>"
-	}
-	{
-		"username": "<@>",
-		"user_type": "<type>",
-		"password": "<pass>"
-	}
+	"name": "WolframAlpha",
+	"number": "5143250692",
+	"email": "wolframalpha@email.com",
+	"firstName": "James",
+	"lastName": "Carter",
+	"middleInitial": "M",
+	"city": "Quebec",
+	"province": "QC",
+	"lob": "Education"
 }
 ```
 
 #### ``/api/index.php/clients/{cName}``
-* ``GET`` loads client information
-* insert company Name @ ``{cName}``
-
-Example:
-``/api/index.php/clients/Apple%20Inc.``
+* ``GET`` loads client information where ``cName`` is a valid company name
+* ``POST`` updates the client information with the name ``cName`` (uses same fields as for client creation)
 
 Result:
 ```json
 {
-	"company_name":"Apple Inc.",
-	"contact_number":"4632343154",
-	"company_email":"apple@email.com",
-	"rep_first_name":"Steve",
-	"rep_last_name":"Jobs",
-	"rep_middle_initial":"A",
-	"city":"Waterloo",
-	"province":"ON",
-	"line_of_business":"Tech"
+	"name": "WolframAlpha",
+	"number": "5143250692",
+	"email": "wolframalpha@email.com",
+	"firstName": "James",
+	"lastName": "Carter",
+	"middleInitial": "M",
+	"city": "Quebec",
+	"province": "QC",
+	"lob": "Education"
 }
 ```
 
-#### ``/api/index.php/clientNames``
-* ``GET`` returns list of Client Names (company_name)
+#### ``/api/index.php/clients``
+* ``GET`` returns list of Client Names (company_name) sorted in alphabetical order
 
 Result:
 ```json
 [
-	"Digital Extremes",
-	"Manulife",
-	"Koryo",
-	"Walmart",
 	"Air Canada",
-	"Wallgreens",
-	"IKEA",
-	"Nike",
 	"Apple Inc.",
-	"Essence"
+	"Digital Extremes",
+	"Essence",
+	"IKEA",
+	"Koryo",
+	"Manulife",
+	"Nike",
+	"Wallgreens",
+	"Walmart"
 ]
 ```
