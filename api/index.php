@@ -8,6 +8,7 @@ include 'controllers/authentication/auth.php';
 include 'controllers/employees/employee.php';
 include 'controllers/clients/client.php';
 include 'controllers/contracts/contract.php';
+include 'controllers/assignment/assignment.php';
 
 $config = require('config.php'); // The path will change for deployement
 $app = new \Slim\App($config);
@@ -53,5 +54,10 @@ $app->post('/contracts/{cid}/score', \ContractController::class . ':updateScore'
 $app->get('/managers/{mid}/scores', \ContractController::class . ':getScore');
 $app->get('/contracts/{cid}', \ContractController::class . ':viewContract');
 $app->get('/clients/{cName}/contracts', \ContractController::class . ':getMyContracts');
+
+// Assignment Endpoints
+$app->get('/manager/{eid}', \AssignmentController::class . ':loadAssignables');
+$app->post('/manager/{eid}', \AssignmentController::class . ':assignContract');
+$app->post('/employees/{eid}/hours/{cid}', \AssignmentController::class . ':updateHours');
 
 $app->run();
