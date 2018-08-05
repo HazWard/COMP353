@@ -44,4 +44,16 @@ $app->get('/clients/{cName}', \ClientController::class . ':loadClient');
 $app->get('/clients', \ClientController::class . ':getClientNames');
 $app->post('/clients/{cName}', \ClientController::class. ':updateClient');
 
+// Contract Endpoints
+$app->post('/contracts/new', \ContractController::class . ':createNewContract');
+$app->get('/contracts/{cid}/deliverables/first/{numDays}', \ContractController::class . ':updateFirstDeliv');
+$app->get('/contracts/{cid}/deliverables/second/{numDays}', \ContractController::class . ':updateSecondDeliv');
+$app->get('/contracts/{cid}/deliverables/third/{numDays}', \ContractController::class . ':updateThirdDeliv');
+$app->get('/contracts/{cid}/deliverables/fourth/{numDays}', \ContractController::class . ':updateFourthDeliv');
+$app->post('/contracts/update', \ContractController::class . ':updateContract');
+$app->get('/contracts/{cid}/score/{score}', \ContractController::class . ':updateScore');
+$app->get('/scores/{mid}', \ContractController::class . ':getScore');
+$app->get('/contracts/{cid}', \ContractController::class . ':viewContract');
+$app->get('/myContracts/{cName}', \ContractController::class . ':getMyContracts');
+
 $app->run();
