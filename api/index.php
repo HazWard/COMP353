@@ -60,6 +60,6 @@ $app->get('/myContracts/{cName}', \ContractController::class . ':getMyContracts'
 // Assignment Endpoints
 $app->get('/manager/{eid}', \AssignmentController::class . ':loadAssignables');
 $app->post('/manager/{eid}', \AssignmentController::class . ':assignContract');
-$app->post('/employees/{eid}/{cid}', \AssignmentController::class . ':updateHours');
+$app->post('/employees/{eid}/hours/{cid}', \AssignmentController::class . ':updateHours');
 
 $app->run();
