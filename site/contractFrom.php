@@ -20,7 +20,13 @@
     <div class="row main">
         <div class="main-login main-center">
             <h5 style="text-align: center; font-weight: bold; font-size: large">Enter client information</h5>
-            <form class="" method="post" action="../api/clients/createClient.php">
+            <form class="" method="post" action="../api/contracts/createContract.php">
+                <div class="form-group">
+                    <label>Select a Client</label>
+                    <select class="form-control" id="company" name="company">
+                        <option value="" disabled selected>Select a company</option>
+                    </select>
+                </div>
                 <div class="form-group">
                     <label for="name" class="cols-sm-2 control-label">Contract Category</label>
                     <div class="cols-sm-10">
@@ -40,87 +46,31 @@
                     </div>
                 </div>
                 <div class="form-group">
-                    <label for="email" class="cols-sm-2 control-label">Company Email</label>
+                    <label for="email" class="cols-sm-2 control-label">ACV</label>
                     <div class="cols-sm-10">
                         <div class="input-group">
                             <span class="input-group-addon"><i class="fa fa-envelope fa" aria-hidden="true"></i></span>
-                            <input type="text" class="form-control" name="acv" id="acva"  placeholder="Enter ACV" required/>
+                            <input type="number" class="form-control" name="acv" id="acv"  placeholder="Enter ACV" required/>
                         </div>
                     </div>
                 </div>
                 <div class="form-group">
-                    <label for="FN" class="cols-sm-2 control-label">Enter Representative First Name</label>
+                    <label for="FN" class="cols-sm-2 control-label">Initial Amount</label>
                     <div class="cols-sm-10">
                         <div class="input-group">
                             <span class="input-group-addon"><i class="fa fa-users fa" aria-hidden="true"></i></span>
-                            <input type="text" class="form-control" name="firstName" id="firstName"  placeholder="Enter First Name" required/>
+                            <input type="text" class="form-control" name="initialAmoutn" id="initialAmoutn"  placeholder="Enter initial Amount" required/>
                         </div>
                     </div>
                 </div>
                 <div class="form-group">
-                    <label for="LN" class="cols-sm-2 control-label">Enter Representative Last Name</label>
-                    <div class="cols-sm-10">
-                        <div class="input-group">
-                            <span class="input-group-addon"><i class="fa fa-users fa" aria-hidden="true"></i></span>
-                            <input type="text" class="form-control" name="lastName" id="lastName"  placeholder="Enter Last Name" required/>
-                        </div>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label for="MI" class="cols-sm-2 control-label">Enter Representative Middle Initial</label>
-                    <div class="cols-sm-10">
-                        <div class="input-group">
-                            <span class="input-group-addon"><i class="fa fa-users fa" aria-hidden="true"></i></span>
-                            <input type="text" class="form-control" name="middleInitial" id="middleInitial"  placeholder="Enter Middle Initial" maxlength="1" required/>
-                        </div>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label for="LOB" class="cols-sm-2 control-label">Enter Line of Business</label>
-                    <div class="cols-sm-10">
-                        <div class="input-group">
-                            <span class="input-group-addon"><i class="fa fa-briefcase fa" aria-hidden="true"></i></span>
-                            <input type="text" class="form-control" name="LOB" id="LOB"  placeholder="Line of Business"  required/>
-                        </div>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label for="exampleFormControlSelect1">Select a Province</label>
-                    <select class="form-control" id="province" name="province">
-                        <option value="" disabled selected>Select a Province</option>
-                        <option>Ontario</option>
-                        <option>British Columbia</option>
-                        <option>Quebec</option>
-                        <option>Alberta</option>
-                        <option>Nova Scotia</option>
-                        <option>Saskatchewan</option>
-                        <option>Manitoba</option>
-                        <option>New Brunswick</option>
-                        <option>Newfoundland and Labrador</option>
-                        <option>Prince Edward Island</option>
-                        <option>Nunavut</option>
-                        <option>Northwest Territories</option>
-                        <option>Yukon</option>
+                    <label>Select a Manager</label>
+                    <select class="form-control" id="manager" name="manager">
+                        <option value="" disabled selected>Select a Manager</option>
                     </select>
-                </div>
-                <div class="form-group">
-                    <label>Select a City</label>
-                    <select class="form-control" id="city" name="city">
-                        <option value="" disabled selected>Select a City</option>
-                        <!--add logic to populate cities based on province selection-->
-                    </select>
-                </div>
-                <div class="form-group">
-                    <label for="password" class="cols-sm-2 control-label">Enter Password</label>
-                    <div class="cols-sm-10">
-                        <div class="input-group">
-                            <span class="input-group-addon"><i class="fa fa-lock fa-lg" aria-hidden="true"></i></span>
-                            <input type="password" class="form-control" name="password" id="password"  placeholder="Enter Password"/>
-                        </div>
-                    </div>
                 </div>
                 <div class="form-group ">
-                    <input type="submit" class="btn btn-primary btn-lg btn-block login-button" value="Register New Client">
+                    <input type="submit" class="btn btn-primary btn-lg btn-block login-button" value="Contract Form">
                 </div>
 
             </form>
