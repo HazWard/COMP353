@@ -16,6 +16,7 @@ Returns:
 ```json
 # On Successful login (Status Code 200)
 {
+  "username" : "<username>"
   "type": "<user type>"
 }
 
@@ -142,4 +143,60 @@ Returns (in both cases):
 }
 ```
 
+### Clients
 
+#### ``/api/index.php/clients``
+* ``POST`` creates new client data into the client table & credentials data (using email & password) into the user_credentials table. Used fields in the clientForm.php
+
+Returns:
+```json
+{
+	"name": "WolframAlpha",
+	"number": "5143250692",
+	"email": "wolframalpha@email.com",
+	"firstName": "James",
+	"lastName": "Carter",
+	"middleInitial": "M",
+	"city": "Quebec",
+	"province": "QC",
+	"lob": "Education"
+}
+```
+
+#### ``/api/index.php/clients/{cName}``
+* ``GET`` loads client information where ``cName`` is a valid company name
+* ``POST`` updates the client information with the name ``cName`` (uses same fields as for client creation)
+
+Result:
+```json
+{
+	"name": "WolframAlpha",
+	"number": "5143250692",
+	"email": "wolframalpha@email.com",
+	"firstName": "James",
+	"lastName": "Carter",
+	"middleInitial": "M",
+	"city": "Quebec",
+	"province": "QC",
+	"lob": "Education"
+}
+```
+
+#### ``/api/index.php/clients``
+* ``GET`` returns list of Client Names (company_name) sorted in alphabetical order
+
+Result:
+```json
+[
+	"Air Canada",
+	"Apple Inc.",
+	"Digital Extremes",
+	"Essence",
+	"IKEA",
+	"Koryo",
+	"Manulife",
+	"Nike",
+	"Wallgreens",
+	"Walmart"
+]
+```

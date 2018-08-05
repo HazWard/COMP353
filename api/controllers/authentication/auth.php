@@ -26,7 +26,11 @@ class AuthController
 
         while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
             extract($row);
-            array_push($results, $user_type);
+            $user = array(
+                "username" => $username,
+                "type" => $user_type
+            );
+            array_push($results, $user);
         }
         if (count($results) < 1) {
             $response = $response->withStatus(403);
@@ -37,10 +41,7 @@ class AuthController
         }
         $response = $response->withStatus(200);
         $response = $response->withHeader("Content-Type", "application/json");
-        $body = array(
-          'type' => $results[0]
-        );
-        $response->getBody()->write(json_encode($body));
+        $response->getBody()->write(json_encode($results[0]));
         return $response;
     }
 
