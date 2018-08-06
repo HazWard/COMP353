@@ -9,6 +9,7 @@ include 'controllers/employees/employee.php';
 include 'controllers/clients/client.php';
 include 'controllers/contracts/contract.php';
 include 'controllers/assignment/assignment.php';
+include 'controllers/reports/report.php';
 
 $config = require('config.php'); // The path will change for deployement
 $app = new \Slim\App($config);
@@ -61,5 +62,12 @@ $app->get('/employees/{eid}/preferences', \AssignmentController::class . ':loadA
 $app->post('/employees/{eid}/contracts', \AssignmentController::class . ':assignContract');
 $app->post('/employees/{eid}/contracts/{cid}', \AssignmentController::class . ':updateHours');
 $app->get('/employees/{eid}/contracts', \AssignmentController::class . ':loadAssignedContracts');
+
+// Report Endpoints
+$app->get('/reports/highest', \ReportController::class . ':getHighestNumContracts');
+$app->get('/reports/employees/{prov}', \ReportController::class . ':getEmployeesWorkingInProvince');
+$app->get('/reports/contracts', \ReportController::class . ':getLastContractsFromTenDays');
+$app->get('/reports/contracts/{category}', \ReportController::class . ':getContractsWithCategory');
+$app->get('/reports/generate/{category}', \ReportController::class . ':generateReport');
 
 $app->run();

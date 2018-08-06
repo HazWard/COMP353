@@ -144,7 +144,7 @@ class ContractController
                 "thirdDeliverable" => $third_deliv,
                 "fourthDeliverable" => $fourth_deliv,
                 "satisfactionScore" => $score,
-                "manager_id" => $manager_id
+                "manager" => $manager_id
             );
             array_push($results, $contract_tuple);
         }
