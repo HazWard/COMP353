@@ -1,8 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <!-- Theme Made By www.w3schools.com - No Copyright -->
-    <title>Bootstrap Theme Simply Me</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
@@ -14,9 +12,8 @@
 <body>
 <?php include('head.php'); ?>
 <div class="container-fluid bg-2 text-center">
-    <h3 class="margin">Welcome Sales Associate, please select an option below</h3>
-    <a href="clientForm.php" class="btn btn-default btn-lg"> Create a client account </a>
-    <a href="contractForm.php" class="btn btn-default btn-lg"> Create Contracts</a>
+    <h3 class="margin">Welcome Manager, please select an option below</h3>
+    <a href="clientContractView.php" class="btn btn-default btn-lg"> View Contracts & give satisfaction score</a>
 </div>
 </body>
 </html>
