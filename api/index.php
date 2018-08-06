@@ -9,6 +9,7 @@ include 'controllers/employees/employee.php';
 include 'controllers/clients/client.php';
 include 'controllers/contracts/contract.php';
 include 'controllers/assignment/assignment.php';
+include 'controllers/reports/report.php';
 
 $config = require('config.php'); // The path will change for deployement
 $app = new \Slim\App($config);
@@ -51,6 +52,7 @@ $app->post('/clients/{cName}', \ClientController::class. ':updateClient');
 $app->post('/contracts', \ContractController::class . ':createNewContract');
 $app->post('/contracts/{cid}/deliverables/{deliv}', \ContractController::class . ':updateDeliv');
 $app->post('/contracts/{cid}', \ContractController::class . ':updateContract');
+$app->delete('/contracts/{cid}', \ContractController::class . ':deleteContract');
 $app->post('/contracts/{cid}/score', \ContractController::class . ':updateScore');
 $app->get('/managers/{mid}/scores', \ContractController::class . ':getScore');
 $app->get('/contracts/{cid}', \ContractController::class . ':viewContract');
@@ -60,6 +62,14 @@ $app->get('/clients/{cName}/contracts', \ContractController::class . ':getMyCont
 $app->get('/employees/{eid}/preferences', \AssignmentController::class . ':loadAssignables');
 $app->post('/employees/{eid}/contracts', \AssignmentController::class . ':assignContract');
 $app->post('/employees/{eid}/contracts/{cid}', \AssignmentController::class . ':updateHours');
+$app->delete('/employees/{eid}/contracts/{cid}', \AssignmentController::class . ':removeEmployee');
 $app->get('/employees/{eid}/contracts', \AssignmentController::class . ':loadAssignedContracts');
+
+// Report Endpoints
+$app->get('/reports/highest', \ReportController::class . ':getHighestNumContracts');
+$app->get('/reports/employees/{prov}', \ReportController::class . ':getEmployeesWorkingInProvince');
+$app->get('/reports/contracts', \ReportController::class . ':getLastContractsFromTenDays');
+$app->get('/reports/contracts/{category}', \ReportController::class . ':getContractsWithCategory');
+$app->get('/reports/generate/{category}', \ReportController::class . ':generateReport');
 
 $app->run();
