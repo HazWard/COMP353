@@ -68,5 +68,6 @@ $app->get('/reports/highest', \ReportController::class . ':getHighestNumContract
 $app->get('/reports/employees/{prov}', \ReportController::class . ':getEmployeesWorkingInProvince');
 $app->get('/reports/contracts', \ReportController::class . ':getLastContractsFromTenDays');
 $app->get('/reports/contracts/{category}', \ReportController::class . ':getContractsWithCategory');
+$app->get('/reports/generate/{category}', \ReportController::class . ':generateReport');
 
 $app->run();

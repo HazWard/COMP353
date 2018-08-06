@@ -119,4 +119,28 @@ class ReportController
         $response->getBody()->write(json_encode($results));
         return $response;
     }
+
+    public function generateReport(Request $request, Response $response, array $args) {
+        $results = array();
+        $connection = $this->container->get('db');
+        $category_param = $args['category'];
+
+        $queryText = "SELECT average_score, company_name, province, city FROM (SELECT AVG(score) AS average_score, company_name FROM contracts WHERE contract_category=:category GROUP BY company_name ORDER BY average_score DESC) AS category NATURAL JOIN clients GROUP BY city";
+        $stmt = $connection->prepare($queryText);
+        $stmt->bindValue(':category', $category_param, PDO::PARAM_STR);
+        $stmt->execute();
+        while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
+            extract($row);
+            $company_report = array(
+                "companyName" => $company_name,
+                "averageScore" => $average_score,
+                "province" => $province,
+                "city" => $city
+            );
+            array_push($results, $company_report);
+        }
+        $response = $response->withHeader("Content-Type", "application/json");
+        $response->getBody()->write(json_encode($results));
+        return $response;
+    }
 }
