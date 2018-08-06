@@ -15,19 +15,17 @@ class ReportController
     public function getHighestNumContracts(Request $request, Response $response, array $args) {
         $results = array();
         $connection = $this->container->get('db');
-        $queryText = "SELECT con.company_name as name, COUNT(con.contract_id) as count, c.line_of_business as lob FROM contracts con, clients c WHERE con.company_name = c.company_name GROUP BY con.company_name ORDER BY COUNT(con.contract_id) DESC";
+        $queryText = "select count, company_name, line_of_busines from (selec count(contracts.contract_id) as count, clients.company_name, clients.line_of_business from contracts natural join clients group by company_name) AS temp group by line_of_business";
         $stmt = $connection->prepare($queryText);
         $stmt->execute();
         while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
             extract($row);
             $company = array(
-                "name" => $name,
+                "companyName" => $name,
                 "contracts" => $count
+                "lineOfBusiness" => $line_of_business
             );
-            $lob = strtolower($lob);
-            if(!isset($results[$lob])) {
-                $results[$lob] = $company;
-            }
+            array_push($results, $company);
         }
         $response = $response->withHeader("Content-Type", "application/json");
         $response->getBody()->write(json_encode($results));
