@@ -1,42 +1,53 @@
 
 $( document ).ready(function() {
-    $('#province').change(function() {
-        getCities();
-    });
+        getManagers();
+        getClients();
 });
 
-function getCities(){
+function getManagers(){
     let xmlhttp = new XMLHttpRequest();
-    let cityArray = [];
-    let provinceDrop = document.getElementById("province");
-    let selectedProvince = provinceDrop.options[provinceDrop.selectedIndex].value;
-    let province = getProvinceAbbrev(selectedProvince);
+    let managerArray = [];
     xmlhttp.onreadystatechange = function() {
         if (this.readyState == 4 && this.status == 200) {
-            cityArray = JSON.parse(this.responseText);
-            populateCities(cityArray,selectedProvince);
+            managerArray = JSON.parse(this.responseText);
+            populateDropbox(managerArray,'manager');
         }
     };
-    xmlhttp.open("GET", "/COMP353/api/index.php/locations/cities?province=" + province, true);
+    xmlhttp.open("GET", "/COMP353/api/index.php/managers", true);
     xmlhttp.send();
 
 }
 
-function populateCities (cityArray,province){
-    let cityDrop = document.getElementById("city");
-    removeOptions(cityDrop);
-    let displayCities = cityArray;
+function getClients(){
+    let xmlhttp = new XMLHttpRequest();
+    let clientArray = [];
+    xmlhttp.onreadystatechange = function() {
+        if (this.readyState == 4 && this.status == 200) {
+            clientArray = JSON.parse(this.responseText);
+            populateDropbox(clientArray,'company');
+        }
+    };
+    xmlhttp.open("GET", "/COMP353/api/index.php/clients", true);
+    xmlhttp.send();
+}
 
-    let select = document.getElementById("city");
-    let options = displayCities;
-
-    for(let i = 0; i < options.length; i++) {
-        let opt = options[i];
-        let el = document.createElement("option");
-        el.textContent = opt;
-        el.value = opt;
-        select.appendChild(el);
-    }
+function populateDropbox (dropArray,dropID){
+    let drop = document.getElementById(dropID);
+    removeOptions(drop);
+    
+        for(let i = 0; i < dropArray.length; i++) {
+            let opt = dropArray[i];
+            let el = document.createElement("option");
+            if(dropID == 'manager'){
+                el.textContent = opt.firstName + " " + opt.lastName;
+                el.value = opt.id;
+            }
+            else{
+                el.textContent = opt;
+                el.value = opt
+            }
+            drop.appendChild(el);
+        }
 }
 
 function removeOptions(selectbox)
