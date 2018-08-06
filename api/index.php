@@ -61,6 +61,7 @@ $app->get('/clients/{cName}/contracts', \ContractController::class . ':getMyCont
 $app->get('/employees/{eid}/preferences', \AssignmentController::class . ':loadAssignables');
 $app->post('/employees/{eid}/contracts', \AssignmentController::class . ':assignContract');
 $app->post('/employees/{eid}/contracts/{cid}', \AssignmentController::class . ':updateHours');
+$app->delete('/employees/{eid}/contracts/{cid}', \AssignmentController::class . ':removeEmployee');
 $app->get('/employees/{eid}/contracts', \AssignmentController::class . ':loadAssignedContracts');
 
 // Report Endpoints
