@@ -239,6 +239,50 @@ class ContractController
     }
 
     /*
+     * deleteContract()
+     * reserved for Admin
+     * used to delete contract
+     */
+    public function deleteContract(Request $request, Response $response, array $args)
+    {
+        if ($_SESSION['user_type'] != 'admin') {
+            $response = $response->withStatus(403);
+            $response = $response->withHeader("Content-Type", "application/json");
+            $results = array(
+                "error" => "Unauthorized access to endpoint"
+            );
+            $response->getBody()->write(json_encode($results));
+            return $response;
+        }
+        $connection = $this->container->get("db");
+        $contract_id_param = $args['cid'];
+
+        $stmt = $connection->prepare(
+            "DELETE ".ContractController::$contract_table_name." WHERE contract_id=:cid"
+        );
+
+        $stmt->bindValue(':cid', $contract_id_param, PDO::PARAM_INT);
+        $successful = $stmt->execute(); // $result = success/fail of execution
+
+        if (!$successful) {
+            $response = $response->withStatus(404);
+            $response = $response->withHeader("Content-Type", "application/json");
+            $results = array(
+                "error" => "Contract with ID '".$contract_id_param."' was not deleted successfully"
+            );
+            $response->getBody()->write(json_encode($results));
+            return $response;
+        }
+
+        $response = $response->withHeader("Content-Type", "application/json");
+        $results = array(
+            "message" => "Successfully delete the contract with ID'".$contract_id_param
+        );
+        $response->getBody()->write(json_encode($results));
+        return $response;
+    }
+
+    /*
      * updateScore()
      * reserved for Clients
      * used to give/update satisfaction score for a contract

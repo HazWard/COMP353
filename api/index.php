@@ -52,6 +52,7 @@ $app->post('/clients/{cName}', \ClientController::class. ':updateClient');
 $app->post('/contracts', \ContractController::class . ':createNewContract');
 $app->post('/contracts/{cid}/deliverables/{deliv}', \ContractController::class . ':updateDeliv');
 $app->post('/contracts/{cid}', \ContractController::class . ':updateContract');
+$app->delete('/contracts/{cid}', \ContractController::class . ':deleteContract');
 $app->post('/contracts/{cid}/score', \ContractController::class . ':updateScore');
 $app->get('/managers/{mid}/scores', \ContractController::class . ':getScore');
 $app->get('/contracts/{cid}', \ContractController::class . ':viewContract');
