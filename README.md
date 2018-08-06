@@ -363,3 +363,91 @@ Returns:
 	}
 ]
 ```
+
+### Assignment
+#### ``/api/index.php/employees/{eid}/preferences``
+* ``GET`` : retrieves contracts that match employees ``{eid}`` preferences
+
+GET Results:
+```json
+[
+    {
+        "contract_id": "1",
+        "contract_category": "Premium",
+        "type_of_service": "Cloud",
+        "acv": "50000",
+        "initial_amount": "10000",
+        "service_start_date": "2017-01-19 03:14:07",
+        "first_deliv": "4",
+        "second_deliv": "4",
+        "third_deliv": "4",
+        "fourth_deliv": "3",
+        "score": "4",
+        "manager_id": "10000000",
+        "company_name": "Apple Inc."
+    },
+    {
+        "contract_id": "11",
+        "contract_category": "Premium",
+        "type_of_service": "Cloud",
+        "acv": "60000",
+        "initial_amount": "20000",
+        "service_start_date": "2017-08-19 03:14:07",
+        "first_deliv": null,
+        "second_deliv": null,
+        "third_deliv": null,
+        "fourth_deliv": null,
+        "score": null,
+        "manager_id": "10000002",
+        "company_name": "Air Canada"
+    },
+    {
+        "contract_id": "21",
+        "contract_category": "Premium",
+        "type_of_service": "Cloud",
+        "acv": "50000",
+        "initial_amount": "10000",
+        "service_start_date": "2017-01-19 03:14:07",
+        "first_deliv": null,
+        "second_deliv": null,
+        "third_deliv": null,
+        "fourth_deliv": null,
+        "score": null,
+        "manager_id": "10000004",
+        "company_name": "Koryo"
+    }
+]
+```
+
+POST Results:
+```json
+{
+    "employee_id": "20000001",
+    "contract_id": "11",
+    "hours_worked": "0"
+}
+```
+
+#### ``/api/index.php/employees/{eid}/contracts/{cid}``
+* ``POST`` inputs number of hours worked by employee ``{eid}`` on contract ``{cid}`` since last entry (added to the amount on db); Returns post-change assigned_contracts tuple
+
+Result:
+```json
+{
+    "employee_id": "20000001",
+    "contract_id": "11",
+    "hours_worked": "30"
+}
+```
+
+#### ``/api/index.php/employees/{eid}/contracts``
+* ``GET`` ouputs all assigned contract tuples of contracts assigned to employee ``{eid}``
+
+Result:
+```json
+{
+    "employee_id": "20000001",
+    "contract_id": "11",
+    "hours_worked": "30"
+}
+```
