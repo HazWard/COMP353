@@ -165,5 +165,29 @@ class AssignmentController
         $response->getBody()->write(json_encode($results));
         return $response;
     }
+    /*
+     * DELETE
+     * removeEmployee()
+     *
+     */
+    public function removeEmployee(Request $request, Response $response, array $args)
+    {
+        $connection = $this->container->get("db");
+        $eid_param = $args['eid'];
+        $cid_param = $args['cid'];
+        $queryTxt = "DELETE FROM ".AssignmentController::$assigned_table_name." WHERE employee_id =:eid AND contract_id =:cid ";
+        $stmt = $connection->prepare($queryTxt);
+        $stmt->bindValue(':eid', $eid_param, PDO::PARAM_INT);
+        $stmt->bindValue(':cid', $cid_param, PDO::PARAM_INT);
+        $result = $stmt->execute();
+
+        if ($result) { $results = "Removal of employee ".$eid_param." was successful."; }
+        else { $results = "Removal of employee ".$eid_param." was unsuccessful."; }
+
+        // Push results
+        $response = $response->withHeader("Content-Type", "application/json");
+        $response->getBody()->write(json_encode($results));
+        return $response;
+    }
 
 }
