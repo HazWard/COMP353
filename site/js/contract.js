@@ -11,6 +11,7 @@ function getManagers(){
         if (this.readyState == 4 && this.status == 200) {
             managerArray = JSON.parse(this.responseText);
             populateDropbox(managerArray,'manager');
+            console.log(managerArray);
         }
     };
     xmlhttp.open("GET", "/COMP353/api/index.php/managers", true);
@@ -34,7 +35,6 @@ function getClients(){
 function populateDropbox (dropArray,dropID){
     let drop = document.getElementById(dropID);
     removeOptions(drop);
-    
         for(let i = 0; i < dropArray.length; i++) {
             let opt = dropArray[i];
             let el = document.createElement("option");

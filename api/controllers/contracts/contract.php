@@ -59,16 +59,16 @@ class ContractController
         $stmt2 = $connection->prepare($queryTxt2);
         $stmt2->bindValue(':contract_id', $contract_id_param, PDO::PARAM_STR);
         $stmt2->execute();
-        $result2 = array();
+        $results = array();
         // put result of query in array
         while ($row = $stmt2->fetch(PDO::FETCH_ASSOC)) {
             extract($row);
-            array_push($result2, $row);
+            array_push($results, $row);
         }
-        array_push($results, $result2);
 
         // Check for errors
-        if (count($results) != 2 || count($result2) != 1)
+
+        if (count($results) != 1)
         {
             $response = $response->withStatus(404);
             $response = $response->withHeader("Content-Type", "application/json");
@@ -79,9 +79,10 @@ class ContractController
             return $response;
         }
 
+
         // Return response
         $response = $response->withHeader("Content-Type", "application/json");
-        $response->getBody()->write(json_encode($results[1][0]));
+        $response->getBody()->write(json_encode($results[0]));
         return $response;
 
         return $results;
