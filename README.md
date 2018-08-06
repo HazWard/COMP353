@@ -365,9 +365,8 @@ Returns:
 ```
 
 ### Assignment
-#### ``/api/index.php/managers/{eid}``
+#### ``/api/index.php/employees/{eid}/preferences``
 * ``GET`` : retrieves contracts that match employees ``{eid}`` preferences
-* ``POST`` : assigns a particular contract to the employee ``{eid}``; Returns list of contracts assigned to employee
 
 GET Results:
 ```json
@@ -422,13 +421,11 @@ GET Results:
 
 POST Results:
 ```json
-[
-    {
-        "employee_id": "20000001",
-        "contract_id": "11",
-        "hours_worked": "0"
-    }
-]
+{
+    "employee_id": "20000001",
+    "contract_id": "11",
+    "hours_worked": "0"
+}
 ```
 
 #### ``/api/index.php/employees/{eid}/contracts/{cid}``
@@ -436,13 +433,11 @@ POST Results:
 
 Result:
 ```json
-[
-    {
-        "employee_id": "20000001",
-        "contract_id": "11",
-        "hours_worked": "30"
-    }
-]
+{
+    "employee_id": "20000001",
+    "contract_id": "11",
+    "hours_worked": "30"
+}
 ```
 
 #### ``/api/index.php/employees/{eid}/contracts``
@@ -450,11 +445,9 @@ Result:
 
 Result:
 ```json
-[
-    {
-        "employee_id": "20000001",
-        "contract_id": "11",
-        "hours_worked": "30"
-    }
-]
-```json
+{
+    "employee_id": "20000001",
+    "contract_id": "11",
+    "hours_worked": "30"
+}
+```

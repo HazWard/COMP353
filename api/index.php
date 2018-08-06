@@ -38,7 +38,7 @@ $app->post('/auth/register', \AuthController::class .  ':register');
 // Employee Endpoints
 $app->get('/employees', \EmployeeController::class .  ':employees');
 $app->map(['GET', 'POST'],'/employees/{id}', \EmployeeController::class .  ':employee');
-$app->map(['GET', 'POST'],'/employees/{id}/preferences', \EmployeeController::class .  ':preferences');
+$app->post('/employees/{id}/preferences', \EmployeeController::class .  ':setPreferences');
 
 // Client Endpoints
 $app->post('/clients', \ClientController::class . ':createNewClient');
@@ -56,8 +56,8 @@ $app->get('/contracts/{cid}', \ContractController::class . ':viewContract');
 $app->get('/clients/{cName}/contracts', \ContractController::class . ':getMyContracts');
 
 // Assignment Endpoints
-$app->get('/manager/{eid}', \AssignmentController::class . ':loadAssignables');
-$app->post('/manager/{eid}', \AssignmentController::class . ':assignContract');
+$app->get('/employees/{eid}/preferences', \AssignmentController::class . ':loadAssignables');
+$app->post('/employees/{eid}/contracts', \AssignmentController::class . ':assignContract');
 $app->post('/employees/{eid}/contracts/{cid}', \AssignmentController::class . ':updateHours');
 $app->get('/employees/{eid}/contracts', \AssignmentController::class . ':loadAssignedContracts');
 

@@ -135,7 +135,7 @@ class AssignmentController
 
         // Push results
         $response = $response->withHeader("Content-Type", "application/json");
-        $response->getBody()->write(json_encode($results));
+        $response->getBody()->write(json_encode($results[0]));
         return $response;
     }
 
