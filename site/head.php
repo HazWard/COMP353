@@ -11,9 +11,9 @@
         </div>
         <div class="collapse navbar-collapse" id="myNavbar">
             <ul class="nav navbar-nav navbar-right">
-                <li><a href="#">link</a></li>
-                <li><a href="#">link</a></li>
-                <li><a href="#">link</a></li>
+                <form  method="post" action="logout.php">
+                <input type="submit" class="btn btn-primary btn-sm btn-block login-button" value="logout">
+                </form>
             </ul>
         </div>
     </div>

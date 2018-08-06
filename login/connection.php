@@ -1,30 +1,23 @@
 <?php
 session_start();
-
 // initialize variables to your needs
 $username = "root";
 $password = "";
 $errors = array();
-
-
 if (isset($_POST['login_button'])) {
     $username = $_POST['username'];
     $password = $_POST['password'];
-
     if (empty($username)) {
         array_push($errors, "You must enter a username");
     }
     if (empty($password)) {
         array_push($errors, "You must enter a password");
     }
-
     if (count($errors) == 0) {
         //encrypt password
         $password = md5($password);
-
-
         //next example will insert new conversation
-        $service_url = 'http://localhost/api/index.php/auth/login';
+        $service_url = 'http://localhost/COMP353/api/index.php/auth/login';
         $curl = curl_init($service_url);
         $curl_post_data = array(
             'username' => $username,
@@ -35,13 +28,28 @@ if (isset($_POST['login_button'])) {
         curl_setopt($curl, CURLOPT_POSTFIELDS, $curl_post_data);
         curl_exec($curl);
         $httpcode = curl_getinfo($curl, CURLINFO_HTTP_CODE);
+        $result = json_decode(curl_exec($curl));
         if ($httpcode == 200) {
             $_SESSION['username'] = $username;
-            header('location: index.php');
+            $_SESSION['user_type'] = $result->type;
+            if($result->type == 'sales'){
+                header("Location: /COMP353/site/SAhome.php");
+            }
+            else if($result->type == 'admin'){
+                header("Location: /COMP353/site/adminHome.php");
+            }
+            else if($result->type == 'client'){
+                header("Location: /COMP353/site/ClientHome.php");
+            }
+            else if($result->type == 'manager'){
+                header("Location: /COMP353/site/managerHome.php");
+            }
+            else {
+                header("Location: /COMP353/site/employeeHome.php");
+            }
         } else {
             array_push($errors, "Wrong username/password combination");
         }
     }
 }
-
 ?>
