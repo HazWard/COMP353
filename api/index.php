@@ -56,9 +56,9 @@ $app->get('/contracts/{cid}', \ContractController::class . ':viewContract');
 $app->get('/clients/{cName}/contracts', \ContractController::class . ':getMyContracts');
 
 // Assignment Endpoints
-$app->get('/manager/{eid}', \AssignmentController::class . ':loadAssignables');
-$app->post('/manager/{eid}', \AssignmentController::class . ':assignContract');
-$app->post('/employees/{eid}/contracts/{cid}', \AssignmentController::class . ':updateHours');
-$app->get('/employees/{eid}/contracts', \AssignmentController::class . ':loadAssignedContracts');
+$app->get('/employees/{eid}/contracts', \AssignmentController::class . ':loadAssignables');
+$app->post('/employees/{eid}/contracts', \AssignmentController::class . ':assignContract');
+$app->post('/employees/{eid}/assignments/{cid}', \AssignmentController::class . ':updateHours');
+$app->get('/employees/{eid}/assignments', \AssignmentController::class . ':loadAssignedContracts');
 
 $app->run();
