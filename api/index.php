@@ -8,6 +8,7 @@ include 'controllers/authentication/auth.php';
 include 'controllers/employees/employee.php';
 include 'controllers/clients/client.php';
 include 'controllers/contracts/contract.php';
+include 'controllers/assignment/assignment.php';
 
 $config = require('config.php'); // The path will change for deployement
 $app = new \Slim\App($config);
@@ -38,7 +39,7 @@ $app->post('/auth/register', \AuthController::class .  ':register');
 $app->get('/employees', \EmployeeController::class .  ':employees');
 $app->get('/managers', \EmployeeController::class .  ':managers');
 $app->map(['GET', 'POST'],'/employees/{id}', \EmployeeController::class .  ':employee');
-$app->map(['GET', 'POST'],'/employees/{id}/preferences', \EmployeeController::class .  ':preferences');
+$app->post('/employees/{id}/preferences', \EmployeeController::class .  ':setPreferences');
 
 // Client Endpoints
 $app->post('/clients', \ClientController::class . ':createNewClient');
@@ -54,5 +55,11 @@ $app->post('/contracts/{cid}/score', \ContractController::class . ':updateScore'
 $app->get('/managers/{mid}/scores', \ContractController::class . ':getScore');
 $app->get('/contracts/{cid}', \ContractController::class . ':viewContract');
 $app->get('/clients/{cName}/contracts', \ContractController::class . ':getMyContracts');
+
+// Assignment Endpoints
+$app->get('/employees/{eid}/preferences', \AssignmentController::class . ':loadAssignables');
+$app->post('/employees/{eid}/contracts', \AssignmentController::class . ':assignContract');
+$app->post('/employees/{eid}/contracts/{cid}', \AssignmentController::class . ':updateHours');
+$app->get('/employees/{eid}/contracts', \AssignmentController::class . ':loadAssignedContracts');
 
 $app->run();
