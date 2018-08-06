@@ -65,5 +65,8 @@ $app->get('/employees/{eid}/contracts', \AssignmentController::class . ':loadAss
 
 // Report Endpoints
 $app->get('/reports/highest', \ReportController::class . ':getHighestNumContracts');
+$app->get('/reports/employees/{prov}', \ReportController::class . ':getEmployeesWorkingInProvince');
+$app->get('/reports/contracts', \ReportController::class . ':getLastContractsFromTenDays');
+$app->get('/reports/contracts/{category}', \ReportController::class . ':getContractsWithCategory');
 
 $app->run();
