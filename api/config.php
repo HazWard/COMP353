@@ -5,10 +5,11 @@ return [
         'displayErrorDetails' => true,
 
         'db' => [
-            'host' => 'localhost',
+            'host' => 'database',
             'dbname' => 'company_cms',
             'user' => 'root',
-            'pass' => '',
+            'pass' => 'mydatabase',
+            'port' => '3306'
         ],
     ]
 ];
