@@ -9,6 +9,7 @@ return [
             'dbname' => 'company_cms',
             'user' => 'root',
             'pass' => 'mydatabase',
+            'port' => '3306'
         ],
     ]
 ];

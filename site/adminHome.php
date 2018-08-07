@@ -14,9 +14,9 @@
 <body>
 <?php include('head.php'); ?>
 <div class="container-fluid bg-2 text-center">
-    <h3 class="margin">Welcome Sales Associate, please select an option below</h3>
-    <a href="clientForm.php" class="btn btn-default btn-lg"> Create a client account </a>
-    <a href="contractForm.php" class="btn btn-default btn-lg"> Create Contracts</a>
+    <h3 class="margin">Welcome Admin, please select an option below</h3>
+    <a href="clientForm.php" class="btn btn-default btn-lg"> read/delete/modify clients </a>
+    <a href="#" class="btn btn-default btn-lg"> remove/alter contracts </a>
 </div>
 </body>
 </html>
