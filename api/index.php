@@ -34,7 +34,6 @@ $app->get('/locations/cities', \LocationController::class . ':cities');
 
 // Authentication Endpoints
 $app->post('/auth/login', \AuthController::class .  ':login');
-$app->post('/auth/register', \AuthController::class .  ':register');
 
 // Employee Endpoints
 $app->get('/employees', \EmployeeController::class .  ':employees');
