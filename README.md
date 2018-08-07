@@ -17,7 +17,8 @@ Returns:
 # On Successful login (Status Code 200)
 {
   "username" : "<username>",
-  "type" : "<user type>"
+  "type" : "<user type>",
+  "company" : "<only present if the user is a client>"
 }
 
 # On Unsuccessful login (Status Code 403)
@@ -136,10 +137,10 @@ Returns:
 ```
 
 #### ``/api/index.php/employees/{id}/preferences``
-* ``GET`` will return a JSON object with a field for ``category`` and ``type`` for the given employee ID
 * ``POST`` updates the given employee (using its ID), both ``category`` and ``type`` need to be sent
+* ``GET`` will return a list of contracts matching the preferences set for the given employee
 
-Returns (in both cases):
+Returns:
 ```json
 {
 	"category": "<a category>",
@@ -151,9 +152,11 @@ Returns (in both cases):
 
 #### ``/api/index.php/clients``
 * ``POST`` creates new client data into the client table & credentials data (using email & password) into the user_credentials table. Used fields in the clientForm.php
+* ``GET`` returns list of Client Names (company_name) sorted in alphabetical order
 
 Returns:
 ```json
+# POST
 {
 	"name": "WolframAlpha",
 	"number": "5143250692",
@@ -165,6 +168,20 @@ Returns:
 	"province": "QC",
 	"lob": "Education"
 }
+
+# GET
+[
+	"Air Canada",
+	"Apple Inc.",
+	"Digital Extremes",
+	"Essence",
+	"IKEA",
+	"Koryo",
+	"Manulife",
+	"Nike",
+	"Wallgreens",
+	"Walmart"
+]
 ```
 
 #### ``/api/index.php/clients/{cName}``
@@ -184,25 +201,6 @@ Result:
 	"province": "QC",
 	"lob": "Education"
 }
-```
-
-#### ``/api/index.php/clients``
-* ``GET`` returns list of Client Names (company_name) sorted in alphabetical order
-
-Result:
-```json
-[
-	"Air Canada",
-	"Apple Inc.",
-	"Digital Extremes",
-	"Essence",
-	"IKEA",
-	"Koryo",
-	"Manulife",
-	"Nike",
-	"Wallgreens",
-	"Walmart"
-]
 ```
 
 ### Contracts
@@ -423,25 +421,23 @@ GET Results:
 ]
 ```
 
-POST Results:
-```json
-{
-    "employee_id": "20000001",
-    "contract_id": "11",
-    "hours_worked": "0"
-}
-```
-
 #### ``/api/index.php/employees/{eid}/contracts/{cid}``
 * ``POST`` inputs number of hours worked by employee ``{eid}`` on contract ``{cid}`` since last entry (added to the amount on db); Returns post-change assigned_contracts tuple
-
+* ``DELETE`` removes the given employee from the given contract
 Result:
 ```json
+# On POST
 {
     "employee_id": "20000001",
     "contract_id": "11",
     "hours_worked": "30"
 }
+
+# On DELETE
+{
+  "<message or error>" : "<message content>"
+}
+
 ```
 
 #### ``/api/index.php/employees/{eid}/contracts``
@@ -454,4 +450,161 @@ Result:
     "contract_id": "11",
     "hours_worked": "30"
 }
+```
+
+### Report
+* All the endpoints use the ``GET`` method
+
+#### ``/reports/highest``
+* Returns a list of companies with the highest number of contracts in their respective line of business
+
+Returns:
+```json
+[
+	{
+		"companyName": "Manulife",
+		"contracts": "10",
+		"lineOfBusiness": "Food"
+	},
+	{
+		"companyName": "Essence",
+		"contracts": "2",
+		"lineOfBusiness": "Retail"
+	},
+	{
+		"companyName": "Apple Inc.",
+		"contracts": "7",
+		"lineOfBusiness": "Tech"
+	},
+	{
+		"companyName": "Air Canada",
+		"contracts": "10",
+		"lineOfBusiness": "Travel"
+	}
+]
+```
+
+#### ``/reports/employees/{prov}``
+* Returns a list of employees working on a contract in the given province ``prov``
+* ``prov`` has the be the 2-letter abbreviation of the province
+
+Returns:
+```json
+[
+	{
+		"id": "20000017",
+		"firstName": "Samantha",
+		"lastName": "Ogilovich",
+		"department": "UI",
+		"managerId": "10000004",
+		"insurancePlan": "Silver Employee Plan"
+	},
+	{
+		"id": "20000018",
+		"firstName": "Tatiana",
+		"lastName": "Mann",
+		"department": "UI",
+		"managerId": "10000004",
+		"insurancePlan": "Silver Employee Plan"
+	},
+	{
+		"id": "20000019",
+		"firstName": "Jeannette",
+		"lastName": "Dore",
+		"department": "UI",
+		"managerId": "10000004",
+		"insurancePlan": "Normal Employee Plan"
+	}
+]
+```
+
+#### ``/reports/contracts``
+* Returns a list of contracts created in the last 10 days
+* ``prov`` has the be the 2-letter abbreviation of the province
+
+Returns:
+```json
+[
+	{
+	    "contract_id": "11",
+        "contract_category": "Premium",
+        "type_of_service": "Cloud",
+        "acv": "60000",
+        "initial_amount": "20000",
+        "service_start_date": "2017-08-19 03:14:07",
+        "first_deliv": null,
+        "second_deliv": null,
+        "third_deliv": null,
+        "fourth_deliv": null,
+        "score": null,
+        "manager_id": "10000002",
+        "company_name": "Air Canada",
+    },
+    {
+        "contract_id": "21",
+        "contract_category": "Premium",
+        "type_of_service": "Cloud",
+        "acv": "50000",
+        "initial_amount": "10000",
+        "service_start_date": "2017-01-19 03:14:07",
+        "first_deliv": null,
+        "second_deliv": null,
+        "third_deliv": null,
+        "fourth_deliv": null,
+        "score": null,
+        "manager_id": "10000004",
+        "company_name": "Koryo"
+    }
+]
+```
+
+#### ``/reports/contracts/{category}``
+* Returns a list of clients whose contracts have the highest satisfaction scores in that category, grouped by the cities of clients
+
+Returns:
+```json
+[
+	{
+		"companyName": "Manulife",
+		"averageScore": null,
+		"province": "AB",
+		"city": "Edmonton"
+	},
+	{
+		"companyName": "Koryo",
+		"averageScore": null,
+		"province": "QC",
+		"city": "Montreal"
+	},
+	{
+		"companyName": "Walmart",
+		"averageScore": null,
+		"province": "QC",
+		"city": "Quebec"
+	},
+	{
+		"companyName": "Air Canada",
+		"averageScore": null,
+		"province": "ON",
+		"city": "Rockland"
+	},
+	{
+		"companyName": "Wallgreens",
+		"averageScore": null,
+		"province": "SK",
+		"city": "Saskatoon"
+	},
+	{
+		"companyName": "Nike",
+		"averageScore": null,
+		"province": "ON",
+		"city": "Toronto"
+	},
+	{
+		"companyName": "Apple Inc.",
+		"averageScore": null,
+		"province": "ON",
+		"city": "Waterloo"
+	}
+]
 ```

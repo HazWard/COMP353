@@ -181,8 +181,12 @@ class AssignmentController
         $stmt->bindValue(':cid', $cid_param, PDO::PARAM_INT);
         $result = $stmt->execute();
 
-        if ($result) { $results = "Removal of employee ".$eid_param." was successful."; }
-        else { $results = "Removal of employee ".$eid_param." was unsuccessful."; }
+        if ($result) {
+            $results['message'] = "Removal of employee ".$eid_param." was successful.";
+        } else {
+            $response = $response->withStatus(500);
+            $results['error'] = "Removal of employee ".$eid_param." was unsuccessful.";
+        }
 
         // Push results
         $response = $response->withHeader("Content-Type", "application/json");

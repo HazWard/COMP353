@@ -45,9 +45,4 @@ class AuthController
         return $response;
     }
 
-    public function register(Request $request, Response $response, array $args) {
-        $connection = $this->container->get("db");
-        $request_body = $request->getParsedBody();
-        return $response;
-    }
 }
