@@ -70,5 +70,8 @@ $app->get('/reports/employees/{prov}', \ReportController::class . ':getEmployees
 $app->get('/reports/contracts', \ReportController::class . ':getLastContractsFromTenDays');
 $app->get('/reports/contracts/{category}', \ReportController::class . ':getContractsWithCategory');
 $app->get('/reports/generate/{category}', \ReportController::class . ':generateReport');
+$app->get('/reports/queryone', \ReportController::class . ':getQueryOne');
+$app->get('/reports/querytwo', \ReportController::class . ':getQueryTwo');
+$app->get('/reports/querythree', \ReportController::class . ':getQueryThree');
 
 $app->run();
