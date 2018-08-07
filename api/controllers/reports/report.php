@@ -143,4 +143,68 @@ class ReportController
         $response->getBody()->write(json_encode($results));
         return $response;
     }
+
+    public function getQueryOne(Request $request, Response $response, array $args) {
+        $results = array();
+        $connection = $this->container->get('db');
+
+        $queryText = "SELECT * FROM (SELECT employees.*, SUM(hours_worked) AS total_hours FROM employees NATURAL LEFT JOIN assigned_contracts WHERE employees.insurance_plan = 'Premium Employee Plan' GROUP BY employee_id) AS premium_employee_hours WHERE total_hours < 60";
+        $stmt = $connection->prepare($queryText);
+        $stmt->execute();
+        while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
+            extract($row);
+            $employee  = array(
+                "id" => $employee_id,
+                "firstName" => $first_name,
+                "lastName" => $last_name,
+                "department" => $department,
+                "managerId" => $manager_id,
+                "insurancePlan" => $insurance_plan
+            );
+            array_push($results, $employee);
+        }
+        $response = $response->withHeader("Content-Type", "application/json");
+        $response->getBody()->write(json_encode($results));
+        return $response;
+    }
+
+    public function getQueryTwo(Request $request, Response $response, array $args) {
+        $results = array();
+        $connection = $this->container->get('db');
+
+        $queryText = "SELECT * FROM contracts WHERE contract_category = 'Premium' AND third_deliv > 3 AND contract_id IN (SELECT contract_id FROM (SELECT COUNT(*) AS num_silver_employees, contract_id FROM assigned_contracts NATURAL LEFT JOIN employees WHERE insurance_plan = 'Silver Employee Plan' GROUP BY contract_id) AS silver_on_contracts WHERE num_silver_employees > 35)";
+        $stmt = $connection->prepare($queryText);
+        $stmt->execute();
+        while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
+            extract($row);
+            $contract_tuple = array(
+                "id" => $contract_id,
+                "category" => $contract_category,
+                "serviceType" => $type_of_service,
+                "acv" => $acv,
+                "initialAmount" => $initial_amount,
+                "startDate" => $service_start_date,
+                "firstDeliverable" => $first_deliv,
+                "secondDeliverable" => $second_deliv,
+                "thirdDeliverable" => $third_deliv,
+                "fourthDeliverable" => $fourth_deliv,
+                "satisfactionScore" => $score,
+                "manager" => $manager_id
+            );
+            array_push($results, $contract_tuple);
+        }
+        $response = $response->withHeader("Content-Type", "application/json");
+        $response->getBody()->write(json_encode($results));
+        return $response;
+    }
+
+    public function getQueryThree(Request $request, Response $response, array $args) {
+        $results = array(
+            "error" => "Unimplemented endpoint"
+        );
+        $response = $response->withStatus(501);
+        $response = $response->withHeader("Content-Type", "application/json");
+        $response->getBody()->write(json_encode($results));
+        return $response;
+    }
 }
