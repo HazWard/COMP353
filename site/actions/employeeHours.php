@@ -8,7 +8,7 @@ if(isset($_SESSION['username'])) {
 $cid = $_POST["contractid"];
 
 $logHourArray = $_POST;
-$service_url = 'http://localhost/api/index.php/employees/'.$eid.'/contracts/'.$cid.'';
+$service_url = 'http://localhost/COMP353/api/index.php/employees/'.$eid.'/contracts/'.$cid;
 $curl = curl_init($service_url);
 $curl_post_data = array(
     "employee_id"=> $eid,
@@ -23,7 +23,7 @@ $httpcode = curl_getinfo($curl, CURLINFO_HTTP_CODE);
 if ($httpcode == 200) {
 	//kills session and logs user out
 	session_destroy();
-    header("Location: /site/logout.html");
+    header("Location: /COMP353/site/employeeHome.php");
 } else{
     echo 'Error';
 }
