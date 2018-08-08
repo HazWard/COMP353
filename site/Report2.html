@@ -1,0 +1,37 @@
+<!--Page displaying Report 2-->
+
+<!DOCTYPE html>
+
+<head>
+    <link rel="stylesheet" type="text/css" href="style.css">
+</head>
+
+<body>
+<script>
+    function getReports(){
+        let xmlhttp = new XMLHttpRequest();
+        let contractArray = [];
+        xmlhttp.onreadystatechange = function() {
+            if (this.readyState == 4 && this.status == 200) {
+                contractArray = JSON.parse(this.responseText);
+                output = "";
+                console.log(contractArray);
+                for(let obj of contractArray){
+                    console.log(typeof obj);
+                    output += "Id: " + obj.id + ", Category: " + obj.category + ", Service type: " + obj.serviceType + ", ACV: " + obj.acv + ", Initial amount: " + obj.initialAmount + ", Manager: " + obj.manager + "<br>";
+                }
+                document.getElementById("demo").innerHTML = output;
+            }
+        };
+        xmlhttp.open("GET", "/api/index.php/reports/contracts", true);
+        xmlhttp.send();
+
+    }
+</script>
+<div class = "header">
+    <button type="button" onclick="getReports()">Click to get a list of all contracts created in the last 10 days</button>
+
+    <p id = "demo"></p>
+</div>
+</body>
+</html>
