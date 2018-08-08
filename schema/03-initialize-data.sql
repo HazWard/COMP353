@@ -34,6 +34,36 @@ INSERT INTO clients(company_name, contact_number, company_email, rep_first_name,
 VALUES('Walmart', 5143250692, 'walmart@email.com', 'James', 'Carter', 'M', 'Quebec', 'QC', 'Retail');
 INSERT INTO clients(company_name, contact_number, company_email, rep_first_name, rep_last_name, rep_middle_initial, city, province, line_of_business)
 VALUES('Wallgreens', 2485069202, 'walgreens@email.com', 'Ichigo', 'Sana', null, 'Saskatoon', 'SK', 'Retail');
+INSERT INTO clients(company_name, contact_number, company_email, rep_first_name, rep_last_name, rep_middle_initial, city, province, line_of_business)
+VALUES('Montreal Canadiens',5142134455,'habs@email.ca','Geoff','Molson','M','Montreal','QC','Tech');
+INSERT INTO clients(company_name, contact_number, company_email, rep_first_name, rep_last_name, rep_middle_initial, city, province, line_of_business)
+VALUES('Toronto Maple Leafs',6472134455,'leafs@email.ca','Brendan','Shanahan','M','Toronto','ON','Retail');
+INSERT INTO clients(company_name, contact_number, company_email, rep_first_name, rep_last_name, rep_middle_initial, city, province, line_of_business)
+VALUES('Edmonton Oilers',1232134455,'oilers@email.ca','Peter','Chiarelli','L','Edmonton','AB','Travel');
+INSERT INTO clients(company_name, contact_number, company_email, rep_first_name, rep_last_name, rep_middle_initial, city, province, line_of_business)
+VALUES('Adidas', 5148765432, 'adidas@email.com', 'Smooth', 'McGroove', 'A', 'Montreal', 'QC', 'Retail');
+INSERT INTO clients(company_name, contact_number, company_email, rep_first_name, rep_last_name, rep_middle_initial, city, province, line_of_business)
+VALUES('Pharmaprix', 4635555555, 'drugs@email.com', 'John', 'Tavares', 'J', 'Vancouver', 'BC', 'Retail');
+INSERT INTO clients(company_name, contact_number, company_email, rep_first_name, rep_last_name, rep_middle_initial, city, province, line_of_business)
+VALUES('Pear', 5551239985, 'pear@email.com', 'Stephen', 'Work', 'B', 'Stratford', 'ON', 'Tech');
+INSERT INTO clients(company_name, contact_number, company_email, rep_first_name, rep_last_name, rep_middle_initial, city, province, line_of_business)
+VALUES('Montreal Impact', 5145144381, 'impactfc@email.com', 'Claude', 'Julien', 'N', 'Montreal', 'QC', 'Food');
+INSERT INTO clients(company_name, contact_number, company_email, rep_first_name, rep_last_name, rep_middle_initial, city, province, line_of_business)
+VALUES('Game Grumps', 5556667777, 'gg@email.com', 'Dan', 'Avidan', 'L', 'Toronto', 'ON', 'Tech');
+INSERT INTO clients(company_name, contact_number, company_email, rep_first_name, rep_last_name, rep_middle_initial, city, province, line_of_business)
+VALUES('BG Shrimp', 6471889000, 'gump@email.com', 'Bubba', 'Gump', 'F', 'Calgary', 'AB', 'Food');
+INSERT INTO clients(company_name, contact_number, company_email, rep_first_name, rep_last_name, rep_middle_initial, city, province, line_of_business)
+VALUES('Protogen', 4638888888, 'proto@email.com', 'Jules', 'Mao', 'P', 'Halifax', 'NS', 'Tech');
+INSERT INTO clients(company_name, contact_number, company_email, rep_first_name, rep_last_name, rep_middle_initial, city, province, line_of_business)
+VALUES('Cafe Orange', 5145454554, 'cafeorange@email.com', 'Dude', 'McCool', 'G', 'Westmount', 'QC', 'Food');
+INSERT INTO clients(company_name, contact_number, company_email, rep_first_name, rep_last_name, rep_middle_initial, city, province, line_of_business)
+VALUES('Starfleet', 4335146666, 'trek@email.com', 'Jean Luc', 'Picard', 'C', 'Winnipeg', 'MB', 'Tech');
+INSERT INTO clients(company_name, contact_number, company_email, rep_first_name, rep_last_name, rep_middle_initial, city, province, line_of_business)
+VALUES('Target', 0325146666, 'target@email.com', 'Manny', 'Perry', 'C', 'Boucherville', 'QC', 'Retail');
+INSERT INTO clients(company_name, contact_number, company_email, rep_first_name, rep_last_name, rep_middle_initial, city, province, line_of_business)
+VALUES('Winners', 4335146666, 'win@email.com', 'Wendy', 'McPoyle', 'D', 'Ottawa', 'ON', 'Travel');
+INSERT INTO clients(company_name, contact_number, company_email, rep_first_name, rep_last_name, rep_middle_initial, city, province, line_of_business)
+VALUES('Universal', 4335146666, 'uni@email.com', 'Person', 'McPersonface', 'P', 'Saskatoon', 'SK', 'Food');
 
 # Insurance plan
 insert into insurances(plan_name, reimbursement_perc) values ('Premium Employee Plan', 0.9);
