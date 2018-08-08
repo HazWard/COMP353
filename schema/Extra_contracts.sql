@@ -5,9 +5,6 @@
 #standard deviation of 0.2 per day. First deliverable is random, second deliverable is first deliverable plus a random normal variable
 #Satisfaction scores are normally distributed, with a mean of 6 and a standard deviation of 2. Minimum is 1, maximum is 10. 
 
-#Assigned contracts: each employee is assigned 50 contracts at random without replacement, and works a random number of hours according to a 
-#normal distribution, with a mean of 40, standard deviation of 30, and a minumum value of 5 hours
-
 use company_cms;
 
 insert into contracts( contract_category, type_of_service, acv, initial_amount, service_start_date, first_deliv, second_deliv, third_deliv, score,manager_id, company_name) values('Gold','On-premises',53000,14600,'2017-12-28 00:00:01',11,17,23,3,10000004,'Pear');
