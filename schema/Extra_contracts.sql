@@ -507,3 +507,7 @@ insert into contracts( contract_category, type_of_service, acv, initial_amount, 
 insert into contracts( contract_category, type_of_service, acv, initial_amount, service_start_date, first_deliv, second_deliv, third_deliv, score,manager_id, company_name) values('Gold','On-premises',74000,24100,'2018-03-06 00:00:01',8,13,20,1,10000004,'Air Canada');
 insert into contracts( contract_category, type_of_service, acv, initial_amount, service_start_date, first_deliv, second_deliv, third_deliv, score,manager_id,company_name) values('Premium','Cloud',49000,20900,'2017-10-05 00:00:01',4,5,10,6,10000000,'Koryo');
 insert into contracts( contract_category, type_of_service, acv, initial_amount, service_start_date, first_deliv, second_deliv, third_deliv, score,manager_id, company_name) values('Diamond','On-premises',88500,19800,'2018-06-25 00:00:01',6,9,13,6,10000005,'Nike');
+
+update contracts
+set fourth_deliv = null
+where contract_category != 'Silver';
