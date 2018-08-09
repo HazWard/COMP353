@@ -1,11 +1,7 @@
 <?php
 
-
-
 $contractID = $_POST['contract_id'];
 $employeeID = $_POST['hiddenID'];
-
-
 
 $service_url = 'http://localhost/COMP353/api/index.php//employees/'.$employeeID.'/contracts';
 $curl = curl_init($service_url);
