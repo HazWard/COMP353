@@ -1,0 +1,90 @@
+<!--Page displaying Report 5-->
+<!DOCTYPE html>
+<head>
+<link rel="stylesheet" type="text/css" href="style.css">
+    </head>
+    <body>
+    <script>
+        function getSilver(){
+            let xmlhttp = new XMLHttpRequest();
+            let goldArray = [];
+            xmlhttp.onreadystatechange = function() {
+                if (this.readyState == 4 && this.status == 200) {
+                    goldArray= JSON.parse(this.responseText);
+                    output = "";
+                    console.log(goldArray);
+                    for(let obj of goldArray){
+                        console.log(typeof obj);
+                        output += "Company Name: " + obj.companyName+ ", Average Score: " + obj.averageScore  + ", Province: " + obj.province + ", City: " + obj.city + "<br>" + "<hr>";
+                    }
+                    document.getElementById("array").innerHTML = output;
+                }
+            };
+            xmlhttp.open("GET", "/api/index.php/reports/generate/Silver", true);
+            xmlhttp.send();
+        }
+    function getGold(){
+        let xmlhttp = new XMLHttpRequest();
+        let goldArray = [];
+        xmlhttp.onreadystatechange = function() {
+            if (this.readyState == 4 && this.status == 200) {
+                goldArray= JSON.parse(this.responseText);
+                output = "";
+                console.log(goldArray);
+                for(let obj of goldArray){
+                    console.log(typeof obj);
+                    output += "Company Name: " + obj.companyName+ ", Average Score: " + obj.averageScore  + ", Province: " + obj.province + ", City: " + obj.city + "<br>" + "<hr>";
+                }
+                document.getElementById("array").innerHTML = output;
+            }
+        };
+        xmlhttp.open("GET", "/api/index.php/reports/generate/Gold", true);
+        xmlhttp.send();
+    }
+        function getDiamond(){
+            let xmlhttp = new XMLHttpRequest();
+            let goldArray = [];
+            xmlhttp.onreadystatechange = function() {
+                if (this.readyState == 4 && this.status == 200) {
+                    goldArray= JSON.parse(this.responseText);
+                    output = "";
+                    console.log(goldArray);
+                    for(let obj of goldArray){
+                        console.log(typeof obj);
+                        output += "Company Name: " + obj.companyName+ ", Average Score: " + obj.averageScore  + ", Province: " + obj.province + ", City: " + obj.city + "<br>" + "<hr>";
+                    }
+                    document.getElementById("array").innerHTML = output;
+                }
+            };
+            xmlhttp.open("GET", "/api/index.php/reports/generate/Diamond", true);
+            xmlhttp.send();
+        }
+        function getPremium(){
+            let xmlhttp = new XMLHttpRequest();
+            let goldArray = [];
+            xmlhttp.onreadystatechange = function() {
+                if (this.readyState == 4 && this.status == 200) {
+                    goldArray= JSON.parse(this.responseText);
+                    output = "";
+                    console.log(goldArray);
+                    for(let obj of goldArray){
+                        console.log(typeof obj);
+                        output += "Company Name: " + obj.companyName+ ", Average Score: " + obj.averageScore  + ", Province: " + obj.province + ", City: " + obj.city + "<br>" + "<hr>";
+                    }
+                    document.getElementById("array").innerHTML = output;
+                }
+            };
+            xmlhttp.open("GET", "/api/index.php/reports/generate/Premium", true);
+            xmlhttp.send();
+        }
+    </script>
+    <div class = "header">
+        <button type="button" onclick="getSilver()">Click to get the details the highest satisfaction rated 'Silver' contracts</button>
+        <button type="button" onclick="getGold()">Click to get the details the highest satisfaction rated 'Gold' contracts</button>
+        <button type="button" onclick="getDiamond()">Click to get the details the highest satisfaction rated 'Diamond' contracts</button>
+        <button type="button" onclick="getPremium()">Click to get the details the highest satisfaction rated 'Premium' contracts</button>
+
+<p id = "array"></p>
+    </div>
+    </body>
+    </html>
