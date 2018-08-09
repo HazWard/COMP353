@@ -1,7 +1,7 @@
 #Assigned contracts: each employee is assigned 50 contracts at random without replacement, and works a random number of hours according to a 
 #normal distribution, with a mean of 40, standard deviation of 30, and a minumum value of 5 hours
 
-use company_cms;
+USE tcc353_1;
 
 insert into assigned_contracts(employee_id, contract_id,hours_worked) values(10000000,293,57);
 insert into assigned_contracts(employee_id, contract_id,hours_worked) values(10000000,57,61);

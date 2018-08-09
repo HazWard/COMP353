@@ -1,7 +1,5 @@
 # Init
-DROP DATABASE IF EXISTS company_cms;
-CREATE DATABASE company_cms;
-USE company_cms;
+USE tcc353_1;
 
 # Initialize tables
 CREATE TABLE provinces(

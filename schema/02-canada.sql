@@ -1,4 +1,4 @@
-USE company_cms;
+USE tcc353_1;
 
 # Provinces
 INSERT INTO provinces(prov_abbrev, prov_name) VALUES('AB', 'Alberta');

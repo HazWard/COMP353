@@ -5,10 +5,10 @@ return [
         'displayErrorDetails' => true,
 
         'db' => [
-            'host' => 'database',
-            'dbname' => 'company_cms',
-            'user' => 'root',
-            'pass' => 'mydatabase',
+            'host' => 'tcc353.encs.concordia.ca',
+            'dbname' => 'tcc353_1',
+            'user' => '<redacted>',
+            'pass' => '<redacted>',
             'port' => '3306'
         ],
     ]

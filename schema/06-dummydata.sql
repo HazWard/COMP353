@@ -1,4 +1,4 @@
-use company_cms;
+USE tcc353_1;
 
 #
 ## for one of the queries ##

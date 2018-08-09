@@ -1,4 +1,4 @@
-USE company_cms;
+USE tcc353_1;
 
 /*
 Queries to populate the database
