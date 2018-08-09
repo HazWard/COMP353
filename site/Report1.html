@@ -1,0 +1,38 @@
+<!--Page displaying Report 1-->
+
+<!DOCTYPE html>
+
+<head>
+    <link rel="stylesheet" type="text/css" href="style.css">
+</head>
+
+<body>
+<script>
+    function getReports(){
+        let xmlhttp = new XMLHttpRequest();
+        let clientArray = [];
+        xmlhttp.onreadystatechange = function() {
+            if (this.readyState == 4 && this.status == 200) {
+                clientArray = JSON.parse(this.responseText);
+                output = "";
+                console.log(clientArray);
+                for(let obj of clientArray){
+                    console.log(typeof obj);
+                    output += "Company Name: " + obj.companyName + ", Contracts: " + obj.contracts + ", Line of Business: " + obj.lineOfBusiness + "<br>";
+                }
+                document.getElementById("demo").innerHTML = output;
+            }
+        };
+        xmlhttp.open("GET", "/api/index.php/reports/highest", true);
+        xmlhttp.send();
+
+    }
+</script>
+<div class = "header">
+<button type="button" onclick="getReports()">Click to get clients with the most number of contracts in each line of business</button>
+
+    <p id = "demo"></p>
+</div>
+</body>
+</html>
+
