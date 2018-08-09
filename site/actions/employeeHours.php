@@ -21,8 +21,6 @@ curl_setopt($curl, CURLOPT_POSTFIELDS, $curl_post_data);
 curl_exec($curl);
 $httpcode = curl_getinfo($curl, CURLINFO_HTTP_CODE);
 if ($httpcode == 200) {
-	//kills session and logs user out
-	session_destroy();
     header("Location: /COMP353/site/employeeHome.php");
 } else{
     echo 'Error';

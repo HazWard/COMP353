@@ -20,10 +20,8 @@ curl_exec($curl);
 $httpcode = curl_getinfo($curl, CURLINFO_HTTP_CODE);
 
 if ($httpcode == 200) {
-	//redirects to next page: log hours (will be created soon)
-    header("Location: /COMP353/site/logHours.html");
+    header("Location: /COMP353/site/employeeHome.php");
 } else{
     echo 'Error';
 }
-
 ?>

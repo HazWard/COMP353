@@ -3,6 +3,8 @@
 <!DOCTYPE html>
 <html>
 <head>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="js/contractAssign.js"></script>
     <title>Employee Pref</title>
     <link rel="stylesheet" type="text/css" href="css/style.css">
     <script> </script>
@@ -10,18 +12,21 @@
 <body>
 <div class="header">
     <h2>Enter an Employee ID to view their preference and assign them to a contract</h2>
+    <input type="text" placeholder="EmployeeID" id="employee_id">
+    <button value="submit1" id="submit1">Search Contracts</button>
 </div>
 
-<form class="" method="post" action="">
-    <input type="text" placeholder="EmployeeID" id="employee_id">
-    <button type="submit" class="button" name="submit">Submit</button>
+
+
+
+<div class="header">
+<p id = "employeeContracts"></p>
+</div>
+<form method="post" action="../site/assignContract.php">
+    <input type="text" placeholder="ContractID" id="contract_id" name="contract_id">
+    <input type="hidden" id="hiddenID" value="0" name="hiddenID">
+    <input type="submit"  value="Assign client">
 </form>
 
-<p id="demo"></p>
-
-<form>
-    <input type="text" placeholder="ContractID" id="contract_id">
-    <button type="submit" class="button" name="submit">Submit</button>
-</form>
 </body>
 </html>

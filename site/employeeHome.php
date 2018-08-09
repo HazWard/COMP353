@@ -13,7 +13,8 @@
 <?php include('head.php'); ?>
 <div class="container-fluid bg-2 text-center">
     <h3 class="margin">Welcome employee, please select an option below</h3>
-    <a href="contractCategory.html" class="btn btn-default btn-lg">Choose contract preferences & log worked hours</a>
+    <a href="contractCategory.html" class="btn btn-default btn-lg">Choose contract preferences</a>
+    <a href="logHours.html" class="btn btn-default btn-lg">Log worked hours</a>
 </div>
 </body>
 </html>
