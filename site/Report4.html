@@ -1,0 +1,32 @@
+<!--Page displaying Report 4-->
+<!DOCTYPE html>
+<head>
+    <link rel="stylesheet" type="text/css" href="style.css">
+</head>
+<body>
+<script>
+    function getReports(){
+        let xmlhttp = new XMLHttpRequest();
+        let goldArray = [];
+        xmlhttp.onreadystatechange = function() {
+            if (this.readyState == 4 && this.status == 200) {
+                goldArray= JSON.parse(this.responseText);
+                output = "";
+                console.log(goldArray);
+                for(let obj of goldArray){
+                    console.log(typeof obj);
+                    output += "Id: " + obj.id + ", Category: " + obj.category + ", Service Type: " + obj.serviceType + ", ACV: " + obj.acv + ", Initial Amount: " + obj.initialAmount + ", Manager: " + obj.manager + ", Start Date: " + obj.startDate + "<br>" + "<hr>";
+                }
+                document.getElementById("array").innerHTML = output;
+            }
+        };
+        xmlhttp.open("GET", "/api/index.php//reports/contracts/Gold", true);
+        xmlhttp.send();
+    }
+</script>
+<div class = "header">
+    <button type="button" onclick="getReports()">Click to get the details of all 'Gold' contracts</button>
+    <p id = "array"></p>
+</div>
+</body>
+</html>
