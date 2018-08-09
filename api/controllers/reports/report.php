@@ -199,10 +199,22 @@ class ReportController
     }
 
     public function getQueryThree(Request $request, Response $response, array $args) {
-        $results = array(
-            "error" => "Unimplemented endpoint"
-        );
-        $response = $response->withStatus(501);
+        $results = array();
+        $connection = $this->container->get('db');
+
+        $queryText = "select contract_id, contract_category, first_deliv, MONTH(service_start_date) as month from contracts where YEAR(service_start_date) = 2017 ORDER BY contract_category, MONTH(service_start_date) DESC";
+        $stmt = $connection->prepare($queryText);
+        $stmt->execute();
+        while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
+            extract($row);
+            $contract  = array(
+                "id" => $contract_id,
+                "category" => $contract_category,
+                "firstDeliv" => $first_deliv,
+                "month" => $month
+            );
+            array_push($results, $contract);
+        }
         $response = $response->withHeader("Content-Type", "application/json");
         $response->getBody()->write(json_encode($results));
         return $response;
