@@ -17,7 +17,8 @@ if (isset($_POST['login_button'])) {
         //encrypt password
         $pass = md5($password);
         //next example will insert new conversation
-        $service_url = 'http://localhost/COMP353/api/index.php/auth/login';
+        
+        $service_url = 'http://localhost:8888/api/index.php/auth/login';
         $curl = curl_init($service_url);
         $curl_post_data = array(
             'username' => $username,
