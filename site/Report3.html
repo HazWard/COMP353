@@ -1,0 +1,32 @@
+<!--Page displaying Report 3-->
+<!DOCTYPE html>
+<head>
+    <link rel="stylesheet" type="text/css" href="style.css">
+</head>
+<body>
+<script>
+    function getReports(){
+        let xmlhttp = new XMLHttpRequest();
+        let QCEmployeeArray = [];
+        xmlhttp.onreadystatechange = function() {
+            if (this.readyState == 4 && this.status == 200) {
+                QCEmployeeArray= JSON.parse(this.responseText);
+                output = "";
+                console.log(QCEmployeeArray);
+                for(let obj of QCEmployeeArray){
+                    console.log(typeof obj);
+                    output += "Id: " + obj.id + ", First Name: " + obj.firstName + ", Last Name: " + obj.lastName + ", Department: " + obj.department + ", Manager ID: " + obj.managerId + ", Insurance Plan: " + obj.insurancePlan + "<br>" + "<hr>";
+                }
+                document.getElementById("demo").innerHTML = output;
+            }
+        };
+        xmlhttp.open("GET", "/api/index.php/reports/employees/QC", true);
+        xmlhttp.send();
+    }
+</script>
+<div class = "header">
+    <button type="button" onclick="getReports()">Click to get details of all QC employees</button>
+    <p id = "demo"></p>
+</div>
+</body>
+</html>

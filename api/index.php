@@ -34,7 +34,6 @@ $app->get('/locations/cities', \LocationController::class . ':cities');
 
 // Authentication Endpoints
 $app->post('/auth/login', \AuthController::class .  ':login');
-$app->post('/auth/register', \AuthController::class .  ':register');
 
 // Employee Endpoints
 $app->get('/employees', \EmployeeController::class .  ':employees');
@@ -71,5 +70,8 @@ $app->get('/reports/employees/{prov}', \ReportController::class . ':getEmployees
 $app->get('/reports/contracts', \ReportController::class . ':getLastContractsFromTenDays');
 $app->get('/reports/contracts/{category}', \ReportController::class . ':getContractsWithCategory');
 $app->get('/reports/generate/{category}', \ReportController::class . ':generateReport');
+$app->get('/reports/queryone', \ReportController::class . ':getQueryOne');
+$app->get('/reports/querytwo', \ReportController::class . ':getQueryTwo');
+$app->get('/reports/querythree', \ReportController::class . ':getQueryThree');
 
 $app->run();

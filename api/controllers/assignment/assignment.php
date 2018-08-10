@@ -121,6 +121,13 @@ class AssignmentController
         $stmt->bindValue(':eid', $eid_param, PDO::PARAM_INT);
         $stmt->bindValue(':cid', $cid_param, PDO::PARAM_INT);
         $stmt->execute();
+        
+        $queryTxt = "UPDATE ".AssignmentController::$assigned_table_name." SET hours_worked = :numHours WHERE employee_id =:eid AND contract_id =:cid AND hours_worked is NULL";
+        $stmt = $connection->prepare($queryTxt);
+        $stmt->bindValue(':numHours', $request_body['numHours'], PDO::PARAM_INT);
+        $stmt->bindValue(':eid', $eid_param, PDO::PARAM_INT);
+        $stmt->bindValue(':cid', $cid_param, PDO::PARAM_INT);
+        $stmt->execute();
 
         $results = array();
         $queryTxt2 = "SELECT * FROM ".AssignmentController::$assigned_table_name." WHERE employee_id = :eid AND contract_id = :cid";
@@ -181,8 +188,12 @@ class AssignmentController
         $stmt->bindValue(':cid', $cid_param, PDO::PARAM_INT);
         $result = $stmt->execute();
 
-        if ($result) { $results = "Removal of employee ".$eid_param." was successful."; }
-        else { $results = "Removal of employee ".$eid_param." was unsuccessful."; }
+        if ($result) {
+            $results['message'] = "Removal of employee ".$eid_param." was successful.";
+        } else {
+            $response = $response->withStatus(500);
+            $results['error'] = "Removal of employee ".$eid_param." was unsuccessful.";
+        }
 
         // Push results
         $response = $response->withHeader("Content-Type", "application/json");

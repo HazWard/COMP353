@@ -39,15 +39,22 @@ class AuthController
             $response->getBody()->write(json_encode($results));
             return $response;
         }
+
+        // Add client data if a client is logging in
+        if ($results[0]['type'] == 'client') {
+            $stmt = $connection->prepare("SELECT company_name FROM clients WHERE email=:email LIMIT 1");
+            $stmt->bindValue(':email', $results[0]['username'], PDO::PARAM_STR);
+            $stmt->execute();
+            while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
+                extract($row);
+                $results[0]['company'] = $company_name;
+            }
+        }
+
         $response = $response->withStatus(200);
         $response = $response->withHeader("Content-Type", "application/json");
         $response->getBody()->write(json_encode($results[0]));
         return $response;
     }
 
-    public function register(Request $request, Response $response, array $args) {
-        $connection = $this->container->get("db");
-        $request_body = $request->getParsedBody();
-        return $response;
-    }
 }
