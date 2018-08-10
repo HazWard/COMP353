@@ -8,6 +8,8 @@ if(isset($_SESSION['username'])) {
 $cid = $_POST["contractid"];
 
 $logHourArray = $_POST;
+
+
 $service_url = 'http://localhost/COMP353/api/index.php/employees/'.$eid.'/contracts/'.$cid;
 $curl = curl_init($service_url);
 $curl_post_data = array(
@@ -15,6 +17,8 @@ $curl_post_data = array(
     "contract_id"=> $cid,
     "hours_worked"=> $logHourArray['hours']
        );
+
+
 curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
 curl_setopt($curl, CURLOPT_POST, true);
 curl_setopt($curl, CURLOPT_POSTFIELDS, $curl_post_data);
