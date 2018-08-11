@@ -12,7 +12,6 @@
     <link rel="stylesheet" type="text/css" href="css/main.css">
 </head>
 <body>
-<?php include('head.php'); ?>
 <div class="container-fluid bg-2 text-center">
     <h3 class="margin">Welcome to the CMS website</h3>
     <a href="#" class="btn btn-default btn-lg"> login </a>

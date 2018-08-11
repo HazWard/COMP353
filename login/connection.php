@@ -39,6 +39,7 @@ if (isset($_POST['login_button'])) {
                 header("Location: /COMP353/site/adminHome.php");
             }
             else if($result->type == 'client'){
+                $_SESSION['company_name'] = $result->company;
                 header("Location: /COMP353/site/ClientHome.php");
             }
             else if($result->type == 'manager'){

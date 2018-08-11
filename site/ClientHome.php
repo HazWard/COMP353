@@ -13,7 +13,8 @@
 <?php include('head.php'); ?>
 <div class="container-fluid bg-2 text-center">
     <h3 class="margin">Welcome client, please select an option below</h3>
-    <a href="clientContractView.php" class="btn btn-default btn-lg"> View Contracts & give satisfaction score</a>
+    <a href="clientContractView.php" class="btn btn-default btn-lg"> View Contracts</a>
+    <a href="clientContractView.php" class="btn btn-default btn-lg"> Give satisfaction score</a>
 </div>
 </body>
 </html>

@@ -12,7 +12,7 @@ function getReports(){
             contractArray = JSON.parse(this.responseText);
             output = "";
             console.log(contractArray);
-            obj = contractArray[0];
+
 
             for(let obj of contractArray){
                 output += "Company Name: " + obj.company_name + ", Contract Category: " + obj.contract_category + ", Contract ID " + "<h3>" +obj.contract_id + "</h3>" +" Contract Type "
