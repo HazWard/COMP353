@@ -246,20 +246,20 @@ class ContractController
      */
     public function deleteContract(Request $request, Response $response, array $args)
     {
-        if ($_SESSION['user_type'] != 'admin') {
-            $response = $response->withStatus(403);
-            $response = $response->withHeader("Content-Type", "application/json");
-            $results = array(
-                "error" => "Unauthorized access to endpoint"
-            );
-            $response->getBody()->write(json_encode($results));
-            return $response;
-        }
+//         if ($_SESSION['user_type'] != 'admin') {
+//             $response = $response->withStatus(403);
+//             $response = $response->withHeader("Content-Type", "application/json");
+//             $results = array(
+//                 "error" => "Unauthorized access to endpoint"
+//             );
+//             $response->getBody()->write(json_encode($results));
+//             return $response;
+//         }
         $connection = $this->container->get("db");
         $contract_id_param = $args['cid'];
 
         $stmt = $connection->prepare(
-            "DELETE ".ContractController::$contract_table_name." WHERE contract_id=:cid"
+            "DELETE FROM ".ContractController::$contract_table_name." WHERE contract_id=:cid"
         );
 
         $stmt->bindValue(':cid', $contract_id_param, PDO::PARAM_INT);
