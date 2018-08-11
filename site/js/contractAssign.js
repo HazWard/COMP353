@@ -25,6 +25,6 @@ function getReports(){
         document.getElementById("employeeContracts").innerHTML = output;
         $('#hiddenID').val(employeeID);
     };
-    xmlhttp.open("GET", "/COMP353/api/index.php/employees/" +employeeID +"/preferences", true);
+    xmlhttp.open("GET", "/api/index.php/employees/" +employeeID +"/preferences", true);
     xmlhttp.send();
 }

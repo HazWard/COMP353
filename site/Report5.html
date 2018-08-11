@@ -20,7 +20,7 @@
                     document.getElementById("array").innerHTML = output;
                 }
             };
-            xmlhttp.open("GET", "../api/index.php/reports/generate/Silver", true);
+            xmlhttp.open("GET", "/api/index.php/reports/generate/Silver", true);
             xmlhttp.send();
         }
     function getGold(){
@@ -38,7 +38,7 @@
                 document.getElementById("array").innerHTML = output;
             }
         };
-        xmlhttp.open("GET", "../api/index.php/reports/generate/Gold", true);
+        xmlhttp.open("GET", "/api/index.php/reports/generate/Gold", true);
         xmlhttp.send();
     }
         function getDiamond(){
@@ -56,7 +56,7 @@
                     document.getElementById("array").innerHTML = output;
                 }
             };
-            xmlhttp.open("GET", "../api/index.php/reports/generate/Diamond", true);
+            xmlhttp.open("GET", "/api/index.php/reports/generate/Diamond", true);
             xmlhttp.send();
         }
         function getPremium(){
@@ -74,7 +74,7 @@
                     document.getElementById("array").innerHTML = output;
                 }
             };
-            xmlhttp.open("GET", "../api/index.php/reports/generate/Premium", true);
+            xmlhttp.open("GET", "/api/index.php/reports/generate/Premium", true);
             xmlhttp.send();
         }
     </script>

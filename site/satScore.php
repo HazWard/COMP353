@@ -4,7 +4,7 @@ $cid = $_POST['cid'];
 $score = $_POST['score'];
 
 
-$service_url = "http://localhost/COMP353/api/index.php/contracts/{$cid}/score";
+$service_url = "https://tcc353.encs.concordia.ca/api/index.php/contracts/{$cid}/score";
 $curl = curl_init($service_url);
 $curl_post_data = array(
     "cid" => $cid,

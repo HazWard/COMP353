@@ -3,7 +3,7 @@
 $contractID = $_POST['contract_id'];
 $employeeID = $_POST['hiddenID'];
 
-$service_url = 'http://localhost/COMP353/api/index.php//employees/'.$employeeID.'/contracts';
+$service_url = 'https://tcc353.encs.concordia.ca/api/index.php//employees/'.$employeeID.'/contracts';
 $curl = curl_init($service_url);
 $curl_post_data = array(
     'cid' => $contractID
@@ -17,4 +17,4 @@ $httpcode = curl_getinfo($curl, CURLINFO_HTTP_CODE);
 
 
 
-header("Location: /COMP353/site/managerHome.php");
+header("Location: ../site/managerHome.php");

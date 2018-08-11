@@ -27,6 +27,6 @@ function getManagerScores(){
         }
         document.getElementById("managerScores").innerHTML = output;
     };
-    xmlhttp.open("GET", "/COMP353/api/index.php/managers/"+ managerID + "/scores", true);
+    xmlhttp.open("GET", "/api/index.php/managers/"+ managerID + "/scores", true);
     xmlhttp.send();
 }

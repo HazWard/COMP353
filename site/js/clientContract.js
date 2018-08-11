@@ -27,7 +27,7 @@ function getClientContracts(){
 
                     }
                 };
-                xmlhttp.open("GET", "/COMP353/api/index.php/employees/" + obj.manager, true);
+                xmlhttp.open("GET", "/api/index.php/employees/" + obj.manager, true);
                 xmlhttp.send();
 
             }
@@ -37,7 +37,7 @@ function getClientContracts(){
         }
 
     };
-    xmlhttp.open("GET", encodeURI("/COMP353/api/index.php/clients/"+ companyName +"/contracts"), true);
+    xmlhttp.open("GET", encodeURI("/api/index.php/clients/"+ companyName +"/contracts"), true);
     xmlhttp.send();
 }
 
