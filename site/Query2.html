@@ -1,0 +1,33 @@
+<!--Page displaying Query 2-->
+<!DOCTYPE html>
+<head>
+    <link rel="stylesheet" type="text/css" href="style.css">
+</head>
+<body>
+<script>
+    function getReports(){
+        let xmlhttp = new XMLHttpRequest();
+        let array = [];
+        xmlhttp.onreadystatechange = function() {
+            if (this.readyState == 4 && this.status == 200) {
+                array= JSON.parse(this.responseText);
+                output = "";
+                console.log(array);
+                for(let obj of array){
+                    console.log(typeof obj);
+                    output += "Id: " + obj.id + ", Category: " + obj.category + ", Service Type: " + obj.serviceType + ", ACV: " + obj.acv + ", Initial Amount: " + obj.initialAmount + ", Manager: " + obj.manager + ", Start Date: " + obj.startDate + + ", Satisfaction Score: " + obj.satisfactionScore + ", First Deliverable: " + obj.firstDeliverable + ", Second Deliverable: " + obj.secondDeliverable + + ", Third Deliverable: " + obj.thirdDeliverable + + ", Fourth Deliverable: " + obj.fourthDeliverable +"<br>" + "<hr>";
+                }
+                document.getElementById("array").innerHTML = output;
+            }
+        };
+        xmlhttp.open("GET", "https://tcc353.encs.concordia.ca/api/index.php/reports/querytwo", true);
+        xmlhttp.send();
+    }
+</script>
+<div class = "header">
+    <button type="button" onclick="getReports()">Click for Query 2</button>
+    <p id = "array"></p>
+</div>
+</body>
+</html>
+
