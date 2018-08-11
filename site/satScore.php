@@ -4,7 +4,7 @@ $cid = $_POST['cid'];
 $score = $_POST['score'];
 
 
-$service_url = "http://localhost:8888/api/index.php/contracts/{$cid}/score";
+$service_url = "http://localhost/COMP353/api/index.php/contracts/{$cid}/score";
 $curl = curl_init($service_url);
 $curl_post_data = array(
     "cid" => $cid,
@@ -16,7 +16,7 @@ curl_setopt($curl, CURLOPT_POSTFIELDS, $curl_post_data);
 curl_exec($curl);
 $httpcode = curl_getinfo($curl, CURLINFO_HTTP_CODE);
 if ($httpcode == 200) {
-    header("Location: /site/clientHome.php");
+    header("Location: ../site/clientHome.php");
 } else{
     echo 'Error';
 }

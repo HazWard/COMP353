@@ -14,8 +14,8 @@
 <div class="container-fluid bg-2 text-center">
     <h3 class="margin">Welcome client, please select an option below</h3>
     <a href="clientContractView.php" class="btn btn-default btn-lg"> View Contracts</a>
-    <a href="#" class="btn btn-default btn-lg"> Give satisfaction score</a>
-    <a href="clientContractView.php" class="btn btn-default btn-lg"> View Manager satisfaction scores</a>
+    <a href="giveScore.html" class="btn btn-default btn-lg"> Give satisfaction score</a>
+    <a href="managerScore.php" class="btn btn-default btn-lg"> View Manager satisfaction scores</a>
 </div>
 </body>
 </html>

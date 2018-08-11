@@ -21,7 +21,7 @@
                     document.getElementById("hoursLogged").innerHTML = output;
                 }
             };
-            xmlhttp.open("GET", "/api/index.php/employees/"+ employeeID +"/contracts", true);
+            xmlhttp.open("GET", "../api/index.php/employees/"+ employeeID +"/contracts", true);
             xmlhttp.send();
         }
     </script>

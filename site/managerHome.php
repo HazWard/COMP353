@@ -15,7 +15,7 @@
     <h3 class="margin">Welcome Manager, please select an option below</h3>
     <a href="employeePreference.html" class="btn btn-default btn-lg"> Assign an employee to a contract </a>
     <a href="removeEmployeeForm.php" class="btn btn-default btn-lg"> Remove an employee from a contract</a>
-    <a href="#" class="btn btn-default btn-lg"> Retrieve employee worked hours report</a>
+    <a href="retrieveHours.html" class="btn btn-default btn-lg"> Retrieve employee worked hours report</a>
 </div>
 </body>
 </html>
