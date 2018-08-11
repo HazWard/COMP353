@@ -15,7 +15,7 @@ $curl_post_data = array(
     'city' => $clientArray['city'],
     'province' => getProvinceAbbrev($clientArray['province']),
     'lob' => $clientArray['LOB'],
-    'password' => $clientArray['password'],
+    'password' => md5($clientArray['password']) ,
 );
 
 

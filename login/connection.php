@@ -34,14 +34,14 @@ if (isset($_POST['login_button'])) {
             $_SESSION['username'] = $username;
             $_SESSION['user_type'] = $result->type;
             if($result->type == 'sales'){
-                header("Location: ../COMP353/site/SAhome.php");
+                header("Location: ../site/SAhome.php");
             }
             else if($result->type == 'admin'){
                 header("Location: ../site/adminHome.php");
             }
             else if($result->type == 'client'){
                 $_SESSION['company_name'] = $result->company;
-                header("Location: ../COMP353/site/ClientHome.php");
+                header("Location: ../site/ClientHome.php");
             }
             else if($result->type == 'manager'){
                 header("Location: ../site/managerHome.php");
