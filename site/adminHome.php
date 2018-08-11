@@ -16,7 +16,8 @@
 <div class="container-fluid bg-2 text-center">
     <h3 class="margin">Welcome Admin, please select an option below</h3>
     <a href="clientForm.php" class="btn btn-default btn-lg"> read/delete/modify clients </a>
-    <a href="#" class="btn btn-default btn-lg"> remove/alter contracts </a>
+    <a href="adminModifyContract.html" class="btn btn-default btn-lg"> Alter Contract Details </a>
+     <a href="adminDeleteContract.html" class="btn btn-default btn-lg"> Delete Contract </a>
 </div>
 </body>
 </html>

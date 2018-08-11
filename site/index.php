@@ -14,7 +14,7 @@
 <body>
 <div class="container-fluid bg-2 text-center">
     <h3 class="margin">Welcome to the CMS website</h3>
-    <a href="#" class="btn btn-default btn-lg"> login </a>
+     <a href="../login/login.php" class="btn btn-default btn-lg"> login </a>
 </div>
 </body>
 </html>

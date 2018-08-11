@@ -1,0 +1,64 @@
+<!-- Page urges admin to enter a contract ID to view it's details. It then asks the admin if he'd like to make changes and sends them to the api-->
+<!DOCTYPE html>
+<head>
+    <link rel="stylesheet" type="text/css" href="css/style.css">
+</head>
+<body>
+<script>
+    function getContract(){
+        let xmlhttp = new XMLHttpRequest();
+        let hourArray = [];
+        let contractID = document.getElementById("contract_id").value;
+        xmlhttp.onreadystatechange = function() {
+            if (this.readyState == 4 && this.status == 200) {
+                hourArray = JSON.parse(this.responseText);
+                output = "";
+                console.log(hourArray);
+                    output += "Contract Id: " + hourArray.id + ", Company: " + hourArray.company + ", Category: " + hourArray.category + ", ACV: " + hourArray.acv +", InitialAmount: " + hourArray.initialAmount +", Manager: " + hourArray.manager +", Score: " + hourArray.score +", Service Type: " + hourArray.serviceType + ", Start Date: " + hourArray.startDate +", First Deliverable: " + hourArray.firstDeliverable +", Second Deliverable: " + hourArray.secondDeliverable  +", Third Deliverable: " + hourArray.thirdDeliverable  +", Fourth Deliverable: " + hourArray.fourthDeliverable +"<br>" + "<hr>";
+                document.getElementById("contractDisplay").innerHTML = output;
+            }
+        };
+        xmlhttp.open("GET", "/api/index.php/contracts/" + contractID, true);
+        xmlhttp.send();
+    }
+</script>
+<div class="header">
+    <h2>Enter a Contract ID to see it's details</h2>
+    <form>
+        <input type="text" placeholder="ContractID" id="contract_id"> <br />
+        <button type="button" value="submit" onclick="getContract()">Submit</button>
+    </form>
+</div>
+<br/>
+<br/>
+<div class="header">
+    <p id = "contractDisplay"></p>
+</div>
+
+<br/>
+<br/>
+
+<div class="header">
+    <h2>Enter the details you would like to modify</h2>
+    <form method="post" action="admin.php">
+        <input type="text" placeholder="ContractID" name="id" id="id"> <br />
+        <input type="text" placeholder="Company Name" name="company" id="company"> <br />
+        <input type="text" placeholder="Category" name="category" id="category"> <br />
+        <input type="text" placeholder="Service Type" name="serviceType" id="serviceType"> <br />
+        <input type="text" placeholder="ACV" name="acv" id="acv"> <br />
+        <input type="text" placeholder="Initial Amount" name="initialAmount" id="initialAmount"> <br />
+        <input type="text" placeholder="Start Date" name="startDate" id="startDate"> <br />
+        <input type="text" placeholder="First Deliverable" name="firstDeliverable" id="firstDeliverable"> <br />
+        <input type="text" placeholder="Second Deliverable" name="secondDeliverable" id="secondDeliverable"> <br />
+        <input type="text" placeholder="Third Deliverable" name="thirdDeliverable" id="thirdDeliverable"> <br />
+        <input type="text" placeholder="Fourth Deliverable" name="fourthDeliverable" id="fourthDeliverable"> <br />
+        <input type="text" placeholder="Score" name="score" id="score"> <br />
+        <input type="text" placeholder="Manager" name="manager" id="manager"> <br />
+        <button type="submit" class="button" name="submit">Submit</button>
+    </form>
+
+</div>
+
+
+</body>
+</html>
