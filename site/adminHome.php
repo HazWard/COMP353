@@ -28,6 +28,7 @@
     <a href="Query1.html" class="btn btn-default btn-lg"> Query 1 </a>
     <a href="Query2.html" class="btn btn-default btn-lg"> Query 2 </a>
     <a href="Query3.html" class="btn btn-default btn-lg"> Query 3 </a>
+
 </div>
 </body>
 </html>

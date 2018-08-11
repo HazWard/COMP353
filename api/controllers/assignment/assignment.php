@@ -121,6 +121,13 @@ class AssignmentController
         $stmt->bindValue(':eid', $eid_param, PDO::PARAM_INT);
         $stmt->bindValue(':cid', $cid_param, PDO::PARAM_INT);
         $stmt->execute();
+        
+        $queryTxt = "UPDATE ".AssignmentController::$assigned_table_name." SET hours_worked = :numHours WHERE employee_id =:eid AND contract_id =:cid AND hours_worked is NULL";
+        $stmt = $connection->prepare($queryTxt);
+        $stmt->bindValue(':numHours', $request_body['numHours'], PDO::PARAM_INT);
+        $stmt->bindValue(':eid', $eid_param, PDO::PARAM_INT);
+        $stmt->bindValue(':cid', $cid_param, PDO::PARAM_INT);
+        $stmt->execute();
 
         $results = array();
         $queryTxt2 = "SELECT * FROM ".AssignmentController::$assigned_table_name." WHERE employee_id = :eid AND contract_id = :cid";

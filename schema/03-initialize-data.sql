@@ -25,9 +25,9 @@ VALUES('Essence', 5282526613, 'essence@email.com', 'Ron', 'Gray', 'G', 'Zurich',
 INSERT INTO clients(company_name, contact_number, company_email, rep_first_name, rep_last_name, rep_middle_initial, city, province, line_of_business)
 VALUES('IKEA', 3496734958, 'ikea@email.com', 'River', 'Song', null, 'Toronto', 'ON', 'Retail');
 INSERT INTO clients(company_name, contact_number, company_email, rep_first_name, rep_last_name, rep_middle_initial, city, province, line_of_business)
-VALUES('Koryo', 9462345758, 'koryo@email.com', 'Jannelle', 'Pempenco', 'R', 'Montreal', 'QC', 'Retail');
+VALUES('Koryo', 9462345758, 'koryo@email.com', 'Jannelle', 'Pempenco', 'R', 'Montreal', 'QC', 'Food');
 INSERT INTO clients(company_name, contact_number, company_email, rep_first_name, rep_last_name, rep_middle_initial, city, province, line_of_business)
-VALUES('Manulife', 6341282453, 'manulife@email.com', 'Xiqui', 'Wong', null, 'Edmonton', 'AB', 'Food');
+VALUES('Manulife', 6341282453, 'manulife@email.com', 'Xiqui', 'Wong', null, 'Edmonton', 'AB', 'Financial');
 INSERT INTO clients(company_name, contact_number, company_email, rep_first_name, rep_last_name, rep_middle_initial, city, province, line_of_business)
 VALUES('Nike', 8058533495, 'nike@email.com', 'Erica', 'Badu', 'A', 'Toronto', 'ON', 'Retail');
 INSERT INTO clients(company_name, contact_number, company_email, rep_first_name, rep_last_name, rep_middle_initial, city, province, line_of_business)
@@ -57,7 +57,7 @@ VALUES('Protogen', 4638888888, 'proto@email.com', 'Jules', 'Mao', 'P', 'Halifax'
 INSERT INTO clients(company_name, contact_number, company_email, rep_first_name, rep_last_name, rep_middle_initial, city, province, line_of_business)
 VALUES('Cafe Orange', 5145454554, 'cafeorange@email.com', 'Dude', 'McCool', 'G', 'Westmount', 'QC', 'Food');
 INSERT INTO clients(company_name, contact_number, company_email, rep_first_name, rep_last_name, rep_middle_initial, city, province, line_of_business)
-VALUES('Starfleet', 4335146666, 'trek@email.com', 'Jean Luc', 'Picard', 'C', 'Winnipeg', 'MB', 'Tech');
+VALUES('Starfleet', 4335146666, 'trek@email.com', 'Jean Luc', 'Picard', 'C', 'Winnipeg', 'MB', 'Financial');
 INSERT INTO clients(company_name, contact_number, company_email, rep_first_name, rep_last_name, rep_middle_initial, city, province, line_of_business)
 VALUES('Target', 0325146666, 'target@email.com', 'Manny', 'Perry', 'C', 'Boucherville', 'QC', 'Retail');
 INSERT INTO clients(company_name, contact_number, company_email, rep_first_name, rep_last_name, rep_middle_initial, city, province, line_of_business)
@@ -98,7 +98,7 @@ VALUES(10000011, 'Hassan', 'Sih', 'Networking', NULL, 'Premium Employee Plan');
 
 # Employees Juan
 INSERT INTO employees(employee_id, first_name, last_name, department, manager_id, insurance_plan)
-VALUES(20000001, 'Iman', 'Oak', 'Development', 10000000, 'Silver Employee Plan');
+VALUES(20000001, 'Iman', 'Oak', 'Development', 10000000, 'Premium Employee Plan');
 INSERT INTO employees(employee_id, first_name, last_name, department, manager_id, insurance_plan)
 VALUES(20000002, 'Jas', 'Abat', 'Development', 10000000, 'Silver Employee Plan');
 INSERT INTO employees(employee_id, first_name, last_name, department, manager_id, insurance_plan)
@@ -108,7 +108,7 @@ VALUES(20000004, 'Limchang', 'Kim', 'Development', 10000000, 'Normal Employee Pl
 
 # Employees Rea
 INSERT INTO employees(employee_id, first_name, last_name, department, manager_id, insurance_plan)
-VALUES(20000005, 'Timothy', 'Sin', 'Development', 10000001, 'Silver Employee Plan');
+VALUES(20000005, 'Timothy', 'Sin', 'Development', 10000001, 'Premium Employee Plan');
 INSERT INTO employees(employee_id, first_name, last_name, department, manager_id, insurance_plan)
 VALUES(20000006, 'Kyung', 'Ko', 'Development', 10000001, 'Silver Employee Plan');
 INSERT INTO employees(employee_id, first_name, last_name, department, manager_id, insurance_plan)
@@ -118,7 +118,7 @@ VALUES(20000008, 'Chuling', 'Li', 'Development', 10000001, 'Normal Employee Plan
 
 # Employees Jack
 INSERT INTO employees(employee_id, first_name, last_name, department, manager_id, insurance_plan)
-VALUES(20000009, 'Ivanna', 'James', 'QA', 10000002, 'Silver Employee Plan');
+VALUES(20000009, 'Ivanna', 'James', 'QA', 10000002, 'Premium Employee Plan');
 INSERT INTO employees(employee_id, first_name, last_name, department, manager_id, insurance_plan)
 VALUES(20000010, 'Abigail', 'Oak', 'QA', 10000002, 'Silver Employee Plan');
 INSERT INTO employees(employee_id, first_name, last_name, department, manager_id, insurance_plan)
@@ -128,7 +128,7 @@ VALUES(20000012, 'Janna', 'Sun', 'QA', 10000002, 'Normal Employee Plan');
 
 # Employees Girard
 INSERT INTO employees(employee_id, first_name, last_name, department, manager_id, insurance_plan)
-VALUES(20000013, 'Ophelia', 'Darle', 'QA', 10000003, 'Silver Employee Plan');
+VALUES(20000013, 'Ophelia', 'Darle', 'QA', 10000003, 'Premium Employee Plan');
 INSERT INTO employees(employee_id, first_name, last_name, department, manager_id, insurance_plan)
 VALUES(20000014, 'Persephone', 'Ralla', 'QA', 10000003, 'Silver Employee Plan');
 INSERT INTO employees(employee_id, first_name, last_name, department, manager_id, insurance_plan)
@@ -138,7 +138,7 @@ VALUES(20000016, 'Kyle', 'Sammich', 'QA', 10000003, 'Normal Employee Plan');
 
 # Employees Carla
 INSERT INTO employees(employee_id, first_name, last_name, department, manager_id, insurance_plan)
-VALUES(20000017, 'Samantha', 'Ogilovich', 'UI', 10000004, 'Silver Employee Plan');
+VALUES(20000017, 'Samantha', 'Ogilovich', 'UI', 10000004, 'Premium Employee Plan');
 INSERT INTO employees(employee_id, first_name, last_name, department, manager_id, insurance_plan)
 VALUES(20000018, 'Tatiana', 'Mann', 'UI', 10000004, 'Silver Employee Plan');
 INSERT INTO employees(employee_id, first_name, last_name, department, manager_id, insurance_plan)
@@ -148,7 +148,7 @@ VALUES(20000020, 'Paul', 'Sommersby', 'UI', 10000004, 'Normal Employee Plan');
 
 # Employees Abra
 INSERT INTO employees(employee_id, first_name, last_name, department, manager_id, insurance_plan)
-VALUES(20000021, 'Quinton', 'Banal', 'UI', 10000005, 'Silver Employee Plan');
+VALUES(20000021, 'Quinton', 'Banal', 'UI', 10000005, 'Premium Employee Plan');
 INSERT INTO employees(employee_id, first_name, last_name, department, manager_id, insurance_plan)
 VALUES(20000022, 'Rastabul', 'Ega', 'UI', 10000005, 'Silver Employee Plan');
 INSERT INTO employees(employee_id, first_name, last_name, department, manager_id, insurance_plan)
@@ -158,7 +158,7 @@ VALUES(20000024, 'Manny', 'Telos', 'UI', 10000005, 'Normal Employee Plan');
 
 # Employees Yesse
 INSERT INTO employees(employee_id, first_name, last_name, department, manager_id, insurance_plan)
-VALUES(20000025, 'Xanther', 'Black', 'Design', 10000006, 'Silver Employee Plan');
+VALUES(20000025, 'Xanther', 'Black', 'Design', 10000006, 'Premium Employee Plan');
 INSERT INTO employees(employee_id, first_name, last_name, department, manager_id, insurance_plan)
 VALUES(20000026, 'Vivien', 'Viola', 'Design', 10000006, 'Silver Employee Plan');
 INSERT INTO employees(employee_id, first_name, last_name, department, manager_id, insurance_plan)
@@ -168,7 +168,7 @@ VALUES(20000028, 'Dennis', 'Walk', 'Design', 10000006, 'Normal Employee Plan');
 
 # Employees Mystique
 INSERT INTO employees(employee_id, first_name, last_name, department, manager_id, insurance_plan)
-VALUES(20000029, 'China', 'White', 'Design', 10000007, 'Silver Employee Plan');
+VALUES(20000029, 'China', 'White', 'Design', 10000007, 'Premium Employee Plan');
 INSERT INTO employees(employee_id, first_name, last_name, department, manager_id, insurance_plan)
 VALUES(20000030, 'April', 'Renore', 'Design', 10000007, 'Silver Employee Plan');
 INSERT INTO employees(employee_id, first_name, last_name, department, manager_id, insurance_plan)
@@ -178,7 +178,7 @@ VALUES(20000032, 'Bruce', 'Jenner', 'Design', 10000007, 'Normal Employee Plan');
 
 # Employees Devon
 INSERT INTO employees(employee_id, first_name, last_name, department, manager_id, insurance_plan)
-VALUES(20000033, 'Samantha', 'Collins', 'Business Intelligence', 10000008, 'Silver Employee Plan');
+VALUES(20000033, 'Samantha', 'Collins', 'Business Intelligence', 10000008, 'Premium Employee Plan');
 INSERT INTO employees(employee_id, first_name, last_name, department, manager_id, insurance_plan)
 VALUES(20000034, 'Ebony', 'Lenner', 'Business Intelligence', 10000008, 'Silver Employee Plan');
 INSERT INTO employees(employee_id, first_name, last_name, department, manager_id, insurance_plan)
@@ -188,7 +188,7 @@ VALUES(20000036, 'Destiny', 'Banting', 'Business Intelligence', 10000008, 'Norma
 
 # Employees Evan
 INSERT INTO employees(employee_id, first_name, last_name, department, manager_id, insurance_plan)
-VALUES(20000037, 'Samantha', 'Collins', 'Business Intelligence', 10000009, 'Silver Employee Plan');
+VALUES(20000037, 'Samantha', 'Collins', 'Business Intelligence', 10000009, 'Premium Employee Plan');
 INSERT INTO employees(employee_id, first_name, last_name, department, manager_id, insurance_plan)
 VALUES(20000038, 'Ebony', 'Lenner', 'Business Intelligence', 10000009, 'Silver Employee Plan');
 INSERT INTO employees(employee_id, first_name, last_name, department, manager_id, insurance_plan)
@@ -198,7 +198,7 @@ VALUES(20000040, 'Destiny', 'Banting', 'Business Intelligence', 10000009, 'Norma
 
 # Employees Farran
 INSERT INTO employees(employee_id, first_name, last_name, department, manager_id, insurance_plan)
-VALUES(20000041, 'Tanis', 'Lanister', 'Networking', 10000010, 'Silver Employee Plan');
+VALUES(20000041, 'Tanis', 'Lanister', 'Networking', 10000010, 'Premium Employee Plan');
 INSERT INTO employees(employee_id, first_name, last_name, department, manager_id, insurance_plan)
 VALUES(20000042, 'Jamie', 'Stark', 'Networking', 10000010, 'Silver Employee Plan');
 INSERT INTO employees(employee_id, first_name, last_name, department, manager_id, insurance_plan)
@@ -208,7 +208,7 @@ VALUES(20000044, 'Gemini', 'Scope', 'Networking', 10000010, 'Normal Employee Pla
 
 # Employees Hassan
 INSERT INTO employees(employee_id, first_name, last_name, department, manager_id, insurance_plan)
-VALUES(20000045, 'Lemony', 'Snicket', 'Networking', 10000011, 'Silver Employee Plan');
+VALUES(20000045, 'Lemony', 'Snicket', 'Networking', 10000011, 'Premium Employee Plan');
 INSERT INTO employees(employee_id, first_name, last_name, department, manager_id, insurance_plan)
 VALUES(20000046, 'Honor', 'Lemings', 'Networking', 10000011, 'Silver Employee Plan');
 INSERT INTO employees(employee_id, first_name, last_name, department, manager_id, insurance_plan)
@@ -337,6 +337,24 @@ insert into contracts( contract_category, type_of_service, acv, initial_amount, 
     values ('Silver', 'Cloud', 2000, 400, '2017-01-19 03:14:07', 10000008, 'Essence');
 insert into contracts( contract_category, type_of_service, acv, initial_amount, service_start_date, manager_id, company_name)
     values ('Silver', 'On-premise', 5000, 1000, '2017-01-19 03:14:07', 10000009, 'Walmart');
+
+update contracts
+set first_deliv = 3, second_deliv = 5, third_deliv = 10, score = 10
+where contract_category = 'Premium'
+and service_start_date < '2018-08-01 00:00:01';
+update contracts
+set first_deliv = 6, second_deliv = 11, third_deliv = 18, score = 10
+where contract_category = 'Diamond'
+and service_start_date < '2018-08-01 00:00:01';
+update contracts
+set first_deliv = 8, second_deliv = 14, third_deliv = 20, score = 10
+where contract_category = 'Gold'
+and service_start_date < '2018-08-01 00:00:01';
+update contracts
+set first_deliv = 5, second_deliv = 15, third_deliv = 20, fourth_deliv = 28
+where contract_category = 'Silver'
+and service_start_date < '2018-08-01 00:00:01';
+
 
 /*
 # TO INCLUDE IF INCLUDING SALES ASSOCIATES AND ADMIN
