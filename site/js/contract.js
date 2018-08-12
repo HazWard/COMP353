@@ -14,7 +14,7 @@ function getManagers(){
             console.log(managerArray);
         }
     };
-    xmlhttp.open("GET", "/COMP353/api/index.php/managers", true);
+    xmlhttp.open("GET", "/api/index.php/managers", true);
     xmlhttp.send();
 
 }
@@ -28,7 +28,7 @@ function getClients(){
             populateDropbox(clientArray,'company');
         }
     };
-    xmlhttp.open("GET", "/COMP353/api/index.php/clients", true);
+    xmlhttp.open("GET", "/api/index.php/clients", true);
     xmlhttp.send();
 }
 

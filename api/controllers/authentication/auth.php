@@ -42,7 +42,7 @@ class AuthController
 
         // Add client data if a client is logging in
         if ($results[0]['type'] == 'client') {
-            $stmt = $connection->prepare("SELECT company_name FROM clients WHERE email=:email LIMIT 1");
+            $stmt = $connection->prepare("SELECT company_name FROM clients WHERE company_email=:email LIMIT 1");
             $stmt->bindValue(':email', $results[0]['username'], PDO::PARAM_STR);
             $stmt->execute();
             while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {

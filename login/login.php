@@ -15,15 +15,11 @@
     <?php include('errors.php'); ?>
 
     <label>Username</label>
-    <input type="text" name="username" placeholder="EmployeeID/Comapny Email"><br/>
+    <input type="text" name="username" placeholder="EmployeeID/Company Email"><br/>
     <label>Password</label>
     <input type="password" name="password" placeholder="Password">
     <br/>
     <button type="submit" class="button" name="login_button">Login</button>
-
-    <p>
-        Not yet registered? <a href="/site/createClient.php">Register</a>
-    </p>
 </form>
 </div>
 </body>

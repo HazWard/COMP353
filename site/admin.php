@@ -15,7 +15,7 @@ $score= $_POST['score'];
 $manager = $_POST['manager'];
 
 //next example will insert new conversation
-$service_url = "http://localhost:8888/api/index.php/contracts/{$id}";
+$service_url = "https://tcc353.encs.concordia.ca/api/index.php/contracts/{$id}";
 $curl = curl_init($service_url);
 $curl_post_data = array(
     'id' => $id,
@@ -40,7 +40,7 @@ curl_exec($curl);
 $httpcode = curl_getinfo($curl, CURLINFO_HTTP_CODE);
 
 if ($httpcode == 200) {
-    header("Location: /site/adminHome.php");
+    header("Location: ../site/adminHome.php");
 }
 
 ?>

@@ -1,9 +1,8 @@
 <?php
-$contractArray = $_POST;
-
+$managerArray = $_POST;
 
 //next example will insert new conversation
-$service_url = 'https://tcc353.encs.concordia.ca/api/index.php/contracts';
+$service_url = 'https://tcc353.encs.concordia.ca/api/index.php/managers/'.$managerArray['id'].'/scores';
 $curl = curl_init($service_url);
 $curl_post_data = array(
     'company' => $contractArray['company'],
@@ -16,13 +15,13 @@ $curl_post_data = array(
 
 curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
 curl_setopt($curl, CURLOPT_POST, true);
-curl_setopt($curl, CURLOPT_POSTFIELDS, $curl_post_data);
+
 curl_exec($curl);
 $httpcode = curl_getinfo($curl, CURLINFO_HTTP_CODE);
 
 
 if ($httpcode == 200) {
-    header("Location: ../site/SAhome.php");
+    header("Location: ../COMP353/site/SAhome.php");
 }
 else{
     echo 'Error';

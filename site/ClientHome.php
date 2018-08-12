@@ -15,7 +15,7 @@
     <h3 class="margin">Welcome client, please select an option below</h3>
     <a href="clientContractView.php" class="btn btn-default btn-lg"> View Contracts </a>
     <a href="giveScore.html" class="btn btn-default btn-lg"> Give a satisfaction Score </a>
-    <a href="#" class="btn btn-default btn-lg"> View Satisfaction Scores of Contracts </a>
+    <a href="managerScore.php" class="btn btn-default btn-lg"> View Satisfaction Scores of Contracts </a>
 </div>
 </body>
 </html>

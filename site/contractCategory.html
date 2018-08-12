@@ -11,9 +11,25 @@
   	<h2>Choose Contract Category Type</h2>
   </div>
 	
-  <form class="" method="post" action="actions/employeePreference.php">
-  Category <input type="text" name="category" ><br />
-  Type <input type="text" name="type'"><br />
+  <form class="" method="post" action="employeePreference.php">
+    <div class="form-group">
+      <label>Select a Category</label>
+      <select class="form-control" id="category" name="category">
+        <option value="" disabled selected>Select a category</option>
+        <option>Premium</option>
+        <option>Gold</option>
+        <option>Diamond</option>
+        <option>Silver</option>
+      </select>
+    </div>
+    <div class="form-group">
+      <label>Select a type</label>
+      <select class="form-control" id="type" name="type">
+        <option value="" disabled selected>Select a type</option>
+        <option>On-premises</option>
+        <option>Cloud</option>
+      </select>
+    </div>
   <button type="submit" class="button" name="submit">Submit</button>
 </form>
 </body>

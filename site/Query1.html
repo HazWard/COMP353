@@ -1,0 +1,32 @@
+<!--Page displaying Query 1-->
+<!DOCTYPE html>
+<head>
+    <link rel="stylesheet" type="text/css" href="style.css">
+</head>
+<body>
+<script>
+    function getReports(){
+        let xmlhttp = new XMLHttpRequest();
+        let array = [];
+        xmlhttp.onreadystatechange = function() {
+            if (this.readyState == 4 && this.status == 200) {
+                array= JSON.parse(this.responseText);
+                output = "";
+                console.log(array);
+                for(let obj of array){
+                    console.log(typeof obj);
+                    output += "Id: " + obj.id + ", First Name: " + obj.firstName + ", Last Name: " + obj.lastName  +"<br>" + "<hr>";
+                }
+                document.getElementById("array").innerHTML = output;
+            }
+        };
+        xmlhttp.open("GET", "https://tcc353.encs.concordia.ca/api/index.php/reports/queryone", true);
+        xmlhttp.send();
+    }
+</script>
+<div class = "header">
+    <button type="button" onclick="getReports()">Click for Query 1</button>
+    <p id = "array"></p>
+</div>
+</body>
+</html>
