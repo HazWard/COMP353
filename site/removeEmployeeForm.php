@@ -5,7 +5,7 @@
 </head>
 <body>
 <div class="header">
-    <h2>Enter the number of hours you've worked on a particular contract</h2>
+    <h2>Enter Employee ID and Contract ID concerning the removal</h2>
 </div>
 
 <form class="" method="post" action="removeEmployee.php">
