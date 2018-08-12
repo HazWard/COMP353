@@ -15,10 +15,12 @@ $curl_post_data = array(
     'city' => $clientArray['city'],
     'province' => getProvinceAbbrev($clientArray['province']),
     'lob' => $clientArray['LOB'],
-    'password' => md5($clientArray['password']) ,
+    'password' => $clientArray['password'],
 );
-
-
+$headers = array(
+    'Authorization: Basic '.base64_encode($_SERVER['PHP_AUTH_USER'].':'.$_SERVER['PHP_AUTH_PW'])
+);
+curl_setopt($curl, CURLOPT_HTTPHEADER, $headers);
 curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
 curl_setopt($curl, CURLOPT_POST, true);
 curl_setopt($curl, CURLOPT_POSTFIELDS, $curl_post_data);
