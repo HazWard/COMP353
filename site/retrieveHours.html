@@ -1,0 +1,46 @@
+<!--Page displayed to managers to urge them to enter employee id, and will display the number of hours they've worked on their contracts-->
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Employee Hours</title>
+    <link rel="stylesheet" type="text/css" href="css/style.css">
+    <script>
+        function getHours(){
+            let xmlhttp = new XMLHttpRequest();
+            let hourArray = [];
+            let employeeID = document.getElementById("employee_id").value;
+            xmlhttp.onreadystatechange = function() {
+                if (this.readyState == 4 && this.status == 200) {
+                    hourArray = JSON.parse(this.responseText);
+                    output = "";
+                    console.log(hourArray);
+                    for(let obj of hourArray){
+                        console.log(typeof obj);
+                        output += "Employee Id: " + obj.employee_id + ", Contract Id: " + obj.contract_id + ", Hours Logged: " + obj.hours_worked + "<br>" + "<hr>";
+                    }
+                    document.getElementById("hoursLogged").innerHTML = output;
+                }
+            };
+            xmlhttp.open("GET", "/api/index.php/employees/"+ employeeID +"/contracts", true);
+            xmlhttp.send();
+        }
+    </script>
+</head>
+<body>
+<div class="header">
+    <h2>Enter an Employee ID to see how many hours they've logged on their contracts</h2>
+    <form method="post" action="">
+        <input type="text" placeholder="EmployeeID" id="employee_id"> <br />
+        <button type="button" value="submit" onclick="getHours()">Submit</button>
+    </form>
+
+</div>
+<br/>
+<br/>
+
+<div class="header">
+    <p id = "hoursLogged"></p>
+</div>
+
+</body>
+</html>

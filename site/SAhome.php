@@ -16,7 +16,17 @@
 <div class="container-fluid bg-2 text-center">
     <h3 class="margin">Welcome Sales Associate, please select an option below</h3>
     <a href="clientForm.php" class="btn btn-default btn-lg"> Create a client account </a>
-    <a href="contractForm.php" class="btn btn-default btn-lg"> Create Contracts</a>
+    <a href="contractForm.php" class="btn btn-default btn-lg"> Create Contracts </a>
+    <br/> <br/>
+    <a href="Report1.html" class="btn btn-default btn-lg"> Report 1 </a>
+    <a href="Report2.html" class="btn btn-default btn-lg"> Report 2 </a>
+    <a href="Report3.html" class="btn btn-default btn-lg"> Report 3 </a>
+    <a href="Report4.html" class="btn btn-default btn-lg"> Report 4 </a>
+    <a href="Report5.html" class="btn btn-default btn-lg"> Report 5 </a>
+    <br/> <br/>
+    <a href="Query1.html" class="btn btn-default btn-lg"> Query 1 </a>
+    <a href="Query2.html" class="btn btn-default btn-lg"> Query 2 </a>
+    <a href="Query3.html" class="btn btn-default btn-lg"> Query 3 </a>
 </div>
 </body>
 </html>

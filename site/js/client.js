@@ -17,7 +17,7 @@ function getCities(){
             populateCities(cityArray,selectedProvince);
         }
     };
-    xmlhttp.open("GET", "/COMP353/api/index.php/locations/cities?province=" + province, true);
+    xmlhttp.open("GET", "/api/index.php/locations/cities?province=" + province, true);
     xmlhttp.send();
 
 }
