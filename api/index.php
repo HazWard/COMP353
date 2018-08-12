@@ -51,7 +51,7 @@ $app->post('/clients/{cName}', \ClientController::class. ':updateClient');
 $app->post('/contracts', \ContractController::class . ':createNewContract');
 $app->post('/contracts/{cid}/deliverables/{deliv}', \ContractController::class . ':updateDeliv');
 $app->post('/contracts/{cid}', \ContractController::class . ':updateContract');
-$app->delete('/contracts/{cid}', \ContractController::class . ':deleteContract');
+$app->get('/contracts/{cid}/delete', \ContractController::class . ':deleteContract');
 $app->post('/contracts/{cid}/score', \ContractController::class . ':updateScore');
 $app->get('/managers/{mid}/scores', \ContractController::class . ':getScore');
 $app->get('/contracts/{cid}', \ContractController::class . ':viewContract');
@@ -61,7 +61,7 @@ $app->get('/clients/{cName}/contracts', \ContractController::class . ':getMyCont
 $app->get('/employees/{eid}/preferences', \AssignmentController::class . ':loadAssignables');
 $app->post('/employees/{eid}/contracts', \AssignmentController::class . ':assignContract');
 $app->post('/employees/{eid}/contracts/{cid}', \AssignmentController::class . ':updateHours');
-$app->delete('/employees/{eid}/contracts/{cid}', \AssignmentController::class . ':removeEmployee');
+$app->get('/employees/{eid}/contracts/{cid}/delete', \AssignmentController::class . ':removeEmployee');
 $app->get('/employees/{eid}/contracts', \AssignmentController::class . ':loadAssignedContracts');
 
 // Report Endpoints
