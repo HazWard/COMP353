@@ -4,12 +4,11 @@ $_SESSION['user_type'] = 'admin';
 $cid = $_POST['cid'];
 
 //next example will insert new conversation
-$service_url = "https://tcc353.encs.concordia.ca/api/index.php/contracts/{$cid}";
+$service_url = "https://tcc353.encs.concordia.ca/api/index.php/contracts/{$cid}/delete";
 
 
 $ch = curl_init();
 curl_setopt($ch, CURLOPT_URL, $service_url);
-curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "DELETE");
 $headers = array(
     'Authorization: Basic '.base64_encode($_SERVER['PHP_AUTH_USER'].':'.$_SERVER['PHP_AUTH_PW'])
 );

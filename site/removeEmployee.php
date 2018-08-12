@@ -3,11 +3,10 @@
 $contractID = $_POST['contractID'];
 $employeeID = $_POST['employeeID'];
 
-$service_url = 'https://tcc353.encs.concordia.ca/api/index.php/employees/'.$employeeID.'/contracts/'.$contractID.'';
+$service_url = 'https://tcc353.encs.concordia.ca/api/index.php/employees/'.$employeeID.'/contracts/'.$contractID.'/delete';
 
 $ch = curl_init();
 curl_setopt($ch, CURLOPT_URL, $service_url);
-curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "DELETE");
 $headers = array(
     'Authorization: Basic '.base64_encode($_SERVER['PHP_AUTH_USER'].':'.$_SERVER['PHP_AUTH_PW'])
 );
