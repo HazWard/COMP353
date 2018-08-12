@@ -148,7 +148,7 @@ class ReportController
         $results = array();
         $connection = $this->container->get('db');
 
-        $queryText = "SELECT * FROM (SELECT employees.*, SUM(hours_worked) AS total_hours FROM employees NATURAL LEFT JOIN assigned_contracts WHERE employees.insurance_plan = 'Premium Employee Plan' GROUP BY employee_id) AS premium_employee_hours WHERE total_hours < 60";
+        $queryText = "SELECT * FROM (SELECT employees.*, SUM(hours_worked) AS total_hours FROM employees NATURAL LEFT JOIN assigned_contracts WHERE employees.insurance_plan = 'Premium Employee Plan' GROUP BY employee_id) AS premium_employee_hours WHERE total_hours/20 < 60";
         $stmt = $connection->prepare($queryText);
         $stmt->execute();
         while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
