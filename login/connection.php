@@ -14,8 +14,7 @@ if (isset($_POST['login_button'])) {
         array_push($errors, "You must enter a password");
     }
     if (count($errors) == 0) {
-        //encrypt password
-        $pass = md5($password);
+        $pass = $password;
         //next example will insert new conversation
         
         $service_url = 'https://tcc353.encs.concordia.ca/api/index.php/auth/login';
