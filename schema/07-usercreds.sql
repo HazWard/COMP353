@@ -1,4 +1,4 @@
-use company_cms;
+use tcc353_1;
 
 
 insert into user_credentials(username, user_type, password) values('10000000', 'manager', '10000000');
