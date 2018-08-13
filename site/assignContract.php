@@ -20,4 +20,4 @@ $httpcode = curl_getinfo($curl, CURLINFO_HTTP_CODE);
 
 
 
-header("Location: ../site/managerHome.php");
+header("Location: ./managerHome.php");

@@ -14,4 +14,4 @@ curl_setopt($curl, CURLOPT_HTTPHEADER, $headers);
 $result = curl_exec($ch);
 $httpCode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
 
-header("Location: ../site/managerHome.php");
+header("Location: ./managerHome.php");

@@ -20,7 +20,7 @@ curl_setopt($curl, CURLOPT_POSTFIELDS, $curl_post_data);
 curl_exec($curl);
 $httpcode = curl_getinfo($curl, CURLINFO_HTTP_CODE);
 if ($httpcode == 200) {
-    header("Location: ../site/clientHome.php");
+    header("Location: ./clientHome.php");
 } else{
     echo 'Error';
 }

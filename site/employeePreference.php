@@ -27,7 +27,7 @@ curl_exec($curl);
 $httpcode = curl_getinfo($curl, CURLINFO_HTTP_CODE);
 
 if ($httpcode == 200) {
-    header("Location: ../site/employeeHome.php");
+    header("Location: ./employeeHome.php");
 } else{
     echo 'Error';
 }
