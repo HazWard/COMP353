@@ -1,4 +1,5 @@
 # Init
+CREATE DATABASE tcc353_1;
 USE tcc353_1;
 
 # Initialize tables
@@ -87,8 +88,8 @@ CREATE TABLE assigned_contracts(
     employee_id int not null,
     contract_id int not null,
     hours_worked int default 0,
-    foreign key (employee_id) references employees(employee_id),
-    foreign key (contract_id) references contracts(contract_id),
+    foreign key (employee_id) references employees(employee_id) ON DELETE CASCADE,
+    foreign key (contract_id) references contracts(contract_id) ON DELETE CASCADE,
     constraint pkg_ec primary key (employee_id, contract_id)
 );
 

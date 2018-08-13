@@ -24,7 +24,7 @@ $httpcode = curl_getinfo($curl, CURLINFO_HTTP_CODE);
 
 
 if ($httpcode == 200) {
-    header("Location: ../COMP353/site/SAhome.php");
+    header("Location: ./SAhome.php");
 }
 else{
     echo 'Error';

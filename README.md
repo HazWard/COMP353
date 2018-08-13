@@ -310,6 +310,7 @@ Returns:
 #### ``/api/index.php/contracts/{cid}``
 * ``GET`` : views contract information identified by contract id ``{cid}``
 * ``POST`` : updates contract information identified by contract id ``{cid}``
+* ``GET`` on ``/api/index.php/contracts/{cid}/delete`` : views contract information identified by contract id ``{cid}``
 
 Returns:
 ```json
@@ -423,7 +424,7 @@ GET Results:
 
 #### ``/api/index.php/employees/{eid}/contracts/{cid}``
 * ``POST`` inputs number of hours worked by employee ``{eid}`` on contract ``{cid}`` since last entry (added to the amount on db); Returns post-change assigned_contracts tuple
-* ``DELETE`` removes the given employee from the given contract
+*  ``GET`` on ``/api/index.php/employees/{eid}/contracts/{cid}/delete`` removes the given employee from the given contract
 Result:
 ```json
 # On POST
@@ -433,7 +434,7 @@ Result:
     "hours_worked": "30"
 }
 
-# On DELETE
+# On GET (with /delete)
 {
   "<message or error>" : "<message content>"
 }

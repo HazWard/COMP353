@@ -182,7 +182,7 @@ class AssignmentController
         $connection = $this->container->get("db");
         $eid_param = $args['eid'];
         $cid_param = $args['cid'];
-        $queryTxt = "DELETE FROM ".AssignmentController::$assigned_table_name." WHERE employee_id =:eid AND contract_id =:cid ";
+        $queryTxt = "DELETE FROM ".AssignmentController::$assigned_table_name." WHERE employee_id =:eid AND contract_id =:cid";
         $stmt = $connection->prepare($queryTxt);
         $stmt->bindValue(':eid', $eid_param, PDO::PARAM_INT);
         $stmt->bindValue(':cid', $cid_param, PDO::PARAM_INT);
